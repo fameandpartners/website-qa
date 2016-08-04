@@ -133,3 +133,4 @@ atlassian-ide-plugin.xml
 # # .idea/misc.xml 
 # # *.ipr
 #
+.idea/workspace.xml
