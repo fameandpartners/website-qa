@@ -134,3 +134,17 @@ atlassian-ide-plugin.xml
 # # *.ipr
 #
 .idea/workspace.xml
+results/images/face.png
+results/images/failed.png
+results/images/passed.png
+results/images/pending.png
+results/images/skipped.png
+results/images/table_failed.png
+results/images/table_passed.png
+results/images/table_pending.png
+results/images/table_skipped.png
+results/images/table_undefined.png
+results/images/undefined.png
+results/index.html
+results/login.html
+results/stylesheets/style.css
