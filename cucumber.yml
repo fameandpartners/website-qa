@@ -1,5 +1,5 @@
-default: --no-source --color --format PrettyFace::Formatter::Html --out results\index.html
+#default: --no-source --color --format PrettyFace::Formatter::Html --out results\index.html
 
 
-#default: --format documentation --format html --out smoke_results.html
+default: --format documentation --format html --out smoke_results.html
 #default: --format documentation --format html --out smoke_results.html --tags @smoke
