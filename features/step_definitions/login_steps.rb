@@ -1,4 +1,4 @@
-Given(/^I am on home page$/) do
+Given(/^I am on home page.$/) do
   visit HomePage
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -9,7 +9,7 @@ end
 
 Then(/^I want to login with email as user\.$/) do
   on(LoginPage) do |page|
-    page.specify_credentials(CONFIG['user_name'],CONFIG['user_pwd'])
+    page.specify_credentials(CONFIG['user_email'],CONFIG['user_pwd'])
     page.submit_login
   end
 end
@@ -36,3 +36,14 @@ end
 #~~~ Sign Up with Facebook account. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+Then(/^I want to login with Facebook account\.$/) do
+  pending
+end
+
+When(/^I specify incorrect credentials\.$/) do
+  pending
+end
+
+Then(/^I will see "([^"]*)" error message\.$/) do |arg|
+  pending
+end

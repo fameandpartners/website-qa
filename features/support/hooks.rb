@@ -5,7 +5,8 @@ def browser_path
 end
 
 def browser_name
-  (ENV['BROWSER'] ||= 'chrome').downcase.to_sym
+  # (ENV['BROWSER'] ||= 'chrome').downcase.to_sym
+  (ENV['BROWSER'] ||= 'chrome').to_sym
 end
 
 def environment
@@ -47,18 +48,3 @@ end
 After do
   @browser.close
 end
-
-
-
-
-
-
-# Before do
-#   @browser = Watir::Browser.new :chrome
-#   @browser.window.maximize
-# end
-# After do
-#   @browser.close
-# end
-
-

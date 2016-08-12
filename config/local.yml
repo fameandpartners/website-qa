@@ -1,7 +1,6 @@
-#base_url: 'http://test.foridge.jetmria.com//'
 base_url: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com'
 
-user_name: auto.user.fm@gmail.com
+user_email: auto.user.fm@gmail.com
 user_pwd: 1qazxcv
 
 admin: andreypetrenko@thepaydock.com
