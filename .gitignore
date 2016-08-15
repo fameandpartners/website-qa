@@ -151,3 +151,4 @@ results/stylesheets/style.css
 .idea/
 cucumber.json
 results.html
+cucumber_chrome.json
