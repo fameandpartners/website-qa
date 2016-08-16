@@ -1,8 +1,10 @@
 require_relative '../pages/modules/header'
 
+
 class LoginPage
   include PageObject
   include HeaderPart
+
 
   page_url(CONFIG['base_url']+'/spree_user/sign_in')
 
@@ -18,6 +20,7 @@ class LoginPage
   button(:btnLogin, xpath: "//input[@value='Login']")
   link(:lnkCreateAcc, text: 'Create a new account')
   link(:lnkForgotPwd, text: 'Forgot Password?')
+  h3(:spnResetPwdNtf, text: "You will receive an email with instructions about how to reset your password in a few minutes.")
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

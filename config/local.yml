@@ -2,6 +2,7 @@ base_url: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com'
 
 user_email: auto.user.fm@gmail.com
 user_pwd: 1qazxcv
+gmail_pwd: 1qazqwerty
 
 admin: andreypetrenko@thepaydock.com
 admin_pwd: 1qazxcv

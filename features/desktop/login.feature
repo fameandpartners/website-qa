@@ -34,13 +34,6 @@ Feature: Login page
     Then I will see "Invalid email or password." error message.
 #    Implement table
 
-  @wip @smoke @regression
-  Scenario: Reset a password.
-    When I open Login form.
-    And I want to reset my password.
-    Then message about receiving email with instructions appears.
-    And I am able to reset my password.
-
   @regression
   Scenario: Login from Forgot Password form.
     When I open Login form.

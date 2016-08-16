@@ -14,11 +14,19 @@ class ForgotPwdPage
   link(:lnkSignIn, text: 'Sign in')
 
 
+  def specify_email(email)
+    self.txtEmail_element.when_present.set(email)
+  end
+
+  def click_reset
+    self.btnReset_element.when_present.click
+  end
+
   def create_new_account
     self.lnkCreateAcc_element.when_present.click
   end
 
-  def sign_in
+  def sign_in_gmail
     self.lnkSignIn_element.when_present.click
   end
 

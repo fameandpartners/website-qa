@@ -59,23 +59,10 @@ Then(/^I will see "([^"]*)" error message\.$/) do |msg|
   pending
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#~~~ Reset a password. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-And(/^I want to reset my password\.$/) do
-  pending
-end
-Then(/^message about receiving email with instructions appears\.$/) do
-  pending
-end
-And(/^I am able to reset my password\.$/) do
-  pending
-end
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Login from Forgot Password form. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Then(/^I go to Forgot Password form\.$/) do
-  on(LoginPage) do |page|
-    page.open_forgot_pwd
-  end
+  on(LoginPage).open_forgot_pwd
 end
 And(/^I can login from Forgot Password form\.$/) do
   on(ForgotPwdPage).sign_in
