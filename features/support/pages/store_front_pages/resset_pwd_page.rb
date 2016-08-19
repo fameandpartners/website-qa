@@ -1,8 +1,8 @@
-require_relative '../pages/modules/header'
+require_relative '../../pages/store_front_pages/modules/header'
 
 class ForgotPwdPage
   include PageObject
-  include HeaderPart
+  include Header
 
   page_url(CONFIG['base_url']+'/spree_user/password/new')
 

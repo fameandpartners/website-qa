@@ -3,13 +3,12 @@ Feature: Reset Password
   As unregistered user I can not reset own password.
 
   Background: Open home page
-    Given I am on home page.
+    Given I am on Home page.
 
-  @regression
+  @wip @regression
   Scenario: Check all Reset Password form elements.
-    When I open Reset Password page.
+    When I open Forgot Password page.
     And there are all Reset Password page controls.
-
 
   @wip @smoke @regression
   Scenario: Reset a password.

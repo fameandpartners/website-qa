@@ -1,6 +1,8 @@
+Then(/^I go to Forgot Password form\.$/) do
+  on(LoginPage).open_forgot_pwd
+end
 #~~~ Reset a password. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 And(/^I want to reset my password\.$/) do
-  on(LoginPage).open_forgot_pwd
   on(ForgotPwdPage) do |page|
     page.specify_email(CONFIG['user_email'])
     page.click_reset
@@ -26,3 +28,8 @@ And(/^I am able to reset my password\.$/) do
   end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+And(/^there are all Reset Password page controls\.$/) do
+  pending
+end

@@ -1,8 +1,18 @@
+#base_url: 'https://www.fameandpartners.com'
 base_url: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com'
+
 
 user_email: auto.user.fm@gmail.com
 user_pwd: 1qazxcv
 gmail_pwd: 1qazqwerty
+user_fname: Test
+user_lname: User
+
+user_r_email: auto.user.fmr@gmail.com
+user_r_pwd: 1qazxcv
+
+
+
 
 admin: andreypetrenko@thepaydock.com
 admin_pwd: 1qazxcv

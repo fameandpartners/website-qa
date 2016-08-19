@@ -5,7 +5,13 @@ Feature: My Profile page.
   Background: Login as user.
     Given I am on Home page as logged in user.
 
-  Scenario: Can open my profile via My Account link.
 
 
-  Scenario: Can open my profile via My Details menu item.
+
+  Scenario: Can change My account settings.
+    When I open My Details page.
+    Then I can modify
+    # implement table
+
+
+  Scenario:

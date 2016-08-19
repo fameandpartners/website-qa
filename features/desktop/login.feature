@@ -3,8 +3,8 @@ Feature: Login page
   As unregistered user I can not login.
   As registered user I reset my password.
 
-  Background: Open home page
-    Given I am on home page.
+  Background: Open home page.
+    Given I am on Home page.
 
   @regression
   Scenario: Check all Login form elements.
@@ -20,7 +20,7 @@ Feature: Login page
   @regression
   Scenario: Login with Remember Me option.
     When I open Login form.
-    Then I want to login with email and Remember Me option.
+    Then I want to login with Remember Me option.
 
   @wip @smoke @regression
   Scenario: Login with Facebook account.

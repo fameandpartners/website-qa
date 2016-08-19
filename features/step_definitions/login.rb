@@ -1,5 +1,6 @@
-Given(/^I am on home page.$/) do
+Given(/^I am on Home page\.$/) do
   visit HomePage
+  # on(HomePage).accept_offer(false)
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Check all Login form elements. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -23,12 +24,12 @@ end
 And(/^be sure I was logged in\.$/) do
   on(HomePage) do |page|
     page.click_my_account
-    expect(page.current_url).to include('/pofile')
+    expect(page.current_url).to include('/profile')
   end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Login with Remember Me option. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Then(/^I want to login with email and Remember Me option\.$/) do
+Then(/^I want to login with Remember Me option\.$/) do
   on(LoginPage) do |page|
     page.specify_credentials(CONFIG['user_email'],CONFIG['user_pwd'])
     page.remember_me(true)
@@ -36,16 +37,7 @@ Then(/^I want to login with email and Remember Me option\.$/) do
   end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#~~~ Sign Up with email. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Then(/^I want to create a new account\.$/) do
-  on(LoginPage) do |page|
-    page.create_account
-  end
-end
-And(/^be sure a new account was created\.$/) do
-  pending
-end
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 #~~~ Login with Facebook account. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Then(/^I want to login with Facebook account\.$/) do
   pending
@@ -60,10 +52,6 @@ Then(/^I will see "([^"]*)" error message\.$/) do |msg|
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Login from Forgot Password form. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Then(/^I go to Forgot Password form\.$/) do
-  on(LoginPage).open_forgot_pwd
-end
 And(/^I can login from Forgot Password form\.$/) do
   on(ForgotPwdPage).sign_in
   on(LoginPage) do |page|
@@ -77,7 +65,3 @@ And(/^I can login from Forgot Password form\.$/) do
   end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#~~~ Create a new account from Forgot Password form. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-And(/^create a new account from Forgot Password form\.$/) do
-  pending
-end

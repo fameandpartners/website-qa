@@ -1,9 +1,9 @@
-require_relative '../pages/modules/header'
+require_relative '../../pages/store_front_pages/modules/header'
 
 
 class LoginPage
   include PageObject
-  include HeaderPart
+  include Header
 
 
   page_url(CONFIG['base_url']+'/spree_user/sign_in')
