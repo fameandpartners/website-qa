@@ -18,15 +18,17 @@ end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ My Account menu.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Then(/^I hover mouse to 'My Account' link\.$/) do
-  on(HomePage) do |page|
-    page.hover_my_account
-  end
+  on(HomePage).hover_my_account
 end
 And(/^I can open (.*)\.$/) do |menu_item|
   on(MyProfilePage).link_element(xpath: "//a[text()='#{menu_item}']").when_present.click
-
-  sleep 2
 end
+
+And(/^url equals to "(.*)"\.$/) do |url|
+  expect(on(MyProfilePage).current_url).to include(url)
+end
+
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ User can logout. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 And(/^I logout\.$/) do
@@ -36,3 +38,28 @@ And(/^I logout\.$/) do
     expect(page.current_url).to include('/spree_user/sign_in')
   end
 end
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~ User can change locale. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When(/^I change to "([^"]*)" locale\.$/) do |locale|
+  on(HomePage) do |page|
+    page.click_locale_menu
+    page.select_locale(locale)
+  end
+end
+Then(/^"([^"]*)" locale changed\.$/) do |locale|
+  on(HomePage) do |page|
+    case locale
+      when 'Australia'
+        expect(page.current_url).to include('fameandpartners.com.au')
+      when 'USA'
+        expect(page.current_url).to include('fameandpartners.com')
+    end
+
+  end
+end
+And(/^header message changed to "([^"]*)"\.$/) do |msg|
+  pending
+end
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

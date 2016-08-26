@@ -5,13 +5,19 @@ Feature: My Profile page.
   Background: Login as user.
     Given I am on Home page as logged in user.
 
+  Scenario: Update 'Account Settings'.
+    When I open 'My Details' page.
+    Then I can modify First and Last names with:
+      |First Name| Lorem   |
+      |Last Name | Ipsum   |
 
 
 
-  Scenario: Can change My account settings.
-    When I open My Details page.
-    Then I can modify
-    # implement table
+  @wip
+  Scenario: Email can be changed.
 
+  @wip
+  Scenario: Password can be changed.
 
-  Scenario:
+  @wip
+  Scenario: Profile fields can not be blank.
