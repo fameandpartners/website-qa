@@ -30,9 +30,9 @@ module Header
   def select_locale(locale)
     case locale
       when 'USA'
-        self.lnkUSA_element.when_present.click
+        self.link_element(xpath: "//span[@id='locale-selector-container']//a[contains(text(),'#{locale}')]").when_present.click
       when 'Australia'
-        self.lnkAUS_element.when_present.click
+        self.link_element(xpath: "//span[@id='locale-selector-container']//a[contains(text(),'#{locale}')]").when_present.click
     end
   end
 

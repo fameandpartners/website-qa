@@ -2,32 +2,32 @@ Feature: Checkout process.
   As anonymous user I can buy a dress.
   As registered user I can buy a dress.
 
-
-  Background: Open dress page.
-    Given I am on 'Kirilly' dress.
-
-  Scenario: Successfully buy a dress as anonymous.
+  @smoke
+  Scenario: Successfully buy a dress as anonymous in USA.
+    Given I am on USA 'Kirilly' dress.
     When I specify properties of dress:
       |Dress Size   |US 10  |
       |Skirt Length |PETITE |
-      |Color        |       |
-      |Customize    |       |
     Then I add the dress to cart.
     And I fill in form fields with:
-      | Email                   | anonymous.fm@gmail.com |
-      | Street Address          | Street X      |
-      | Street Address (cont'd) | House Y       |
-      | City                    | Melbourne     |
-      | Phone Number            | 2255-4422     |
-      | <Zipcode Label>         | 12345         |
+      | Email                   | overflow100182@gmail.com  |
+      | First Name              | Lorem                     |
+      | Last Name               | Ipsum                     |
+      | Street Address          | Lorem street 8            |
+      | Street Address (cont'd) | apt. 8                    |
+      | City                    | Melbourne                 |
+      | Phone Number            | 2255-4422                 |
+      | Zipcode                 | 12345                     |
     Then I click 'Pay Securely'.
-    And I fill in credit card information:
-      | Card number      | #{CONFIG['user_email']}  |
+    And I fill in credit card information.
+      | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
       | Expiration Month | 10                |
       | Expiration Year  | 2050              |
       | CVC              | 123               |
-
+    And I click on 'Place My Order' button.
+    Then page with order number displayed.
+    And it appears in 'Orders' admin area.
 
 
 

@@ -47,13 +47,16 @@ Before do
 end
 
 After do |scenario|
-  if scenario.failed?
-    file_name = ['FAILED_', scenario.name.gsub(' ', '_').gsub(/[^0-9A-Za-z_]/, ''), '.png'].join
-    datetime_folder = File.join('screenshots', Time.now.strftime('%d-%m-%Y-%H-%M-%S'))
-    FileUtils.mkdir_p(datetime_folder)
-    screenshot_file = File.join(datetime_folder, file_name)
-    @browser.driver.save_screenshot(screenshot_file)
-    embed screenshot_file, 'image/png'
-  end
-  @browser.close
+  # begin
+    if scenario.failed?
+      file_name = ['FAILED_', scenario.name.gsub(' ', '_').gsub(/[^0-9A-Za-z_]/, ''), '.png'].join
+      datetime_folder = File.join('screenshots', Time.now.strftime('%d-%m-%Y-%H-%M-%S'))
+      FileUtils.mkdir_p(datetime_folder)
+      screenshot_file = File.join(datetime_folder, file_name)
+      @browser.driver.save_screenshot(screenshot_file)
+      embed screenshot_file, 'image/png'
+    end
+  # ensure
+    @browser.close
+  # end
 end

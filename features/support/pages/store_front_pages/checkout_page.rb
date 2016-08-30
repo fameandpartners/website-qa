@@ -23,23 +23,24 @@ class CheckOutPage
   text_field(:txtExpMonth, id: 'month')
   text_field(:txtExpYear, id: 'year')
   text_field(:txtCVC, id: 'card_code')
-  button(:txtPlaceOrder, text: 'Place My Order')
+  button(:btnPlaceOrder, text: 'Place My Order')
 
 
 
 
-    def specify_email(email:)
-      self.txtEmail_element.when_present.set(email)
-    end
-
-  def fill_in_credit(data={})
-    self.txtCardNumber_element.when_present.set(data['Card number'])
-    self.txtNameOnCard_element.when_present.set(data['Name on card'])
-    self.txttxtExpMonth_element.when_present.set(data['Expiration Month'])
-    self.txtExpYear_element.when_present.set(data['Expiration Year'])
-    self.txtCVC_element.when_present.set(data['CVC'])
+  # 1. Your information methods:
+  def specify_email(email:)
+    self.txtEmail_element.when_present.set(email)
   end
 
+  # 2. Address Details methods:
+  def specify_first_name(fname:)
+    self.txtFirstName_element.when_present.set(fname)
+  end
+
+  def specify_last_name(lname:)
+    self.txtLastName_element.when_present.set(lname)
+  end
 
   def ship_address(variant)
     case variant
@@ -53,5 +54,23 @@ class CheckOutPage
   def pay_securely
     self.btnPaySecurely_element.when_present.click
   end
+
+
+
+
+
+  def fill_in_credit(data={})
+    self.txtCardNumber_element.when_present.set(data['Card number'])
+    self.txtNameOnCard_element.when_present.set(data['Name on card'])
+    self.txttxtExpMonth_element.when_present.set(data['Expiration Month'])
+    self.txtExpYear_element.when_present.set(data['Expiration Year'])
+    self.txtCVC_element.when_present.set(data['CVC'])
+  end
+
+  def place_my_order
+    self.btnPlaceOrder_element.when_present.click
+  end
+
+
 
 end

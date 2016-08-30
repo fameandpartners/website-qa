@@ -1,14 +1,13 @@
 #base_url: 'https://www.fameandpartners.com'
 base_url: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com'
 
-
 user_email: auto.user.fm@gmail.com
 user_pwd: 1qazxcv
 gmail_pwd: 1qazqwerty
 user_fname: Lorem
 user_lname: Ipsum
 
-anonymous_email: anonymous.fandp@gmail.com
+anonymous_email: overflow100182@gmail.com
 anonymous_fname: Lorem
 anonymous_lname: Ipsum
 anonymous_pwd: 1qazqwerty
