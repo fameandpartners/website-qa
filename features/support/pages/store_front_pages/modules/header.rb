@@ -20,7 +20,7 @@ module Header
   end
 
   def click_logout
-    self.lnkLogout_element.when_present.hover
+    self.lnkLogout_element.when_present.click
   end
 
   def click_locale_menu
@@ -41,7 +41,9 @@ module Header
       when 'details'
         self.lnkMyDetails_element.when_present.click
       when 'moodboards'
+        self.lnkMyMoodboards_element.when_present.click
       when 'orders'
+        self.lnkMyOrders_element.when_present.click
     end
   end
 

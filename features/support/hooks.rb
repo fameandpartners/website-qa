@@ -23,7 +23,6 @@ Before do
     begin
       if (block.call)
         puts "Assertion PASSED for #{message}"
-
       else
         puts "Assertion FAILED for #{message}"
         fail('Test Failure on assertion')
@@ -47,16 +46,19 @@ Before do
 end
 
 After do |scenario|
-  # begin
-    if scenario.failed?
-      file_name = ['FAILED_', scenario.name.gsub(' ', '_').gsub(/[^0-9A-Za-z_]/, ''), '.png'].join
-      datetime_folder = File.join('screenshots', Time.now.strftime('%d-%m-%Y-%H-%M-%S'))
-      FileUtils.mkdir_p(datetime_folder)
-      screenshot_file = File.join(datetime_folder, file_name)
-      @browser.driver.save_screenshot(screenshot_file)
-      embed screenshot_file, 'image/png'
-    end
-  # ensure
-    @browser.close
-  # end
+  if scenario.failed?
+    file_name = ['FAILED_', scenario.name.gsub(' ', '_').gsub(/[^0-9A-Za-z_]/, ''), '.png'].join
+    datetime_folder = File.join('screenshots', Time.now.strftime('%d-%m-%Y-%H-%M-%S'))
+    FileUtils.mkdir_p(datetime_folder)
+    screenshot_file = File.join(datetime_folder, file_name)
+    @browser.driver.save_screenshot(screenshot_file)
+    embed screenshot_file, 'image/png'
+  end
+  @browser.close
 end
+
+# if ENV['BROWSER'] == 'chrome'
+#   puts 'I am chrome'
+# elsif ENV['BROWSER'] == 'firefox'
+#   puts 'I am firefox'
+# end
