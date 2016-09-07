@@ -17,5 +17,5 @@ Feature: Reset Password
     Then message about receiving email with instructions appears.
     And I am able to reset my password.
 
-  Scenario: Required filed
-    When bla
+#  Scenario: Required filed
+#    When bla

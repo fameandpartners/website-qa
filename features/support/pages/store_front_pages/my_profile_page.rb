@@ -21,8 +21,9 @@ class MyProfilePage
   end
 
 
-
-
+  def update_profile(data)
+    self
+  end
 
 
 

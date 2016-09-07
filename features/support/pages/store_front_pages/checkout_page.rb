@@ -38,8 +38,6 @@ class CheckOutPage
   button(:btnOK, xpath: "//div[@class='vex-dialog-message']//button[text()='OK']")
 
 
-
-
   # 1. Your information methods:
   def specify_email(email:)
     self.txtEmail_element.when_present.set(email)

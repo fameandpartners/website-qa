@@ -28,6 +28,18 @@ class LoginPage
 
   end
 
+
+
+
+  def specify_email(email)
+    self.txtEmail_element.when_present.set(email)
+  end
+
+
+  def specify_pwd(pwd)
+    self.txtPwd_element.when_present.set(pwd)
+  end
+
   def specify_credentials(user_email, user_pwd)
     self.txtEmail_element.when_present.set(user_email)
     self.txtPwd_element.when_present.set(user_pwd)

@@ -43,12 +43,64 @@ Then(/^I want to login with Facebook account\.$/) do
   pending
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#~~~ User can NOT login with incorrect email credentials. ~~~~~~~~~~~~~~~~~~~~~~~
-When(/^I specify incorrect credentials\.$/) do
-  pending
+#~~~ User can NOT login with fake email. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When(/^I specify fake email\.$/) do
+  on(LoginPage) do |page|
+    page.click_my_account
+    page.specify_email('fake@email.com')
+  end
+end
+But(/^password is correct\.$/) do
+  on(LoginPage).specify_pwd('1qazxcv')
+end
+And(/^I click 'Login' button\.$/) do
+  on(LoginPage).submit_login
 end
 Then(/^I will see "([^"]*)" error message\.$/) do |msg|
+  expect(on(LoginPage).text.include?(msg)).to be_truthy
+end
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~ User can NOT login with incorrect password. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When(/^I specify registered email\.$/) do
+  on(LoginPage) do |page|
+    page.click_my_account
+    page.specify_email(CONFIG['user_email'])
+  end
+end
+
+But(/^password is incorrect\.$/) do
+  on(LoginPage).specify_pwd('abracadabra')
+end
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~ User can NOT login with correct password and empty login. ~~~~~~~~~~~~~~~~~~
+When(/^I do not specify email\.$/) do
+  on(LoginPage) do |page|
+    page.click_my_account
+    page.specify_email('')
+  end
+end
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~ User can NOT login with correct password and empty login. ~~~~~~~~~~~~~~~~~~
+When(/^I do not specify nor email nor password\.$/) do
   pending
+end
+
+
+
+
+#~~~ I should specify incorrect email format. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When(/^I specify incorrect email format\.$/) do
+  on(LoginPage) do |page|
+    page.click_my_account
+    page.specify_email('just_email')
+    page.submit_login
+  end
+end
+
+Then(/^I will see "([^"]*)" tooltip\.$/) do |tooltip|
+
+  expect(on(LoginPage).txtEmail_element.title).to eql(tooltip)
+  # label(:text => "Help").title.should eq("Hint Text")
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Login from Forgot Password form. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -65,3 +117,8 @@ And(/^I can login from Forgot Password form\.$/) do
   end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+But(/^password is empty\.$/) do
+  on(LoginPage).specify_pwd('')
+end

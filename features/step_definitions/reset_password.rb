@@ -24,7 +24,6 @@ And(/^I am able to reset my password\.$/) do
     page.sign_in_gmail
     page.open_res_email
     page.click_reset_link
-    sleep 5
   end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
