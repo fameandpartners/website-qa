@@ -9,6 +9,10 @@ def browser_name
   ENV.fetch('BROWSER', 'chrome')
 end
 
+def url
+  ENV.fetch('URL', '192.168.0.103:4444')
+end
+
 def environment
   (ENV['ENV'] ||= 'grid').downcase.to_sym
 end
@@ -35,7 +39,7 @@ Before do
     Selenium::WebDriver::Firefox.path= "#{browser_path}"
   end
   if environment == :grid
-    @browser = Watir::Browser.new(:remote, :url=>"http://192.168.0.103:4444/wd/hub", :desired_capabilities=> {browserName: browser_name,version: browser_version})
+    @browser = Watir::Browser.new(:remote, :url=>"http://#{url}/wd/hub", :desired_capabilities=> {browserName: browser_name,version: browser_version})
     @browser.window.maximize
   else
     @browser = Watir::Browser.new browser_name
