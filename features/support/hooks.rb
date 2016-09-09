@@ -6,8 +6,7 @@ def browser_path
 end
 
 def browser_name
-  # (ENV['BROWSER'] ||= 'chrome').downcase.to_sym
-  (ENV['BROWSER'] ||= 'chrome').to_sym
+  ENV.fetch('BROWSER', 'chrome')
 end
 
 def environment
