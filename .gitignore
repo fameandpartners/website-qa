@@ -154,3 +154,5 @@ results.html
 cucumber_chrome.json
 screenshots/
 cucumber_smoke_chrome.json
+cucumber_checkout.json
+cucumber_smoke_ff.json
