@@ -26,7 +26,7 @@ Feature: Checkout process.
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
       | Expiration Month | 10                |
-      | Expiration Year  | 2050              |
+      | Expiration Year  | 2020              |
       | CVC              | 123               |
     And click on 'Place My Order' button.
     Then "Thanks for your order!" page with order number displayed.
@@ -59,7 +59,7 @@ Feature: Checkout process.
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
       | Expiration Month | 10                |
-      | Expiration Year  | 2050              |
+      | Expiration Year  | 2020              |
       | CVC              | 123               |
     And click on 'Place My Order' button.
     Then "Thanks for your order!" page with order number displayed.
@@ -93,7 +93,7 @@ Feature: Checkout process.
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
       | Expiration Month | 10                |
-      | Expiration Year  | 2050              |
+      | Expiration Year  | 2020              |
       | CVC              | 123               |
     And click on 'Place My Order' button.
     Then "Thanks for your order!" page with order number displayed.
