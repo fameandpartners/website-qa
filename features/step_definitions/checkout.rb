@@ -57,12 +57,11 @@ Then(/^"([^"]*)" page with order number displayed\.$/) do |message|
 end
 
 And(/^it appears in 'Orders' admin area\.$/) do
+  visit LogoutPage
   visit OrdersPage
   on(LoginPage) do |page|
-    if page.txtEmail?
-      page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
-      page.submit_login
-    end
+    page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+    page.submit_login
   end
   on(OrdersPage) do |page|
     page.specify_search_order(@complete_order_number)
@@ -87,8 +86,6 @@ And(/^there is also on "My Orders" page\.$/) do
     # page.wait_until { page.text.include? 'My Orders' }
     page.table_element(xpath: "//table[contains(@class,'orders-table')]").when_present
     expect(page.link_element(xpath: "//a[text()='#{@complete_order_number}']").visible?).to be_truthy
-    page.hover_my_account
-    page.click_logout
   end
 end
 
