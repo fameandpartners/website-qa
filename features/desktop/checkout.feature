@@ -10,7 +10,7 @@ Feature: Checkout process.
     When I select "<Country>" site version.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.
-    And I fill in form fields with:
+    Then I fill in form fields with:
       | Email                   | overflow100182@gmail.com  |
       | First Name              | Lorem                     |
       | Last Name               | Ipsum                     |
@@ -21,6 +21,7 @@ Feature: Checkout process.
       | City                    | <City>                    |
       | Phone Number            | 2255-4422                 |
       | Zipcode                 | 12345                     |
+    And select "Ship to this address".
     Then I click 'Pay Securely'.
     And fill in credit card information.
       | Card number      | 5520000000000000  |
@@ -43,7 +44,7 @@ Feature: Checkout process.
     And I login as user.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.
-    And I fill in form fields with:
+    Then I fill in form fields with:
       | Email                   | auto.user.fm@gmail.com    |
       | First Name              | Auto                      |
       | Last Name               | User                      |
@@ -54,6 +55,7 @@ Feature: Checkout process.
       | City                    | <City>                    |
       | Phone Number            | 2255-4422                 |
       | Zipcode                 | 12345                     |
+    And select "Ship to this address".
     Then I click 'Pay Securely'.
     And fill in credit card information.
       | Card number      | 5520000000000000  |
@@ -71,39 +73,39 @@ Feature: Checkout process.
       | USA       | United States | Washington      | Seattle | US 10      | PETITE       |
       | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD     |
 
-  @wip #@smoke
-  Scenario Outline: As an anonymous user I can buy a dress shipping to Cyprus with an extra $30 fee charge
-    When I select "<Country>" site version.
-    And I login as user.
-    Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
-    And add the dress to cart.
-    And I fill in form fields with:
-      | Email                   | auto.user.fm@gmail.com    |
-      | First Name              | Auto                      |
-      | Last Name               | User                      |
-      | Street Address          | Lorem street 8            |
-      | Street Address (contd)  | apt. 8                    |
-      | Country                 | <Ship Country>            |
-      | State                   | <State>                   |
-      | City                    | <City>                    |
-      | Phone Number            | 2255-4422                 |
-      | Zipcode                 | 12345                     |
-    Then I click 'Pay Securely'.
-    And fill in credit card information.
-      | Card number      | 5520000000000000  |
-      | Name on card     | Zaphod Beeblebrox |
-      | Expiration Month | 10                |
-      | Expiration Year  | 2020              |
-      | CVC              | 123               |
-    And click on 'Place My Order' button.
-    Then "Thanks for your order!" page with order number displayed.
-    And there is also on "My Orders" page.
-    And it appears in 'Orders' admin area.
-
-    Examples:
-      | Country   | Ship Country  | State   | City    | Dress Size | Skirt Length |
-      | USA       | Cyprus        | Larnaka | Seattle | US 10      | PETITE       |
-      | Australia | Cyprus        | Larnaka | Sydney  | AU 6       | STANDARD     |
+#  @wip #@smoke
+#  Scenario Outline: As an anonymous user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
+#    When I select "<Country>" site version.
+#    And I login as user.
+#    Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
+#    And add the dress to cart.
+#    And I fill in form fields with:
+#      | Email                   | auto.user.fm@gmail.com    |
+#      | First Name              | Auto                      |
+#      | Last Name               | User                      |
+#      | Street Address          | Lorem street 8            |
+#      | Street Address (contd)  | apt. 8                    |
+#      | Country                 | <Ship Country>            |
+#      | State                   | <State>                   |
+#      | City                    | <City>                    |
+#      | Phone Number            | 2255-4422                 |
+#      | Zipcode                 | 12345                     |
+#    Then I click 'Pay Securely'.
+#    And fill in credit card information.
+#      | Card number      | 5520000000000000  |
+#      | Name on card     | Zaphod Beeblebrox |
+#      | Expiration Month | 10                |
+#      | Expiration Year  | 2020              |
+#      | CVC              | 123               |
+#    And click on 'Place My Order' button.
+#    Then "Thanks for your order!" page with order number displayed.
+#    And there is also on "My Orders" page.
+#    And it appears in 'Orders' admin area.
+#
+#    Examples:
+#      | Country   | Ship Country  | State   | City    | Dress Size | Skirt Length |
+#      | USA       | Cyprus        | Larnaka | Seattle | US 10      | PETITE       |
+#      | Australia | Cyprus        | Larnaka | Sydney  | AU 6       | STANDARD     |
 
 
 

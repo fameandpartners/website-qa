@@ -1,5 +1,5 @@
 #~~~ Successfully buy a dress as registered user.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-And(/^I fill in form fields with:$/) do |table|
+Then(/^I fill in form fields with:$/) do |table|
   on(CheckOutPage) do |page|
     data = table.rows_hash
     page.specify_email(email: data['Email'])
@@ -48,7 +48,8 @@ end
 
 Then(/^"([^"]*)" page with order number displayed\.$/) do |message|
   on(CheckOutPage) do |page|
-    page.wait_until { page.text.include? message }
+    page.h1_element(xpath: "//h1[text()='#{message}']").when_present
+    # page.wait_until(30) { page.text.include? message }
     @complete_order_number = page.h3_element(xpath: "//h3[@class='order-number']").text.scan(/[A-Z]\d{,9}$/).first
     expect(@order_number).to eql(@complete_order_number)
   end
@@ -82,10 +83,16 @@ And(/^there is also on "My Orders" page\.$/) do
   on(MyProfilePage) do |page|
     page.hover_my_account
     page.open_account_submenu('orders')
-    page.wait_until { page.text.include? 'My Orders' }
+    # page.wait_until { page.text.include? 'My Orders' }
+    page.table_element(xpath: "//table[contains(@class,'orders-table')]").when_present
     expect(page.link_element(xpath: "//a[text()='#{@complete_order_number}']").visible?).to be_truthy
     page.hover_my_account
     page.click_logout
-    sleep 4
+  end
+end
+
+And(/^select "([^"]*)"\.$/) do |shipment|
+  on(CheckOutPage) do |page|
+    page.select_ship_address(shipment)
   end
 end

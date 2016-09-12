@@ -72,12 +72,12 @@ class CheckOutPage
   def zipcode(zipcode:)
     self.txtZipcode_element.when_present.set(zipcode)
   end
-  def ship_address(variant)
+  def select_ship_address(variant)
     case variant
-      when 'current'
-        self
-      when 'different'
-        self
+      when 'Ship to this address'
+        self.rdbShipAddress_element.when_present.set
+      when 'Ship to different address'
+        self.rdbShipDifferentAddress_element.when_present.set
     end
   end
   def pay_securely

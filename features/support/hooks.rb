@@ -10,7 +10,7 @@ def browser_name
 end
 
 def url
-  ENV.fetch('URL', '192.168.0.103:4444')
+  ENV.fetch('URL', '192.168.13.131:4444')
 end
 
 def environment
