@@ -56,6 +56,7 @@ class CheckOutPage
     self.txtStreetAddressContd_element.when_present.set(street_cnd)
   end
   def select_country(country:)
+    @browser.scroll.to :center
     self.divCountry_element.when_present.click
     self.list_item_element(xpath: "//li[text()='#{country}']").when_present.click
   end

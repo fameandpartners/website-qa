@@ -1,3 +1,5 @@
+require 'watir'
+require 'watir-scroll'
 require 'watir-webdriver'
 require 'page-object'
 
