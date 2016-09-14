@@ -2,6 +2,7 @@ When(/^I select "([^"]*)" site version\.$/) do |country|
   on(ProductPage) do |page|
     page.click_locale_menu
     page.select_locale(country)
+    @country_version=country
   end
 end
 

@@ -33,16 +33,6 @@ end
 
 And(/^click on 'Place My Order' button\.$/) do
   on(CheckOutPage) do |page|
-    sub_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Sub Total')]//span").text.gsub(/[^\d\.]/, '').to_f
-    shipping = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Shipping')]//span").text.gsub(/[^\d\.]/, '').to_f
-    order_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//strong[contains(text(),'Total')]//span").text.gsub(/[^\d\.]/, '').to_f
-    @prices = {
-      sub_total:  sub_total,
-      shipping: shipping,
-      order_total: order_total
-    }
-    expect(@product_price).to eql(@prices[:sub_total])
-    expect(@product_price).to eql(@prices[:order_total])
     page.place_my_order
   end
 end
@@ -80,11 +70,14 @@ end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Successfully buy a dress as registered user.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 And(/^there is also on "My Orders" page\.$/) do
-  on(MyProfilePage) do |page|
-    page.hover_my_account
-    page.open_account_submenu('orders')
-    # page.wait_until { page.text.include? 'My Orders' }
-    page.table_element(xpath: "//table[contains(@class,'orders-table')]").when_present
+  if @country_version == 'Australia'
+    @browser.goto(CONFIG['base_url_au']+'/user_orders')
+  else
+    visit UserOrdersPage
+  end
+
+  on(UserOrdersPage) do |page|
+    page.tblOrdersTable_element.when_present
     expect(page.link_element(xpath: "//a[text()='#{@complete_order_number}']").visible?).to be_truthy
   end
 end
@@ -92,5 +85,42 @@ end
 And(/^select "([^"]*)"\.$/) do |shipment|
   on(CheckOutPage) do |page|
     page.select_ship_address(shipment)
+  end
+end
+
+And(/^confirm custom duty fees\.$/) do
+  on(CheckOutPage).confirm_custom_duty_fees(true)
+end
+
+But(/^check "Order summary"\.$/) do
+  on(CheckOutPage) do |page|
+    sub_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Sub Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    shipping = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Shipping')]//span").text.gsub(/[^\d\.]/, '').to_f
+    order_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//strong[contains(text(),'Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    @prices = {
+        sub_total:  sub_total,
+        shipping: shipping,
+        order_total: order_total
+    }
+    expect(@product_price).to eql(@prices[:sub_total])
+    expect(@product_price).to eql(@prices[:order_total])
+  end
+end
+
+But(/^check "Order summary" with custom duty fees\.$/) do
+  on(CheckOutPage) do |page|
+    sub_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Sub Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    shipping = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Shipping')]//span").text.gsub(/[^\d\.]/, '').to_f
+    order_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//strong[contains(text(),'Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    @prices = {
+        sub_total:  sub_total,
+        shipping: shipping,
+        order_total: order_total
+    }
+    expect(@product_price).to eql(@prices[:sub_total])
+    # @order_total_fees=@prices[:sub_total]+@prices[:shipping]
+    order_total_fee = @prices[:sub_total]+@prices[:shipping]
+    puts order_total_fee
+    expect(@prices[:order_total]).to eql(order_total_fee)
   end
 end

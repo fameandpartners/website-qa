@@ -3,21 +3,27 @@ class CheckOutPage
 
   page_url(CONFIG['base_url']+'/checkout')
 
-  # "Your information" step.
+  # "Your information" block.
   text_field(:txtEmail, id: 'order_bill_address_attributes_email')
+
+
+  # "Address Details" block.
   text_field(:txtFirstName, id: 'order_bill_address_attributes_firstname')
   text_field(:txtLastName, id: 'order_bill_address_attributes_lastname')
   text_field(:txtStreetAddress, id: 'order_bill_address_attributes_address1')
   text_field(:txtStreetAddressContd, id: 'order_bill_address_attributes_address2')
   div(:divCountry, id: 'order_bill_address_attributes_country_id_chosen')
   div(:divState, id: 'order_bill_address_attributes_state_id_chosen')
-
+  text_field(:txtState, id: 'order_bill_address_attributes_state_name')
   text_field(:txtCity, id: 'order_bill_address_attributes_city')
   text_field(:txtPhoneNumber, id: 'order_bill_address_attributes_phone')
   text_field(:txtZipcode, id: 'order_bill_address_attributes_zipcode')
   radio_button(:rdbShipAddress, id: 'ship_to_address_Ship_to_this_address')
   radio_button(:rdbShipDifferentAddress, id: 'ship_to_address_Ship_to_a_different_address')
   button(:btnPaySecurely, name: 'pay_securely')
+  checkbox(:chkDutyFee, id: 'international_shipping_fee')
+
+  # "Shipping Address Details" block.
 
   # "Payment Method" step.
   text_field(:txtCardNumber, id: 'number')
@@ -61,8 +67,13 @@ class CheckOutPage
     self.list_item_element(xpath: "//li[text()='#{country}']").when_present.click
   end
   def select_state(state:)
-    self.divState_element.when_present.click
-    self.list_item_element(xpath: "//li[text()='#{state}']").when_present.click
+    if self.chkDutyFee_element.visible?
+      self.txtState_element.when_present.set(state)
+    else
+      self.divState_element.when_present.click
+      self.list_item_element(xpath: "//li[text()='#{state}']").when_present.click
+    end
+
   end
   def specify_city(city:)
     self.txtCity_element.when_present.set(city)
@@ -104,6 +115,13 @@ class CheckOutPage
     self.btnPlaceOrder_element.when_present.click
   end
 
-
+  def confirm_custom_duty_fees(fee)
+    case fee
+      when true
+        self.chkDutyFee_element.when_present.set
+      when false
+        self.chkDutyFee_element.when_present.clear
+    end
+  end
 
 end
