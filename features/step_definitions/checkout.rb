@@ -48,11 +48,12 @@ end
 
 And(/^it appears in 'Orders' admin area\.$/) do
   visit LogoutPage
-  visit OrdersPage
+  visit LoginPage
   on(LoginPage) do |page|
     page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
     page.submit_login
   end
+  visit OrdersPage
   on(OrdersPage) do |page|
     page.specify_search_order(@complete_order_number)
     page.filter_results

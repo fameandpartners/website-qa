@@ -4,12 +4,13 @@ module Product
   div(:divDressSize, text: 'Dress Size')
   div(:divSkirtLength, text: 'Skirt Length')
 
-
   div(:divProductPrice, xpath: "//div[@class='price']")
   link(:lnkAddToBag, text: 'ADD TO BAG')
 
   def open_dress_size
-    self.divDressSize_element.when_present.click
+      sleep 3 #for safari
+      # self.div_element(xpath: ".//*[@id='tab-size-fit']/div[1]/a/div[1]").when_present.click
+      self.div_element(xpath: ".//div[@id='tab-size-fit']/div[contains(@class,'pdp-side')]/a/div[text()='Dress Size']").when_present.click
   end
 
   def select_dress_size(size)
