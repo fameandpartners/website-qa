@@ -11,16 +11,16 @@ Feature: Checkout process.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.
     Then I fill in form fields with:
-      | Email                   | overflow100182@gmail.com  |
-      | First Name              | Lorem                     |
-      | Last Name               | Ipsum                     |
-      | Street Address          | Lorem street 8            |
-      | Street Address (contd)  | apt. 8                    |
-      | Country                 | <Ship Country>            |
-      | State                   | <State>                   |
-      | City                    | <City>                    |
-      | Phone Number            | 2255-4422                 |
-      | Zipcode                 | 12345                     |
+      | Email                   | anonymous_user@fameandpartners.com  |
+      | First Name              | Lorem                               |
+      | Last Name               | Ipsum                               |
+      | Street Address          | Lorem street 8                      |
+      | Street Address (contd)  | apt. 8                              |
+      | Country                 | <Ship Country>                      |
+      | State                   | <State>                             |
+      | City                    | <City>                              |
+      | Phone Number            | 2255-4422                           |
+      | Zipcode                 | 12345                               |
     And select "Ship to this address".
     Then I click 'Pay Securely'.
     And fill in credit card information.
@@ -81,16 +81,16 @@ Feature: Checkout process.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.
     And I fill in form fields with:
-      | Email                   | auto.user.fm@gmail.com    |
-      | First Name              | Auto                      |
-      | Last Name               | User                      |
-      | Street Address          | Lorem street 8            |
-      | Street Address (contd)  | apt. 8                    |
-      | Country                 | <Ship Country>            |
-      | State                   | <State>                   |
-      | City                    | <City>                    |
-      | Phone Number            | 2255-4422                 |
-      | Zipcode                 | 12345                     |
+      | Email                   | anonymous_user@fameandpartners.com    |
+      | First Name              | Anonymous                             |
+      | Last Name               | User                                  |
+      | Street Address          | Lorem street 8                        |
+      | Street Address (contd)  | apt. 8                                |
+      | Country                 | <Ship Country>                        |
+      | State                   | <State>                               |
+      | City                    | <City>                                |
+      | Phone Number            | 2255-4422                             |
+      | Zipcode                 | 12345                                 |
     And confirm custom duty fees.
     Then I click 'Pay Securely'.
     And fill in credit card information.

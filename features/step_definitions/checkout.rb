@@ -52,6 +52,10 @@ And(/^it appears in 'Orders' admin area\.$/) do
   on(LoginPage) do |page|
     page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
     page.submit_login
+    if page.txtEmail_element.visible?
+      page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+      page.submit_login
+    end
   end
   visit OrdersPage
   on(OrdersPage) do |page|

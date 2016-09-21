@@ -40,7 +40,25 @@ class LoginPage
     self.txtPwd_element.when_present.set(pwd)
   end
 
+  def specify_login_email(user_email)
+    self.txtEmail_element.when_present.set(user_email)
+  end
+
+  def specify_login_pwd(pwd)
+    self.txtPwd_element.when_present.set(pwd)
+  end
+
   def specify_credentials(user_email, user_pwd)
+    # if ENV['BROWSER'] == 'chrome'
+    #   self.txtEmail_element.when_present.set(user_email)
+    #   self.txtPwd_element.when_present.set(user_pwd)
+    # elsif ENV['BROWSER'] == 'firefox'
+    #   puts 'I am firefox'
+    # elsif ENV['BROWSER'] == 'firefox'
+    #   puts 'I am firefox'
+    # elsif ENV['BROWSER'] == 'firefox'
+    #   puts 'I am firefox'
+    # end
     self.txtEmail_element.when_present.set(user_email)
     self.txtPwd_element.when_present.set(user_pwd)
   end

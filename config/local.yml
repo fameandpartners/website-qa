@@ -8,10 +8,25 @@ gmail_pwd: 1qazqwerty
 user_fname: Lorem
 user_lname: Ipsum
 
+twit_usr_name: twit_usr_fandp
+twit_email: auto.user.fm@gmail.com
+twit_pwd: 1qazxcv
+
+fb_user: auto.user.fm@gmail.com
+fb_pwd: 1qazxcv
+fb_f_name: Fame
+fb_l_name: Partner
+
 anonymous_email: overflow100182@gmail.com
 anonymous_fname: Lorem
 anonymous_lname: Ipsum
 anonymous_pwd: 1qazqwerty
+
+safari_user: safari_user@fameandpartners.com
+firefox_user: firefox_user@fameandpartners.com
+ie_user: ie_user@fameandpartners.com
+chrome_user: chrome_user@fameandpartners.com
+anonymous_user: anonymous_user@fameandpartners.com
 
 
 user_r_email: auto.user.fmr@gmail.com
