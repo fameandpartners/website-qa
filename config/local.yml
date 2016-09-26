@@ -23,11 +23,20 @@ anonymous_lname: Ipsum
 anonymous_pwd: 1qazqwerty
 
 safari_user: safari_user@fameandpartners.com
-firefox_user: firefox_user@fameandpartners.com
-ie_user: ie_user@fameandpartners.com
-chrome_user: chrome_user@fameandpartners.com
-anonymous_user: anonymous_user@fameandpartners.com
+safari_user_pwd: 1qazqwerty
 
+firefox_user: firefox_user@fameandpartners.com
+firefox_user_pwd: 1qazqwerty
+
+chrome_user: chrome_user@fameandpartners.com
+chrome_user_pwd: 1qazqwerty
+chrome_afterpay_pwd: fameandpartners2016
+
+ie_user: ie_user@fameandpartners.com
+ie_user_pwd: 1qazqwerty
+
+anonymous_user: anonymous_user@fameandpartners.com
+anonymous_user_pwd:
 
 user_r_email: auto.user.fmr@gmail.com
 user_r_pwd: 1qazxcv

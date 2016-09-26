@@ -35,7 +35,8 @@ end
 And(/^submit my enquiry\.$/) do
   on(ContactUsPage) do |page|
     page.submit_enquiry
-    expect(page.text.include? "Thanks! We won't play hard to get, we'll get back to you ASAP.").to be_truthy
+    sleep 1
+    expect(page.hThanks_element.visible?).to be_truthy
   end
 end
 

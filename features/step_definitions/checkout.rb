@@ -2,9 +2,11 @@
 Then(/^I fill in form fields with:$/) do |table|
   on(CheckOutPage) do |page|
     data = table.rows_hash
-    page.specify_email(email: data['Email'])
-    page.specify_first_name(fname: data['First Name'])
-    page.specify_last_name(lname: data['Last Name'])
+    if @is_authorized == false
+      page.specify_email(email: data['Email'])
+      page.specify_first_name(fname: data['First Name'])
+      page.specify_last_name(lname: data['Last Name'])
+    end
     page.specify_street_address(street: data['Street Address'])
     page.specify_street_address_contd(street_cnd: data['Street Address (contd)'])
     page.select_country(country: data['Country'])
@@ -49,13 +51,14 @@ end
 And(/^it appears in 'Orders' admin area\.$/) do
   visit LogoutPage
   visit LoginPage
+  sleep 2
   on(LoginPage) do |page|
     page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
     page.submit_login
-    if page.txtEmail_element.visible?
-      page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
-      page.submit_login
-    end
+    # if page.txtEmail_element.visible?
+    #   page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+    #   page.submit_login
+    # end
   end
   visit OrdersPage
   on(OrdersPage) do |page|

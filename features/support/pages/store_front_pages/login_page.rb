@@ -17,7 +17,9 @@ class LoginPage
   text_field(:txtPwd, id: 'spree_user_password')
   checkbox(:chkRemMe, id: 'spree_user_remember_me')
   span(:spnRemMe, xpath: "//label[@for='spree_user_remember_me']/span[text()='Remember me']")
-  button(:btnLogin, xpath: "//input[@value='Login']")
+  # button(:btnLogin, xpath: "//input[@value='Login']")
+  # button(:btnLogin, xpath: ".//*[@id='password-credentials']/div[5]/input")
+  button(:btnLogin, name: "commit")
   link(:lnkCreateAcc, text: 'Create a new account')
   link(:lnkForgotPwd, text: 'Forgot Password?')
   h3(:spnResetPwdNtf, text: "You will receive an email with instructions about how to reset your password in a few minutes.")
@@ -49,21 +51,12 @@ class LoginPage
   end
 
   def specify_credentials(user_email, user_pwd)
-    # if ENV['BROWSER'] == 'chrome'
-    #   self.txtEmail_element.when_present.set(user_email)
-    #   self.txtPwd_element.when_present.set(user_pwd)
-    # elsif ENV['BROWSER'] == 'firefox'
-    #   puts 'I am firefox'
-    # elsif ENV['BROWSER'] == 'firefox'
-    #   puts 'I am firefox'
-    # elsif ENV['BROWSER'] == 'firefox'
-    #   puts 'I am firefox'
-    # end
     self.txtEmail_element.when_present.set(user_email)
     self.txtPwd_element.when_present.set(user_pwd)
   end
 
   def submit_login
+    puts browser_name
     self.btnLogin_element.when_present.click
   end
 

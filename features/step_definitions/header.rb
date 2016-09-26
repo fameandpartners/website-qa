@@ -2,8 +2,18 @@
 When(/^I login as user\.$/) do
   on(HomePage).click_my_account
   on(LoginPage) do |page|
-    page.specify_credentials(CONFIG['user_email'],CONFIG['user_pwd'])
+    if browser_name == 'chrome'
+      page.specify_credentials(CONFIG['chrome_user'],CONFIG['chrome_user_pwd'])
+    elsif browser_name == 'firefox'
+      page.specify_credentials(CONFIG['firefox_user'],CONFIG['firefox_user_pwd'])
+    elsif browser_name == 'internet explorer'
+      page.specify_credentials(CONFIG['ie_user'],CONFIG['ie_user_pwd'])
+    elsif browser_name == 'safari'
+      sleep 2
+      page.specify_credentials(CONFIG['safari_user'],CONFIG['safari_user_pwd'])
+    end
     page.submit_login
+    @is_authorized = true
   end
 end
 Then (/^I open My profile via My Account link\.$/) do

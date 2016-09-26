@@ -19,6 +19,7 @@ class ContactUsPage
   text_area(:txtEnquiry ,id: 'contact_message')
   button(:btnSubmitEnquiry, name: 'commit')
 
+  h1(:hThanks, text: "Thanks! We won't play hard to get, we'll get back to you ASAP.")
 
   def specify_first_name(fname:)
     self.txtFirstName_element.when_present.set(fname)
