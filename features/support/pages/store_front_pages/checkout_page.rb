@@ -66,15 +66,17 @@ class CheckOutPage
     self.divCountry_element.when_present.click
     self.list_item_element(xpath: "//li[text()='#{country}']").when_present.click
   end
+
   def select_state(state:)
-    if self.chkDutyFee_element.visible?
+    if self.txtState_element.visible?
       self.txtState_element.when_present.set(state)
-    else
+    end
+    if self.divState_element.visible?
       self.divState_element.when_present.click
       self.list_item_element(xpath: "//li[text()='#{state}']").when_present.click
     end
-
   end
+
   def specify_city(city:)
     self.txtCity_element.when_present.set(city)
   end

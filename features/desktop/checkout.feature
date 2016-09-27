@@ -91,6 +91,7 @@ Feature: Checkout process.
       | City                    | <City>                                |
       | Phone Number            | 2255-4422                             |
       | Zipcode                 | 12345                                 |
+    And select "Ship to this address".
     And confirm custom duty fees.
     Then I click 'Pay Securely'.
     And fill in credit card information.
@@ -105,9 +106,9 @@ Feature: Checkout process.
     And it appears in 'Orders' admin area.
 
     Examples:
-      | Country   | Ship Country  | State   | City    | Dress Size | Skirt Length |
-      | USA       | Cyprus        | Larnaka | Seattle | US 10      | PETITE       |
-      | Australia | Cyprus        | Larnaka | Sydney  | AU 6       | STANDARD     |
+      | Country   | Ship Country  | State   | City      | Dress Size | Skirt Length |
+      | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE       |
+      | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD     |
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
@@ -126,6 +127,7 @@ Feature: Checkout process.
       | City                    | <City>                    |
       | Phone Number            | 2255-4422                 |
       | Zipcode                 | 12345                     |
+    And select "Ship to this address".
     And confirm custom duty fees.
     Then I click 'Pay Securely'.
     And fill in credit card information.
@@ -141,9 +143,9 @@ Feature: Checkout process.
     And it appears in 'Orders' admin area.
 
     Examples:
-      | Country   | Ship Country  | State   | City    | Dress Size | Skirt Length |
-      | USA       | Cyprus        | Larnaka | Seattle | US 10      | PETITE       |
-      | Australia | Cyprus        | Larnaka | Sydney  | AU 6       | STANDARD     |
+      | Country   | Ship Country  | State   | City      | Dress Size | Skirt Length |
+      | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE       |
+      | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD     |
 
 
 
