@@ -11,10 +11,9 @@ Then(/^I fill in form fields with:$/) do |table|
     page.specify_street_address_contd(street_cnd: data['Street Address (contd)'])
     page.select_country(country: data['Country'])
     page.zipcode(zipcode: data['Zipcode'])
-    page.select_state(state: data['State'])
     page.specify_city(city: data['City'])
     page.specify_phone_num(phone_num: data['Phone Number'])
-
+    page.select_state(state: data['State'])
   end
 end
 
