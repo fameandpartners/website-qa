@@ -56,7 +56,6 @@ class LoginPage
   end
 
   def submit_login
-    puts browser_name
     self.btnLogin_element.when_present.click
   end
 

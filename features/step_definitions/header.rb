@@ -64,7 +64,6 @@ Then(/^"([^"]*)" locale changed\.$/) do |locale|
       when 'USA'
         expect(page.current_url).to include('fameandpartners.com')
     end
-
   end
 end
 And(/^header message changed to "([^"]*)"\.$/) do |msg|
