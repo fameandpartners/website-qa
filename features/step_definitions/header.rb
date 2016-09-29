@@ -13,7 +13,7 @@ When(/^I login as user\.$/) do
       page.specify_credentials(CONFIG['safari_user'],CONFIG['safari_user_pwd'])
     end
     page.submit_login
-    @is_authorized = true
+    session_data[browser_name][:is_authorized] = true
   end
 end
 Then (/^I open My profile via My Account link\.$/) do

@@ -2,12 +2,8 @@ Feature: Checkout process.
   As anonymous user I can buy a dress in USA or Australia.
   As registered user I can buy a dress in USA or Australia.
 
-#  Background: Warm up site versions.
-#    Given Visit both site versions for 'Kirilly' dress page.
-
   @smoke
   Scenario Outline: As an anonymous user I can buy a dress.
-    #    When I select "<Country>" site version.
     When I go to "<Country>" site version.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.
@@ -33,7 +29,7 @@ Feature: Checkout process.
     But check "Order summary".
     And click on 'Place My Order' button.
     Then "Thanks for your order!" page with order number displayed.
-    And it appears in 'Orders' admin area.
+    And it appears in "<Country>" orders admin area.
 
     Examples:
       | Country   | Ship Country  | State           | City    | Dress Size | Skirt Length |
@@ -42,7 +38,6 @@ Feature: Checkout process.
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress.
-    #    When I select "<Country>" site version.
     When I go to "<Country>" site version.
     And I login as user.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
@@ -69,8 +64,8 @@ Feature: Checkout process.
     But check "Order summary".
     And click on 'Place My Order' button.
     Then "Thanks for your order!" page with order number displayed.
-    And there is also on "My Orders" page.
-    And it appears in 'Orders' admin area.
+    And there is also on "My Orders" <Country> page.
+    And it appears in "<Country>" orders admin area.
 
     Examples:
       | Country   | Ship Country  | State           | City    | Dress Size | Skirt Length |
@@ -79,7 +74,6 @@ Feature: Checkout process.
 
   @smoke
   Scenario Outline: As an anonymous user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
-    #    When I select "<Country>" site version.
     When I go to "<Country>" site version.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.
@@ -106,7 +100,7 @@ Feature: Checkout process.
     But check "Order summary" with custom duty fees.
     And click on 'Place My Order' button.
     Then "Thanks for your order!" page with order number displayed.
-    And it appears in 'Orders' admin area.
+    And it appears in "<Country>" orders admin area.
 
     Examples:
       | Country   | Ship Country  | State   | City      | Dress Size | Skirt Length |
@@ -115,7 +109,6 @@ Feature: Checkout process.
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
-#    When I select "<Country>" site version.
     When I go to "<Country>" site version.
     And I login as user.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
@@ -143,8 +136,8 @@ Feature: Checkout process.
     But check "Order summary" with custom duty fees.
     And click on 'Place My Order' button.
     Then "Thanks for your order!" page with order number displayed.
-    And there is also on "My Orders" page.
-    And it appears in 'Orders' admin area.
+    And there is also on "My Orders" <Country> page.
+    And it appears in "<Country>" orders admin area.
 
     Examples:
       | Country   | Ship Country  | State   | City      | Dress Size | Skirt Length |

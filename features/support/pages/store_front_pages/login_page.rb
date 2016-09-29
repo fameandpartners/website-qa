@@ -1,10 +1,4 @@
-require_relative '../../pages/store_front_pages/modules/header'
-
-
-class LoginPage
-  include PageObject
-  include Header
-
+class LoginPage < BasePage
 
   page_url(CONFIG['base_url']+'/spree_user/sign_in')
 
@@ -30,9 +24,6 @@ class LoginPage
   def open_login_form
 
   end
-
-
-
 
   def specify_email(email)
     self.txtEmail_element.when_present.set(email)

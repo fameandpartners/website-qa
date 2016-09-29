@@ -1,8 +1,4 @@
-require_relative '../../pages/admin_pages/adm_modules/admin_header'
-
-class OrdersPage
-  include PageObject
-  include AdminHeader
+class OrdersPage < BasePage
 
   page_url(CONFIG['base_url']+'/admin/orders')
 

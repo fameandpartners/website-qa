@@ -1,8 +1,4 @@
-require_relative '../../pages/store_front_pages/modules/header'
-
-class MyProfilePage
-  include PageObject
-  include Header
+class MyProfilePage < BasePage
 
   page_url(CONFIG['base_url']+'/profile')
 

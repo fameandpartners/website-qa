@@ -4,7 +4,6 @@ GEM
     builder (3.2.2)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
-    coderay (1.1.1)
     commonwatir (4.0.0)
     cucumber (2.4.0)
       builder (>= 2.1.2)
@@ -26,7 +25,6 @@ GEM
     ffi (1.9.14-x86-mingw32)
     gherkin (4.0.0)
     i18n (0.7.0)
-    method_source (0.8.2)
     mini_magick (4.3.6)
     mini_portile2 (2.1.0)
     multi_json (1.12.1)
@@ -41,13 +39,6 @@ GEM
     page_navigation (0.9)
       data_magic (>= 0.14)
     pkg-config (1.1.7)
-    pry (0.10.4)
-      coderay (~> 1.1.0)
-      method_source (~> 0.8.1)
-      slop (~> 3.4)
-    pry-remote (0.1.8)
-      pry (~> 0.9)
-      slop (~> 3.0)
     rake (11.2.2)
     rautomation (0.17.0)
       ffi (~> 1.9.0)
@@ -69,7 +60,6 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    slop (3.6.0)
     watir (5.0.0)
       commonwatir (~> 4)
       watir-webdriver
@@ -111,8 +101,6 @@ PLATFORMS
 DEPENDENCIES
   cucumber
   page-object
-  pry
-  pry-remote
   rake
   rspec
   watir

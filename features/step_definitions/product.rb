@@ -1,6 +1,5 @@
 When(/^I select "([^"]*)" site version\.$/) do |country|
   on(ProductPage) do |page|
-
     page.click_locale_menu
     page.select_locale(country)
     @country_version=country
@@ -9,9 +8,12 @@ end
 
 
 When(/^I go to "([^"]*)" site version\.$/) do |country|
+  session_data[browser_name][:is_authorized] = false
+  puts session_data
   on(ProductPage) do |page|
-    page.goto(country: country, url: '/dresses/dress-kirrily-1100')
+    page.visit_site_version(country: country, url: '/dresses/dress-kirrily-1100')
   end
+  @country_version=country
 end
 
 

@@ -1,5 +1,5 @@
-class CheckOutPage
-  include PageObject
+class CheckOutPage < BasePage
+
 
   page_url(CONFIG['base_url']+'/checkout')
 

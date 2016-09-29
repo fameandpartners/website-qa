@@ -21,6 +21,12 @@ def browser_version
   (ENV['VER'])
 end
 
+def session_data
+  @session_data ||= {
+    browser_name => {}
+  }
+end
+
 Before do
   def assert_it message, &block
     begin
@@ -65,3 +71,5 @@ end
 # elsif ENV['BROWSER'] == 'firefox'
 #   puts 'I am firefox'
 # end
+
+# binding.remote_pry

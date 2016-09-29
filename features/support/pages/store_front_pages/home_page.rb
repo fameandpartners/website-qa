@@ -1,10 +1,5 @@
-require_relative '../../pages/store_front_pages/modules/header'
-require_relative '../../pages/store_front_pages/modules/footer'
+class HomePage < BasePage
 
-class HomePage
-  include PageObject
-  include Header
-  include Footer
 
   page_url(CONFIG['base_url'])
 

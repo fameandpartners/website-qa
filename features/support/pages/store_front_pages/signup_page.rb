@@ -1,8 +1,4 @@
-require_relative '../../pages/store_front_pages/modules/header'
-
-class SignUpPage
-  include PageObject
-  include Header
+class SignUpPage < BasePage
 
   page_url(CONFIG['base_url']+'/signup')
 

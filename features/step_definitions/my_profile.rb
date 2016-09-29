@@ -25,3 +25,18 @@ Then(/^I can modify First and Last names with:$/) do |table|
 sleep 3
 
 end
+
+And(/^there is also on "My Orders" (.*) page\.$/) do |country|
+  on(MyProfilePage).visit_site_version(country: country, url: '/user_orders')
+  #
+  # if country == 'Australia'
+  #   @browser.goto(CONFIG['base_url_au']+'/user_orders')
+  # else
+  #   visit UserOrdersPage
+  # end
+
+  on(UserOrdersPage) do |page|
+    page.tblOrdersTable_element.when_present
+    expect(page.link_element(xpath: "//a[text()='#{@complete_order_number}']").visible?).to be_truthy
+  end
+end

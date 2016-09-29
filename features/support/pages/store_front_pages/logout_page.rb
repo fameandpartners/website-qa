@@ -1,7 +1,6 @@
-class LogoutPage
-  include PageObject
-  include Header
+class LogoutPage < BasePage
 
   page_url(CONFIG['base_url']+'/logout')
+
 
 end

@@ -2,7 +2,7 @@
 Then(/^I fill in form fields with:$/) do |table|
   on(CheckOutPage) do |page|
     data = table.rows_hash
-    if @is_authorized == false
+    if session_data[browser_name][:is_authorized] == false
       page.specify_email(email: data['Email'])
       page.specify_first_name(fname: data['First Name'])
       page.specify_last_name(lname: data['Last Name'])
@@ -41,56 +41,14 @@ end
 Then(/^"([^"]*)" page with order number displayed\.$/) do |message|
   on(CheckOutPage) do |page|
     page.h1_element(xpath: "//h1[text()='#{message}']").when_present
-    # page.wait_until(30) { page.text.include? message }
     @complete_order_number = page.h3_element(xpath: "//h3[@class='order-number']").text.scan(/[A-Z]\d{,9}$/).first
     expect(@order_number).to eql(@complete_order_number)
   end
 end
 
-# require 'pry-remote'
 
-And(/^it appears in 'Orders' admin area\.$/) do
-  visit LogoutPage
-  visit LoginPage
-
-  on(LoginPage) do |page|
-    # binding.remote_pry
-    page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
-    page.submit_login
-    # if page.txtEmail_element.visible?
-    #   page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
-    #   page.submit_login
-    # end
-  end
-  visit OrdersPage
-  on(OrdersPage) do |page|
-    page.specify_search_order(@complete_order_number)
-    page.filter_results
-    page.link_element(text: @complete_order_number).when_present.click
-    page.h1_element(xpath: "//h1[contains(text(),'#{@complete_order_number}')]").when_present
-    admin_sub_total = page.span_element(xpath: "//tr[@id='subtotal-row']//td[@class='total']//span").text.gsub(/[^\d\.]/, '').to_f
-    admin_shipping = page.span_element(xpath: "//*[@id='order-charges']//td[@class='total']/span").text.gsub(/[^\d\.]/, '').to_f
-    admin_order_total = page.span_element(xpath: "//td[@id='order-total']/span").text.gsub(/[^\d\.]/, '').to_f
-    expect(@prices[:sub_total]).to eql(admin_sub_total)
-    expect(@prices[:shipping]).to eql(admin_shipping)
-    expect(@prices[:order_total]).to eql(admin_order_total)
-
-  end
-end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Successfully buy a dress as registered user.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-And(/^there is also on "My Orders" page\.$/) do
-  if @country_version == 'Australia'
-    @browser.goto(CONFIG['base_url_au']+'/user_orders')
-  else
-    visit UserOrdersPage
-  end
-
-  on(UserOrdersPage) do |page|
-    page.tblOrdersTable_element.when_present
-    expect(page.link_element(xpath: "//a[text()='#{@complete_order_number}']").visible?).to be_truthy
-  end
-end
 
 And(/^select "([^"]*)"\.$/) do |shipment|
   on(CheckOutPage) do |page|
@@ -134,3 +92,4 @@ But(/^check "Order summary" with custom duty fees\.$/) do
     expect(@prices[:order_total]).to eql(order_total_fee)
   end
 end
+
