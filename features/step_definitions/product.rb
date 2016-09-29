@@ -1,10 +1,19 @@
 When(/^I select "([^"]*)" site version\.$/) do |country|
   on(ProductPage) do |page|
+
     page.click_locale_menu
     page.select_locale(country)
     @country_version=country
   end
 end
+
+
+When(/^I go to "([^"]*)" site version\.$/) do |country|
+  on(ProductPage) do |page|
+    page.goto(country: country, url: '/dresses/dress-kirrily-1100')
+  end
+end
+
 
 Then(/^specify "([^"]*)" dress Size and "([^"]*)" skirt length of the dress\.$/) do |dress_size, skirt_length|
   on(ProductPage) do |page|

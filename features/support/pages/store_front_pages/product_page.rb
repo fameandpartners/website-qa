@@ -13,7 +13,15 @@ class ProductPage
 
   #page_url(URLS[:prod_us]+'/dresses/dress-kirrily-1100')
 
-  def goto(base_name: :prod_us, url:)
+  def goto(base_name: :prod_us, country: nil, url:)
+    if country
+      case country
+        when 'USA'
+          base_name = :prod_us
+        when 'Australia'
+          base_name = :prod_au
+      end
+    end
     @browser.goto("#{URLS[base_name]}#{url}")
   end
 

@@ -2,12 +2,13 @@ Feature: Checkout process.
   As anonymous user I can buy a dress in USA or Australia.
   As registered user I can buy a dress in USA or Australia.
 
-  Background: Warm up site versions.
-    Given Visit both site versions for 'Kirilly' dress page.
+#  Background: Warm up site versions.
+#    Given Visit both site versions for 'Kirilly' dress page.
 
   @smoke
   Scenario Outline: As an anonymous user I can buy a dress.
-    When I select "<Country>" site version.
+    #    When I select "<Country>" site version.
+    When I go to "<Country>" site version.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.
     Then I fill in form fields with:
@@ -41,7 +42,8 @@ Feature: Checkout process.
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress.
-    When I select "<Country>" site version.
+    #    When I select "<Country>" site version.
+    When I go to "<Country>" site version.
     And I login as user.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.
@@ -77,7 +79,8 @@ Feature: Checkout process.
 
   @smoke
   Scenario Outline: As an anonymous user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
-    When I select "<Country>" site version.
+    #    When I select "<Country>" site version.
+    When I go to "<Country>" site version.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.
     And I fill in form fields with:
@@ -112,7 +115,8 @@ Feature: Checkout process.
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
-    When I select "<Country>" site version.
+#    When I select "<Country>" site version.
+    When I go to "<Country>" site version.
     And I login as user.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
     And add the dress to cart.

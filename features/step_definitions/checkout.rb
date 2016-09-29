@@ -47,11 +47,14 @@ Then(/^"([^"]*)" page with order number displayed\.$/) do |message|
   end
 end
 
+require 'pry-remote'
+
 And(/^it appears in 'Orders' admin area\.$/) do
   visit LogoutPage
   visit LoginPage
-  sleep 2
+
   on(LoginPage) do |page|
+    # binding.remote_pry
     page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
     page.submit_login
     # if page.txtEmail_element.visible?
