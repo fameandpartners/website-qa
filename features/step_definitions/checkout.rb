@@ -47,7 +47,7 @@ Then(/^"([^"]*)" page with order number displayed\.$/) do |message|
   end
 end
 
-require 'pry-remote'
+# require 'pry-remote'
 
 And(/^it appears in 'Orders' admin area\.$/) do
   visit LogoutPage
