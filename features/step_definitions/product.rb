@@ -9,7 +9,6 @@ end
 
 When(/^I go to "([^"]*)" site version\.$/) do |country|
   session_data[browser_name][:is_authorized] = false
-  puts session_data
   on(ProductPage) do |page|
     page.visit_site_version(country: country, url: '/dresses/dress-kirrily-1100')
   end

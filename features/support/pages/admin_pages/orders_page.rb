@@ -10,7 +10,6 @@ class OrdersPage < BasePage
     self.txtUserSearch_element.when_present.set(order_num)
   end
 
-
   def filter_results
     self.btnFilterResult_element.when_present.click
   end
