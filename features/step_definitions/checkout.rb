@@ -1,8 +1,11 @@
 #~~~ Successfully buy a dress as registered user.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+require 'pry-remote'
+
 Then(/^I fill in form fields with:$/) do |table|
   on(CheckOutPage) do |page|
     data = table.rows_hash
     if session_data[browser_name][:is_authorized] == false
+      # binding.remote_pry
       page.specify_email(email: data['Email'])
       page.specify_first_name(fname: data['First Name'])
       page.specify_last_name(lname: data['Last Name'])

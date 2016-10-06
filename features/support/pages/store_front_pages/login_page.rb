@@ -16,7 +16,7 @@ class LoginPage < BasePage
   button(:btnLogin, css: ".btn[value='Login']")
   # button(:btnLogin, name: "commit")
   link(:lnkCreateAcc, text: 'Create a new account')
-  link(:lnkForgotPwd, text: 'Forgot Password?')
+  link(:lnkForgotPwd, id: 'forgot-password')
   h3(:spnResetPwdNtf, text: "You will receive an email with instructions about how to reset your password in a few minutes.")
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

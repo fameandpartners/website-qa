@@ -4,8 +4,9 @@ And(/^it appears in "([^"]*)" orders admin area\.$/) do |country|
 
   on(LoginPage) do |page|
     page.visit_site_version(country: country, url: '/spree_user/sign_in')
-
+    sleep 4
     page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+    # binding.remote_pry
     page.submit_login
     # if page.txtEmail_element.visible?
     #   page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])

@@ -6,7 +6,7 @@ def browser_path
 end
 
 def browser_name
-  ENV.fetch('BROWSER_NAME', 'chrome')
+  ENV.fetch('BROWSER_NAME', 'safari')
 end
 
 def url
@@ -49,6 +49,8 @@ Before do
     @browser.window.maximize
   else
     @browser = Watir::Browser.new browser_name
+    @browser = Watir::Browser.new
+
     @browser.window.maximize
   end
 

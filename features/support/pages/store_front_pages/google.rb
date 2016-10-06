@@ -2,7 +2,7 @@ class Gmail
   include PageObject
 
   page_url "http://gmail.com"
-
+  inbox_url = 'https://mail.google.com/mail/#inbox'
 
   text_field(:txtEmail, id: 'Email')
   button(:btnNext, id: 'next')
@@ -13,6 +13,10 @@ class Gmail
 
   def specify_gmail(gmail)
     self.txtEmail_element.when_present.set(gmail)
+  end
+
+  def goto_inbox
+    @browser.goto 'https://mail.google.com/mail/#inbox'
   end
 
   def go_next

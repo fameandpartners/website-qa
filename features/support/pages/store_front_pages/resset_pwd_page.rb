@@ -9,9 +9,24 @@ class ForgotPwdPage < BasePage
   link(:lnkCreateAcc, text: 'Create a new account')
   link(:lnkSignIn, text: 'Sign in')
 
+  text_field(:txtPwdReset, id: 'spree_user_password')
+  text_field(:txtPwdResetConfirm, id: 'spree_user_password_confirmation')
+  button(:btnChangePwd, value: 'Change Password')
 
   def specify_email(email)
     self.txtEmail_element.when_present.set(email)
+  end
+
+  def specify_new_pwd(new_pwd)
+    self.txtPwdReset_element.when_present.set(new_pwd)
+  end
+
+  def specify_new_pwd_confirm(new_pwd_confirm)
+    self.txtPwdResetConfirm_element.when_present.set(new_pwd_confirm)
+  end
+
+  def click_change_pwd
+    self.btnChangePwd_element.when_present.click
   end
 
   def click_reset
