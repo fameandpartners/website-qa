@@ -1,4 +1,5 @@
-Then(/^I go to Forgot Password form\.$/) do
+Then(/^I go to "Forgot Password" form\.$/) do
+  on(HomePage).click_my_account
   on(LoginPage).open_forgot_pwd
 end
 #~~~ Reset a password. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

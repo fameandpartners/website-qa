@@ -6,7 +6,6 @@ Feature: Top navigation menu.
   @wip
   Scenario: Header contains required elements.
 
-
 #  Scenario: Login form opens via 'My Account' link if user is not logged in.
 #    When I click My account link.
 #    Then

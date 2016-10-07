@@ -1,19 +1,6 @@
 #~~~ Open Sign Up form. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-When(/^I open Sign Up form\.$/) do
+When(/^I open "Sign Up" form\.$/) do
   on(HomePage).click_my_account
-  on(LoginPage) do |page|
-    page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
-    page.submit_login
-  end
-  visit UsersPage
-  on(UsersPage) do |page|
-    page.specify_srch_user(CONFIG['user_r_email'])
-    page.click_search
-    page.delete_user(CONFIG['user_r_email'],true)
-    sleep 2
-    page.logout_admin
-  end
-
   on(LoginPage).create_account
 end
 And(/^there are all required Sign Up controls\.$/) do
@@ -28,7 +15,9 @@ Then(/^I want to create a new account\.$/) do
   on(SignUpPage) do |page|
     page.specify_first_name(CONFIG['user_fname'])
     page.specify_last_name(CONFIG['user_lname'])
-    page.specify_email(CONFIG['user_r_email'])
+    @new_user_email = "#{SecureRandom.uuid}@lorem.com"
+    puts @new_user_email
+    page.specify_email(@new_user_email)
     page.specify_passwords(CONFIG['user_pwd'])
     page.newsletter(false)
     page.click_create_an_account
@@ -39,15 +28,26 @@ And(/^be sure a new account was created\.$/) do
     page.click_my_account
     expect(page.current_url).to include('/profile')
   end
+  visit LogoutPage
+  on(HomePage).click_my_account
+  on(LoginPage) do |page|
+    page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+    page.submit_login
+  end
+  visit UsersPage
+  on(UsersPage) do |page|
+    page.specify_srch_user(@new_user_email)
+    page.click_search
+    expect(page.link_element(xpath: "//a[text()='#{@new_user_email}']").visible?).to be_truthy
+  end
+
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Create a new account from Forgot Password form. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Then(/^I want to go to Sign Up form from it\.$/) do
-  pending
+Then(/^I want to go to "Sign Up" form from it\.$/) do
+  on(ForgotPwdPage).create_new_account
 end
-And(/^create a new account\.$/) do
-  pending
-end
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Check all Sign Up form elements. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
