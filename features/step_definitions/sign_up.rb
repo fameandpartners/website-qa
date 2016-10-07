@@ -16,7 +16,6 @@ Then(/^I want to create a new account\.$/) do
     page.specify_first_name(CONFIG['user_fname'])
     page.specify_last_name(CONFIG['user_lname'])
     @new_user_email = "#{SecureRandom.uuid}@lorem.com"
-    puts @new_user_email
     page.specify_email(@new_user_email)
     page.specify_passwords(CONFIG['user_pwd'])
     page.newsletter(false)

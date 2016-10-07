@@ -21,12 +21,12 @@ Feature: Top navigation menu.
     When I login as user.
     Then I hover mouse to 'My Account' link.
     And I can open <menu_item>.
-    And url equals to "<url>".
+    And url includes "<url>".
     Examples:
         |menu_item      |url          |
-        |My Orders      |/user_orders |
+#        |My Orders      |/user_orders |
         |My Moodboards  |/moodboards/ |
-        |My Details     |/profile     |
+#        |My Details     |/profile     |
 
   @smoke
   Scenario: User can logout.

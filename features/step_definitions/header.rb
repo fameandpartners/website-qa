@@ -34,7 +34,7 @@ And(/^I can open (.*)\.$/) do |menu_item|
   on(MyProfilePage).link_element(xpath: "//a[text()='#{menu_item}']").when_present.click
 end
 
-And(/^url equals to "(.*)"\.$/) do |url|
+And(/^url includes "(.*)"\.$/) do |url|
   expect(on(MyProfilePage).current_url).to include(url)
 end
 
