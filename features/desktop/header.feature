@@ -24,9 +24,9 @@ Feature: Top navigation menu.
     And url includes "<url>".
     Examples:
         |menu_item      |url          |
-#        |My Orders      |/user_orders |
+        |My Orders      |/user_orders |
         |My Moodboards  |/moodboards/ |
-#        |My Details     |/profile     |
+        |My Details     |/profile     |
 
   @smoke
   Scenario: User can logout.

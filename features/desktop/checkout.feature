@@ -18,7 +18,7 @@ Feature: Checkout process.
       | City                    | <City>                              |
       | Phone Number            | 2255-4422                           |
       | Zipcode                 | 12345                               |
-    And select "Ship to this address".
+    And set "This is also my billing address".
     Then I click 'Pay Securely'.
     And fill in credit card information.
       | Card number      | 5520000000000000  |
@@ -53,7 +53,7 @@ Feature: Checkout process.
       | City                    | <City>                    |
       | Phone Number            | 2255-4422                 |
       | Zipcode                 | 12345                     |
-    And select "Ship to this address".
+    And set "This is also my billing address".
     Then I click 'Pay Securely'.
     And fill in credit card information.
       | Card number      | 5520000000000000  |
@@ -88,7 +88,7 @@ Feature: Checkout process.
       | City                    | <City>                                |
       | Phone Number            | 2255-4422                             |
       | Zipcode                 | 12345                                 |
-    And select "Ship to this address".
+    And set "This is also my billing address".
     And confirm custom duty fees.
     Then I click 'Pay Securely'.
     And fill in credit card information.
@@ -124,7 +124,7 @@ Feature: Checkout process.
       | City                    | <City>                    |
       | Phone Number            | 2255-4422                 |
       | Zipcode                 | 12345                     |
-    And select "Ship to this address".
+    And set "This is also my billing address".
     And confirm custom duty fees.
     Then I click 'Pay Securely'.
     And fill in credit card information.

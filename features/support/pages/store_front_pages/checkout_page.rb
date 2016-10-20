@@ -3,23 +3,24 @@ class CheckOutPage < BasePage
 
   page_url(CONFIG['base_url']+'/checkout')
 
-  # "Your information" block.
-  text_field(:txtEmail, id: 'order_bill_address_attributes_email')
+  # "Deliver to" block.
+  text_field(:txtEmail, id: 'order_ship_address_attributes_email')
+  text_field(:txtFirstName, id: 'order_ship_address_attributes_firstname')
+  text_field(:txtLastName, id: 'order_ship_address_attributes_lastname')
+  text_field(:txtPhoneNumber, id: 'order_ship_address_attributes_phone') #new one
 
 
-  # "Address Details" block.
-  text_field(:txtFirstName, id: 'order_bill_address_attributes_firstname')
-  text_field(:txtLastName, id: 'order_bill_address_attributes_lastname')
-  text_field(:txtStreetAddress, id: 'order_bill_address_attributes_address1')
-  text_field(:txtStreetAddressContd, id: 'order_bill_address_attributes_address2')
-  div(:divCountry, id: 'order_bill_address_attributes_country_id_chosen')
-  div(:divState, id: 'order_bill_address_attributes_state_id_chosen')
-  text_field(:txtState, id: 'order_bill_address_attributes_state_name')
-  text_field(:txtCity, id: 'order_bill_address_attributes_city')
-  text_field(:txtPhoneNumber, id: 'order_bill_address_attributes_phone')
-  text_field(:txtZipcode, id: 'order_bill_address_attributes_zipcode')
-  radio_button(:rdbShipAddress, id: 'ship_to_address_Ship_to_this_address')
-  radio_button(:rdbShipDifferentAddress, id: 'ship_to_address_Ship_to_a_different_address')
+
+  # "Delivery Address" block.
+  div(:divCountry, id: 'order_ship_address_attributes_country_id_chosen')
+  text_field(:txtStreetAddress, id: 'order_ship_address_attributes_address1')
+  text_field(:txtStreetAddressContd, id: 'order_ship_address_attributes_address2')
+  text_field(:txtCity, id: 'order_ship_address_attributes_city')
+  text_field(:txtZipcode, id: 'order_ship_address_attributes_zipcode')
+  div(:divState, id: 'order_ship_address_attributes_state_id_chosen')
+  text_field(:txtState, id: 'order_ship_address_attributes_state_name')
+  checkbox(:chkShipAddress, id: 'ship_to_address')
+
   button(:btnPaySecurely, name: 'pay_securely')
   checkbox(:chkDutyFee, id: 'international_shipping_fee')
 
@@ -31,11 +32,11 @@ class CheckOutPage < BasePage
   text_field(:txtExpMonth, id: 'month')
   text_field(:txtExpYear, id: 'year')
   text_field(:txtCVC, id: 'card_code')
-  button(:btnPlaceOrder, text: 'Place My Order')
+  button(:btnPlaceOrder, text: 'Place your order now')
 
 
   # Right checkout panel
-  text_field(:txtCity, id: 'order_bill_address_attributes_city')
+  # text_field(:txtCity, id: 'order_bill_address_attributes_city')
 
   h1(:hOrderThanks, xpath: "//h1[@class='order']")
 
@@ -88,10 +89,10 @@ class CheckOutPage < BasePage
   end
   def select_ship_address(variant)
     case variant
-      when 'Ship to this address'
-        self.rdbShipAddress_element.when_present.set
-      when 'Ship to different address'
-        self.rdbShipDifferentAddress_element.when_present.set
+      when true
+        self.chkShipAddress_element.when_present.check
+      when false
+        self.chkShipAddress_element.when_present.clear
     end
   end
   def pay_securely
@@ -106,8 +107,8 @@ class CheckOutPage < BasePage
   end
 
   def fill_in_credit(data={})
-    self.txtCardNumber_element.when_present.set(data['Card number'])
     self.txtNameOnCard_element.when_present.set(data['Name on card'])
+    self.txtCardNumber_element.when_present.set(data['Card number'])
     self.txtExpMonth_element.when_present.set(data['Expiration Month'])
     self.txtExpYear_element.when_present.set(data['Expiration Year'])
     self.txtCVC_element.when_present.set(data['CVC'])
