@@ -19,12 +19,14 @@ class CheckOutPage < BasePage
   text_field(:txtZipcode, id: 'order_ship_address_attributes_zipcode')
   div(:divState, id: 'order_ship_address_attributes_state_id_chosen')
   text_field(:txtState, id: 'order_ship_address_attributes_state_name')
-  checkbox(:chkShipAddress, id: 'ship_to_address')
+  label(:lblShipAddress, xpath: "//label[@for='ship_to_address']")
 
   button(:btnPaySecurely, name: 'pay_securely')
-  checkbox(:chkDutyFee, id: 'international_shipping_fee')
+  label(:lblDutyFee, xpath: "//label[@for='international_shipping_fee']")
+  # "Billing Address" balock.
+  span(:spnBillingAddress, xpath: "//span[text()='Billing Address']")
 
-  # "Shipping Address Details" block.
+
 
   # "Payment Method" step.
   text_field(:txtCardNumber, id: 'number')
@@ -87,12 +89,17 @@ class CheckOutPage < BasePage
   def zipcode(zipcode:)
     self.txtZipcode_element.when_present.set(zipcode)
   end
+
   def select_ship_address(variant)
     case variant
-      when true
-        self.chkShipAddress_element.when_present.check
       when false
-        self.chkShipAddress_element.when_present.clear
+        unless self.spnBillingAddress_element.visible?
+          self.lblShipAddress_element.when_present.click
+        end
+      when true
+        if self.spnBillingAddress_element.visible?
+          self.lblShipAddress_element.when_present.click
+        end
     end
   end
   def pay_securely
@@ -121,9 +128,11 @@ class CheckOutPage < BasePage
   def confirm_custom_duty_fees(fee)
     case fee
       when true
-        self.chkDutyFee_element.when_present.set
+        if self.btnPaySecurely_element.attribute_value('disabled')
+          self.lblDutyFee_element.when_present.click
+        end
       when false
-        self.chkDutyFee_element.when_present.clear
+        self.lblDutyFee_element.when_present.clear
     end
   end
 

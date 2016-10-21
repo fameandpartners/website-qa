@@ -55,7 +55,7 @@ end
 
 And(/^set "([^"]*)"\.$/) do |shipment|
   on(CheckOutPage) do |page|
-    # page.select_ship_address(true)
+    page.select_ship_address(true)
   end
 end
 
