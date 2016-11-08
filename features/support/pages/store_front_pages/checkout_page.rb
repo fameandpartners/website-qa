@@ -38,7 +38,8 @@ class CheckOutPage < BasePage
 
 
   # Right checkout panel
-  # text_field(:txtCity, id: 'order_bill_address_attributes_city')
+  text_field(:txtCoupon, xpath: "//div[contains(@class,'hidden-sm')]//input[@placeholder='Discount code']")
+  button(:btnApplyCoupon, xpath: "//div[contains(@class,'hidden-sm')]//button")
 
   h1(:hOrderThanks, xpath: "//h1[@class='order']")
 
@@ -134,6 +135,14 @@ class CheckOutPage < BasePage
       when false
         self.lblDutyFee_element.when_present.clear
     end
+  end
+
+  def specify_coupon(coupon)
+    self.txtCoupon_element.when_present.set(coupon)
+  end
+
+  def apply_coupon
+    self.btnApplyCoupon_element.when_present.click
   end
 
 end

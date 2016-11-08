@@ -144,8 +144,40 @@ Feature: Checkout process.
       | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE       |
       | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD     |
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Scenario Outline: As a user I can buy a dress with a discount coupon.
+    When I go to "<Country>" site version.
+    Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
+    And add the dress to cart.
+    Then I fill in form fields with:
+      | Email                   | anonymous_user@fameandpartners.com  |
+      | First Name              | Lorem                               |
+      | Last Name               | Ipsum                               |
+      | Street Address          | Lorem street 8                      |
+      | Street Address (contd)  | apt. 8                              |
+      | Country                 | <Ship Country>                      |
+      | State                   | <State>                             |
+      | City                    | <City>                              |
+      | Phone Number            | 2255-4422                           |
+      | Zipcode                 | 12345                               |
+    And set "This is also my billing address".
+    And apply a coupon for 25% discount.
+    Then I click 'Pay Securely'.
+    And fill in credit card information.
+      | Card number      | 5520000000000000  |
+      | Name on card     | Zaphod Beeblebrox |
+      | Expiration Month | 10                |
+      | Expiration Year  | 2020              |
+      | CVC              | 123               |
+    But check "Order summary" with a discount coupon.
+    And click on 'Place My Order' button.
+    Then "Thanks for your order!" page with order number displayed.
+    And it appears in "<Country>" orders admin area.
 
-
+    Examples:
+      | Country   | Ship Country  | State           | City    | Dress Size | Skirt Length |
+      | USA       | United States | Washington      | Seattle | US 10      | PETITE       |
+      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD     |
 
 
 

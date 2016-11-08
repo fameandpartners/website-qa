@@ -83,6 +83,34 @@ But(/^check "Order summary"\.$/) do
   end
 end
 
+But(/^check "Order summary" with a discount coupon\.$/) do
+  on(CheckOutPage) do |page|
+    sub_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Sub Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    shipping = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Shipping')]//span").text.gsub(/[^\d\.]/, '').to_f
+    promotion = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Promotion')]//span").text.gsub(/[^\d\.]/, '').to_f
+    order_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Order Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    puts <<-EOS
+      Sub Total: #{sub_total}
+      Shipping: #{shipping}
+      Promotion: -#{promotion}
+      Order Total: #{order_total}
+
+    EOS
+    @prices = {
+        sub_total:  sub_total,
+        shipping: shipping,
+        order_total: order_total,
+        promotion: promotion
+    }
+    order_total_coupon = (@prices[:sub_total]-@prices[:promotion])+@prices[:shipping]
+    puts "Order total with coupon: #{order_total_coupon}"
+    expect(@prices[:order_total]).to eql(order_total_coupon)
+  end
+end
+
+
+
+
 But(/^check "Order summary" with custom duty fees\.$/) do
   on(CheckOutPage) do |page|
     sub_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Sub Total')]//span").text.gsub(/[^\d\.]/, '').to_f
@@ -94,10 +122,17 @@ But(/^check "Order summary" with custom duty fees\.$/) do
         order_total: order_total
     }
     expect(@product_price).to eql(@prices[:sub_total])
-    # @order_total_fees=@prices[:sub_total]+@prices[:shipping]
     order_total_fee = @prices[:sub_total]+@prices[:shipping]
     puts order_total_fee
     expect(@prices[:order_total]).to eql(order_total_fee)
+  end
+end
+
+
+Then(/^apply a coupon for 25% discount\.$/) do
+  on(CheckOutPage) do |page|
+    page.specify_coupon(CONFIG['coupon'])
+    page.apply_coupon
   end
 end
 
