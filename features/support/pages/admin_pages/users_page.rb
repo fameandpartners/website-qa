@@ -23,7 +23,6 @@ class UsersPage < BasePage
         when false
           @browser.alert.close
       end
-
     end
   end
 

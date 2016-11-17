@@ -144,7 +144,7 @@ Feature: Checkout process.
       | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE       |
       | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD     |
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  @smoke
   Scenario Outline: As a user I can buy a dress with a discount coupon.
     When I go to "<Country>" site version.
     Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
