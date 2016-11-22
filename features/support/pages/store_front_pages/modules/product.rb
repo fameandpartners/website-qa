@@ -2,7 +2,7 @@ module Product
   include PageObject
 
   div(:divDressSize, text: 'Dress Size')
-  div(:divSkirtLength, text: 'Skirt Length')
+  div(:divSkirtLength, text: 'Height & Hemline')
 
   div(:divProductPrice, xpath: "//div[@class='price']")
   link(:lnkAddToBag, text: 'ADD TO BAG')
