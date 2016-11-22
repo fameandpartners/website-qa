@@ -1,6 +1,8 @@
 Given(/^I am on Home page\.$/) do
-  visit HomePage
-  # on(HomePage).accept_offer(false)
+  on(HomePage) do |page|
+    page.visit_site_version(country: 'Australia', url: '')
+    page.visit_site_version(country: 'USA', url: '')
+  end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Check all Login form elements. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

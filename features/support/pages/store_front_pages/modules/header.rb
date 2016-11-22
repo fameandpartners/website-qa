@@ -11,6 +11,18 @@ module Header
   link(:lnkMyDetails, href: '/profile')
   link(:lnkLogout, href: '/logout')
 
+  div(:divHomeMenu, id: 'home-menu')
+  image(:imgLogo, src: 'https://d3uvjcfk5ey2fu.cloudfront.net/assets/logo/new-logo-ad36b2761e48c30c432a93f99e7df38a.svg')
+  div(:divNavMainMenu, xpath: "//div[contains(@class,'nav-main-menu')]")
+    div(:divNewThisWeek, id: 'rect-new-this-week')
+    div(:divShop, id: 'rect-dresses')
+    div(:divFameWeddings, id: 'rect-wedding')
+    div(:divLookbooks, id: 'rect-lookbook')
+  link(:lnkSearch, xpath: "//a[contains(@class,'icon-search')]")
+  text_field(:txtSearch, id: 'searchValue')
+  link(:lnkWishlist, href: '/moodboards')
+  link(:lnkShoppingCart, xpath: "//div[@id='home-menu']//a[contains(@class,'shopping-cart')]")
+
   def click_my_account
     self.spnMyAccount_element.when_present.click
   end
@@ -46,5 +58,10 @@ module Header
         self.lnkMyOrders_element.when_present.click
     end
   end
+
+  def click_nav_menu(nav_menu_item)
+    self.span_element(text: nav_menu_item).when_present.click
+  end
+
 
 end

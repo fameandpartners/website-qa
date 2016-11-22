@@ -15,6 +15,7 @@ When(/^I login as user\.$/) do
     page.submit_login
     session_data[browser_name][:is_authorized] = true
   end
+
 end
 Then (/^I open My profile via My Account link\.$/) do
   on(HomePage).click_my_account
@@ -67,8 +68,29 @@ Then(/^"([^"]*)" locale changed\.$/) do |locale|
   end
 end
 And(/^header message changed to "([^"]*)"\.$/) do |msg|
-  pending
+  on(HomePage) do |page|
+    expect(page.div_element(xpath: "//div[text()='#{msg}']").visible?).to be_truthy
+  end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+When(/^I can see navigation home menu with all elements\.$/) do
+  on(HomePage) do |page|
+    nav_main_menu=%w(divHomeMenu imgLogo divNavMainMenu lnkSearch lnkWishlist lnkShoppingCart)
+    expect(nav_main_menu.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+  end
+end
 
+Then(/^I can open navigation home submenus:$/) do |table|
+  on(HomePage) do |page|
+    data = table.rows_hash
+    page.click_nav_menu(data['New this week'])
+    expect(page.divNewThisWeek_element.present?).to be_truthy
+    page.click_nav_menu(data['SHOP'])
+    expect(page.divShop_element.present?).to be_truthy
+    page.click_nav_menu(data['FAME WEDDINGS'])
+    expect(page.divFameWeddings_element.present?).to be_truthy
+    page.click_nav_menu(data['LOOKBOOKS'])
+    expect(page.divLookbooks_element.present?).to be_truthy
+  end
+end
