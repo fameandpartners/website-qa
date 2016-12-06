@@ -1,4 +1,4 @@
-class ContactUsPage < BasePage
+class ContactUsPage < MainBasePage
 
   page_url(CONFIG['base_url']+'/contact')
 

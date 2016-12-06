@@ -1,6 +1,5 @@
 require 'watir'
 require 'watir-scroll'
-require 'watir'
 require 'page-object'
 require_relative 'pages/base_page'
 

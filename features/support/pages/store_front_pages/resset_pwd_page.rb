@@ -1,4 +1,4 @@
-class ForgotPwdPage < BasePage
+class ForgotPwdPage < MainBasePage
 
   page_url(CONFIG['base_url']+'/spree_user/password/new')
 

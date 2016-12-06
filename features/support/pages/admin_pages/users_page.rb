@@ -1,4 +1,4 @@
-class UsersPage < BasePage
+class UsersPage < MainBasePage
 
   page_url(CONFIG['base_url']+'/admin/users')
 

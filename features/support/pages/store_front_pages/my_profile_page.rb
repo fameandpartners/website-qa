@@ -1,4 +1,4 @@
-class MyProfilePage < BasePage
+class MyProfilePage < MainBasePage
 
   page_url(CONFIG['base_url']+'/profile')
 

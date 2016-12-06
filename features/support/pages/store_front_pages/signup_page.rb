@@ -1,4 +1,4 @@
-class SignUpPage < BasePage
+class SignUpPage < MainBasePage
 
   page_url(CONFIG['base_url']+'/signup')
 

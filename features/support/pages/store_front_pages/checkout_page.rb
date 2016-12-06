@@ -1,4 +1,4 @@
-class CheckOutPage < BasePage
+class CheckOutPage < MainBasePage
 
 
   page_url(CONFIG['base_url']+'/checkout')

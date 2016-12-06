@@ -1,4 +1,4 @@
-class HomePage < BasePage
+class HomePage < MainBasePage
 
 
   page_url(CONFIG['base_url'])

@@ -50,3 +50,8 @@ Given(/^As a customer I create a new order\.$/) do |table|
     page.place_my_order
   end
 end
+
+
+Given(/^open "([^"]*)" home page\.$/) do |site_ver|
+  on(HomePage).visit_site_version(country: site_ver, url: '')
+end

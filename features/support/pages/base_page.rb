@@ -3,7 +3,7 @@ require_relative 'store_front_pages/modules/header'
 require_relative 'store_front_pages/modules/product'
 require_relative 'store_front_pages/modules/footer'
 
-class BasePage
+class MainBasePage
   include PageObject
   include Header
   include Product

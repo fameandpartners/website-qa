@@ -1,4 +1,4 @@
-class LoginPage < BasePage
+class LoginPage < MainBasePage
 
   page_url(CONFIG['base_url']+'/spree_user/sign_in')
 
@@ -43,7 +43,7 @@ class LoginPage < BasePage
   end
 
   def specify_credentials(user_email, user_pwd)
-    self.txtEmail_element.when_present.set(user_email)
+    self.txtEmail_element.value user_email
     self.txtPwd_element.when_present.set(user_pwd)
   end
 

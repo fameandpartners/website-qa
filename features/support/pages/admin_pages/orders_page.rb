@@ -1,4 +1,4 @@
-class OrdersPage < BasePage
+class OrdersPage < MainBasePage
 
   page_url(CONFIG['base_url']+'/admin/orders')
 

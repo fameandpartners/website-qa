@@ -1,4 +1,4 @@
-class ProductPage < BasePage
+class ProductPage < MainBasePage
 
   # URLS = {
   #     prod_us: "https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com",
