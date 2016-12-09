@@ -26,25 +26,24 @@ class LoginPage < MainBasePage
   end
 
   def specify_email(email)
-    self.txtEmail_element.when_present.set(email)
+    self.txtEmail_element.value = email
   end
 
-
   def specify_pwd(pwd)
-    self.txtPwd_element.when_present.set(pwd)
+    self.txtPwd_element.value = pwd
   end
 
   def specify_login_email(user_email)
-    self.txtEmail_element.when_present.set(user_email)
+    self.txtEmail_element.value = user_email
   end
 
   def specify_login_pwd(pwd)
-    self.txtPwd_element.when_present.set(pwd)
+    self.txtPwd_element.value =  pwd
   end
 
   def specify_credentials(user_email, user_pwd)
-    self.txtEmail_element.value user_email
-    self.txtPwd_element.when_present.set(user_pwd)
+    self.txtEmail_element.value = user_email
+    self.txtPwd_element.value = user_pwd
   end
 
   def submit_login

@@ -6,6 +6,9 @@ class OrdersPage < MainBasePage
   button(:btnFilterResult, xpath: "//form[@id='spree/order_search']//button[@class='icon-search button']")
 
   table(:tblOrderDetails, xpath: "//thead[@id='line-items']/..")
+  # Order's Details ~~~~~~~~~~~~~~~~~~~~~~
+  select_list(:sltMakeStatus, id: 'fabrication_state')
+
   # Order's right panel ~~~~~~~~~~~~~~~~~~
   span(:spnOrderDetails, text: 'Order Details')
   span(:spnCustomerDetails, text: 'Customer Details')

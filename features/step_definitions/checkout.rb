@@ -42,7 +42,7 @@ And(/^click on 'Place My Order' button\.$/) do
 end
 
 Then(/^"([^"]*)" page with order number displayed\.$/) do |message|
-  on(CheckOutPage) do |page|
+  on(OrderPage) do |page|
     page.h1_element(xpath: "//h1[text()='#{message}']").when_present
     @complete_order_number = page.h3_element(xpath: "//h3[@class='order-number']").text.scan(/[A-Z]\d{,9}$/).first
     expect(@order_number).to eql(@complete_order_number)
