@@ -13,17 +13,13 @@ class LoginPage < MainBasePage
   span(:spnRemMe, xpath: "//label[@for='spree_user_remember_me']/span[text()='Remember me']")
   # button(:btnLogin, xpath: "//input[@value='Login']")
   # button(:btnLogin, xpath: ".//*[@id='password-credentials']/div[5]/input")
-  button(:btnLogin, css: ".btn[value='Login']")
-  # button(:btnLogin, name: "commit")
+  # button(:btnLogin, css: ".btn[value='Login']")
+  button(:btnLogin, name: 'commit')
   link(:lnkCreateAcc, text: 'Create a new account')
   link(:lnkForgotPwd, id: 'forgot-password')
   h3(:spnResetPwdNtf, text: "You will receive an email with instructions about how to reset your password in a few minutes.")
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-  def open_login_form
-
-  end
 
   def specify_email(email)
     self.txtEmail_element.value = email
