@@ -1,17 +1,6 @@
 Then(/^footer contains links to:$/) do |table|
   on (HomePage) do |page|
     @browser.scroll.to :bottom
-
-    # data = table.raw
-    # data.each do |rowdata|
-    #   rowdata.each do |entry|
-    #     status = entry
-    #     puts status
-    #   end
-    # end
-
-
-
     data = table.raw
     data.each do |rowdata|
       rowdata.each do |footer_link|
@@ -21,17 +10,6 @@ Then(/^footer contains links to:$/) do |table|
 
       end
     end
-
-
-
-
-
-    # data = table.raw
-    # data.each do |footer_link|
-    #   expect(page.link_element(xpath: "//footer//a[text()=\"#{footer_link[0]}\"]").visible?).to be_truthy
-    #   puts footer_link[0]
-    # end
-    # puts data[1][0]
   end
 end
 

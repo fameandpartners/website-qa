@@ -50,20 +50,20 @@ class CheckOutPage < MainBasePage
 
   # 1. Your information methods:
   def specify_email(email:)
-    self.txtEmail_element.when_present.set(email)
+    self.txtEmail_element.value = email
   end
   # 2. Address Details methods:
   def specify_first_name(fname:)
-    self.txtFirstName_element.when_present.set(fname)
+    self.txtFirstName_element.value = fname
   end
   def specify_last_name(lname:)
-    self.txtLastName_element.when_present.set(lname)
+    self.txtLastName_element.value = lname
   end
   def specify_street_address(street:)
-    self.txtStreetAddress_element.when_present.set(street)
+    self.txtStreetAddress_element.value = street
   end
   def specify_street_address_contd(street_cnd:)
-    self.txtStreetAddressContd_element.when_present.set(street_cnd)
+    self.txtStreetAddressContd_element.value = street_cnd
   end
   def select_country(country:)
     @browser.scroll.to :center
@@ -82,13 +82,13 @@ class CheckOutPage < MainBasePage
   end
 
   def specify_city(city:)
-    self.txtCity_element.when_present.set(city)
+    self.txtCity_element.value = city
   end
   def specify_phone_num(phone_num:)
-    self.txtPhoneNumber_element.when_present.set(phone_num)
+    self.txtPhoneNumber_element.value = phone_num
   end
   def zipcode(zipcode:)
-    self.txtZipcode_element.when_present.set(zipcode)
+    self.txtZipcode_element.value = zipcode
   end
 
   def select_ship_address(variant)
@@ -115,11 +115,11 @@ class CheckOutPage < MainBasePage
   end
 
   def fill_in_credit(data={})
-    self.txtNameOnCard_element.when_present.set(data['Name on card'])
-    self.txtCardNumber_element.when_present.set(data['Card number'])
-    self.txtExpMonth_element.when_present.set(data['Expiration Month'])
-    self.txtExpYear_element.when_present.set(data['Expiration Year'])
-    self.txtCVC_element.when_present.set(data['CVC'])
+    self.txtNameOnCard_element.value = data['Name on card']
+    self.txtCardNumber_element.value = data['Card number']
+    self.txtExpMonth_element.value = data['Expiration Month']
+    self.txtExpYear_element.value = data['Expiration Year']
+    self.txtCVC_element.value = data['CVC']
   end
 
   def place_my_order
@@ -138,7 +138,7 @@ class CheckOutPage < MainBasePage
   end
 
   def specify_coupon(coupon)
-    self.txtCoupon_element.when_present.set(coupon)
+    self.txtCoupon_element.value = coupon
   end
 
   def apply_coupon

@@ -2,6 +2,7 @@ class OrdersPage < MainBasePage
 
   page_url(CONFIG['base_url']+'/admin/orders')
 
+  div(:divProgressMsg, xpath: "//div[@class='progress-message']")
   text_field(:txtUserSearch, id: 'q_number_cont')
   button(:btnFilterResult, xpath: "//form[@id='spree/order_search']//button[@class='icon-search button']")
 
@@ -27,7 +28,7 @@ class OrdersPage < MainBasePage
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   def specify_search_order(order_num)
-    self.txtUserSearch_element.when_present.set(order_num)
+    self.txtUserSearch_element.value = order_num
   end
 
   def filter_results
@@ -46,11 +47,11 @@ class OrdersPage < MainBasePage
     self.lnkNewAdjustment_element.when_present.click
   end
   def specify_adjustment_amount(amount)
-    self.txtAdjustmentAmount_element.when_present.set(amount)
+    self.txtAdjustmentAmount_element.value = amount
   end
 
   def specify_adjustment_description(description)
-    self.txtAdjustmentDescription_element.when_present.set(description)
+    self.txtAdjustmentDescription_element.value = description
   end
 
   def continue_adjustment

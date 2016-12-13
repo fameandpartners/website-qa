@@ -8,7 +8,25 @@ Feature: Orders.
       | Expiration Year  | 2020              |
       | CVC              | 123               |
 
-    Scenario:  
+    Scenario: 'Make status' can be changed.
+      When I go to created order.
+      Then I can change "Make status" to:
+        | PO Placed         |
+        | PO Assigned       |
+        | Fabric Assigned   |
+        | Style Cutting     |
+        | Making            |
+        | QC                |
+        | Shipped           |
+        | Customer Feedback |
+
+
+
+
+    Scenario: 'Shipped' make status for all order items will make the order available for return/exchange
+
+
+    Scenario: 'Shipped' make status will visibly change the order details page listing with an URL to the shipping method tracker
 
 
 

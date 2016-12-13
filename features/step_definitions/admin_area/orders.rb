@@ -84,3 +84,18 @@ And(/^be sure that it recalculated correctly after adjustment removing\.$/) do
     expect(admin_order_total).to eql(@new_order_total)
   end
 end
+
+Then(/^I can change "Make status" to:$/) do |table|
+  on (OrdersPage) do |page|
+    data = table.raw
+    data.each do |rowdata|
+      rowdata.each do |make_status|
+        page.sltMakeStatus_element.when_present(30).select(make_status)
+        page.divProgressMsg_element.wait_until_present
+        page.refresh
+        expect(page.sltMakeStatus_element.selected_options(&:text)[0]).to eql(make_status)
+        puts "\"#{make_status}\" make status was selected."
+      end
+    end
+  end
+end
