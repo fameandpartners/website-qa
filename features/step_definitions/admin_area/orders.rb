@@ -17,13 +17,8 @@ And(/^it appears in "([^"]*)" orders admin area\.$/) do |country|
     end
     page.specify_search_order(@complete_order_number)
     page.filter_results
-
-
-    until page.link_element(text: @complete_order_number).exists? do @browser.scroll.to :bottom end
-    # @browser.scroll.to :bottom
-
-
-
+    # sleep 2
+    @browser.scroll.to :bottom
     page.link_element(text: @complete_order_number).when_present.click
     page.h1_element(xpath: "//h1[contains(text(),'#{@complete_order_number}')]").when_present(30)
     admin_sub_total = page.span_element(xpath: "//tr[@id='subtotal-row']//td[@class='total']//span").text.gsub(/[^\d\.]/, '').to_f

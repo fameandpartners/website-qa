@@ -6,7 +6,7 @@ def browser_path
 end
 
 def browser_name
-  ENV.fetch('BROWSER_NAME', 'firefox')
+  ENV.fetch('BROWSER_NAME', 'chrome')
 end
 
 def url
