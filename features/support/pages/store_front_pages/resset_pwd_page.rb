@@ -37,7 +37,7 @@ class ForgotPwdPage < MainBasePage
     self.lnkCreateAcc_element.when_present.click
   end
 
-  def sign_in_gmail
+  def sign_in_link
     self.lnkSignIn_element.when_present.click
   end
 

@@ -7,7 +7,7 @@ Feature: Reset Password
 
   @wip @regression
   Scenario: Check all Reset Password form elements.
-    When I open "Forgot Password" page.
+    When I go to "Forgot Password" form.
     And there are all Reset Password page controls.
 
   @wip @smoke @regression

@@ -1,8 +1,9 @@
 Given(/^I am on Home page\.$/) do
-  on(HomePage) do |page|
-    page.visit_site_version(country: 'Australia', url: '')
-    page.visit_site_version(country: 'USA', url: '')
-  end
+  on(ProductPage).visit_site_version(country: 'USA', url: '')
+  # on(HomePage) do |page|
+  #   page.visit_site_version(country: 'Australia', url: '')
+  #   page.visit_site_version(country: 'USA', url: '')
+  # end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Check all Login form elements. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,7 +85,11 @@ end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ User can NOT login with correct password and empty login. ~~~~~~~~~~~~~~~~~~
 When(/^I do not specify nor email nor password\.$/) do
-  pending
+  on(LoginPage) do |page|
+    page.specify_email('')
+    page.specify_pwd('')
+    page.submit_login
+  end
 end
 
 
@@ -106,11 +111,19 @@ Then(/^I will see "([^"]*)" tooltip\.$/) do |tooltip|
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Login from Forgot Password form. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-And(/^I can login from Forgot Password form\.$/) do
-  on(ForgotPwdPage).sign_in
+And(/^I can login from "Forgot Password" form\.$/) do
+  on(ForgotPwdPage).sign_in_link
   on(LoginPage) do |page|
-    page.specify_credentials(CONFIG['user_email'],CONFIG['user_pwd'])
-    page.remember_me(false)
+    if browser_name == 'chrome'
+      page.specify_credentials(CONFIG['chrome_user'],CONFIG['chrome_user_pwd'])
+    elsif browser_name == 'firefox'
+      page.specify_credentials(CONFIG['firefox_user'],CONFIG['firefox_user_pwd'])
+    elsif browser_name == 'internet explorer'
+      page.specify_credentials(CONFIG['ie_user'],CONFIG['ie_user_pwd'])
+    elsif browser_name == 'safari'
+      sleep 2
+      page.specify_credentials(CONFIG['safari_user'],CONFIG['safari_user_pwd'])
+    end
     page.submit_login
   end
   on(HomePage) do |page|

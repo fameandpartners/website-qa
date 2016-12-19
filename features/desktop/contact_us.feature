@@ -3,7 +3,6 @@ Feature: Contact Us.
   Background: Open 'Contact Us' page.
     Given I am on Home page.
 
-    @regression
     Scenario: User can open 'Contact Us' page.
       When I open 'Contact Us' page.
       Then there are all required 'Contact Us' controls.
@@ -25,7 +24,6 @@ Feature: Contact Us.
         | Help              | Category                  |
         | Making a purchase | Delivery                  |
 
-  @regression
   Scenario Outline: User can send an enquiry to all categories.
     When I open 'Contact Us' page.
     Then I fill in contact info with:
