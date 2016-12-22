@@ -15,11 +15,6 @@ And(/^it appears in "([^"]*)" orders admin area\.$/) do |country|
         page.submit_login
       end
     end
-    # page.specify_search_order(@complete_order_number)
-    # page.filter_results
-    # sleep 2
-    # @browser.scroll.to :bottom
-    # page.link_element(text: @complete_order_number).when_present.click
     page.h1_element(xpath: "//h1[contains(text(),'#{@complete_order_number}')]").when_present(30)
     admin_sub_total = page.span_element(xpath: "//tr[@id='subtotal-row']//td[@class='total']//span").text.gsub(/[^\d\.]/, '').to_f
     admin_shipping = page.span_element(xpath: "//*[@id='order-charges']//td[@class='total']/span").text.gsub(/[^\d\.]/, '').to_f
@@ -119,16 +114,7 @@ And(/^"Return or exchange" is available for user\.$/) do
   on(MainBasePage).visit_site_version(country: 'USA', url: '/logout')
   on(MainBasePage).visit_site_version(country: 'USA', url: '/login')
   on(LoginPage) do |page|
-    if browser_name == 'chrome'
-      page.specify_credentials(CONFIG['chrome_user'],CONFIG['chrome_user_pwd'])
-    elsif browser_name == 'firefox'
-      page.specify_credentials(CONFIG['firefox_user'],CONFIG['firefox_user_pwd'])
-    elsif browser_name == 'internet explorer'
-      page.specify_credentials(CONFIG['ie_user'],CONFIG['ie_user_pwd'])
-    elsif browser_name == 'safari'
-      sleep 2
-      page.specify_credentials(CONFIG['safari_user'],CONFIG['safari_user_pwd'])
-    end
+    page.specify_registered_user(browser_name)
     page.submit_login
   end
   on(MainBasePage).visit_site_version(country: 'USA', url: '/user_orders')
@@ -136,6 +122,4 @@ And(/^"Return or exchange" is available for user\.$/) do
     page.tblMyOrders_element.when_present(30)
     expect(page.link_element(xpath: "//a[text()='#{@order_number}']/../..//a[text()='Return or exchange']").visible?).to be_truthy
   end
-
-
 end

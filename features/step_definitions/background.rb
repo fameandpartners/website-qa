@@ -6,16 +6,7 @@ end
 Given(/^As a customer I create a new order\.$/) do |table|
   on(MainBasePage).visit_site_version(country: 'USA', url: '/login')
   on(LoginPage) do |page|
-    if browser_name == 'chrome'
-      page.specify_credentials(CONFIG['chrome_user'],CONFIG['chrome_user_pwd'])
-    elsif browser_name == 'firefox'
-      page.specify_credentials(CONFIG['firefox_user'],CONFIG['firefox_user_pwd'])
-    elsif browser_name == 'internet explorer'
-      page.specify_credentials(CONFIG['ie_user'],CONFIG['ie_user_pwd'])
-    elsif browser_name == 'safari'
-      sleep 2
-      page.specify_credentials(CONFIG['safari_user'],CONFIG['safari_user_pwd'])
-    end
+    page.specify_registered_user(browser_name)
     page.submit_login
     session_data[browser_name][:is_authorized] = true
   end

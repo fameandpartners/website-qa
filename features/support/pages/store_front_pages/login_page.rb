@@ -37,6 +37,18 @@ class LoginPage < MainBasePage
     self.txtPwd_element.value =  pwd
   end
 
+  def specify_registered_user(browser_name)
+    if browser_name == 'chrome'
+      self.specify_credentials(CONFIG['chrome_user'],CONFIG['chrome_user_pwd'])
+    elsif browser_name == 'firefox'
+      self.specify_credentials(CONFIG['firefox_user'],CONFIG['firefox_user_pwd'])
+    elsif browser_name == 'internet explorer'
+      self.specify_credentials(CONFIG['ie_user'],CONFIG['ie_user_pwd'])
+    elsif browser_name == 'safari'
+      self.specify_credentials(CONFIG['safari_user'],CONFIG['safari_user_pwd'])
+    end
+  end
+
   def specify_credentials(user_email, user_pwd)
     self.txtEmail_element.value = user_email
     self.txtPwd_element.value = user_pwd
