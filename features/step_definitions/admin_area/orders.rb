@@ -34,16 +34,13 @@ When(/^I go to created order\.$/) do
   end
   on(OrdersPage) do |page|
     page.visit_site_version(country: 'USA', url: "/admin/orders/#{@order_number}")
-    # page.specify_search_order(@order_number)
-    # page.filter_results
-    # page.link_element(text: @order_number).when_present.click
     page.h1_element(xpath: "//h1[contains(text(),'#{@order_number}')]").when_present
-    # admin_sub_total = page.span_element(xpath: "//tr[@id='subtotal-row']//td[@class='total']//span").text.gsub(/[^\d\.]/, '').to_f
-    # admin_shipping = page.span_element(xpath: "//*[@id='order-charges']//td[@class='total']/span").text.gsub(/[^\d\.]/, '').to_f
-    # admin_order_total = page.span_element(xpath: "//td[@id='order-total']/span").text.gsub(/[^\d\.]/, '').to_f
-    # expect(@prices[:sub_total]).to eql(admin_sub_total)
-    # expect(@prices[:shipping]).to eql(admin_shipping)
-    # expect(@prices[:order_total]).to eql(admin_order_total)
+    admin_sub_total = page.span_element(xpath: "//tr[@id='subtotal-row']//td[@class='total']//span").text.gsub(/[^\d\.]/, '').to_f
+    admin_shipping = page.span_element(xpath: "//*[@id='order-charges']//td[@class='total']/span").text.gsub(/[^\d\.]/, '').to_f
+    admin_order_total = page.span_element(xpath: "//td[@id='order-total']/span").text.gsub(/[^\d\.]/, '').to_f
+    expect(@prices[:sub_total]).to eql(admin_sub_total)
+    expect(@prices[:shipping]).to eql(admin_shipping)
+    expect(@prices[:order_total]).to eql(admin_order_total)
   end
 end
 
@@ -122,4 +119,6 @@ And(/^"Return or exchange" is available for user\.$/) do
     page.tblMyOrders_element.when_present(30)
     expect(page.link_element(xpath: "//a[text()='#{@order_number}']/../..//a[text()='Return or exchange']").visible?).to be_truthy
   end
+
+
 end

@@ -16,14 +16,11 @@ Given(/^As a customer I create a new order\.$/) do |table|
     page.select_dress_size('US 10')
     page.open_skirt_length
     page.select_skirt_length('PETITE'.downcase)
-    # @product_price = page.divProductPrice_element.text.gsub(/[^\d\.]/, '').to_f
-    # puts "Product price is: #{@product_price}"
+    @product_price = page.divProductPrice_element.text.gsub(/[^\d\.]/, '').to_f
+    puts "Product price is: #{@product_price}"
     page.add_to_bag
   end
   on(CheckOutPage) do |page|
-    # page.specify_first_name(fname: 'Lorem')
-    # page.specify_last_name(lname: 'Ipsum')
-    # page.specify_email(email: 'anonymous_user@fameandpartners.com')
     page.specify_phone_num(phone_num: '2255-4422')
     page.select_country(country: 'United States')
     page.specify_street_address(street: 'Lorem street 8')
@@ -38,21 +35,21 @@ Given(/^As a customer I create a new order\.$/) do |table|
     data = table.rows_hash
     page.close_fee_popup
     page.fill_in_credit(data)
-    # sub_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Sub Total')]//span").text.gsub(/[^\d\.]/, '').to_f
-    # shipping = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Shipping')]//span").text.gsub(/[^\d\.]/, '').to_f
-    # order_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Order Total')]//span").text.gsub(/[^\d\.]/, '').to_f
-    # puts <<-EOS
-    #   Sub Total: #{sub_total}
-    #   Shipping: #{shipping}
-    #   Order Total: #{order_total}
-    # EOS
-    # @prices = {
-    #     sub_total:  sub_total,
-    #     shipping: shipping,
-    #     order_total: order_total
-    # }
-    # expect(@product_price).to eql(@prices[:sub_total])
-    # expect(@product_price).to eql(@prices[:order_total])
+    sub_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Sub Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    shipping = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Shipping')]//span").text.gsub(/[^\d\.]/, '').to_f
+    order_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Order Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    puts <<-EOS
+      Sub Total: #{sub_total}
+      Shipping: #{shipping}
+      Order Total: #{order_total}
+    EOS
+    @prices = {
+        sub_total:  sub_total,
+        shipping: shipping,
+        order_total: order_total
+    }
+    expect(@product_price).to eql(@prices[:sub_total])
+    expect(@product_price).to eql(@prices[:order_total])
     page.place_my_order
   end
 end
