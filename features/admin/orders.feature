@@ -20,13 +20,13 @@ Feature: Orders.
         | Shipped           |
         | Customer Feedback |
 
+    Scenario: 'Shipped' make status for all order items will make the order available for return or exchange.
+      When I go to created order.
+      Then I change make status to "Shipped".
+      And "Return or exchange" is available for user.
 
 
-
-    Scenario: 'Shipped' make status for all order items will make the order available for return/exchange
-
-
-    Scenario: 'Shipped' make status will visibly change the order details page listing with an URL to the shipping method tracker
+#    Scenario: 'Shipped' make status will visibly change the order details page listing with an URL to the shipping method tracker
 
 
 

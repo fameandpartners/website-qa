@@ -5,9 +5,7 @@ Then(/^footer contains links to:$/) do |table|
     data.each do |rowdata|
       rowdata.each do |footer_link|
         puts footer_link
-        puts footer_link.class
         expect(page.link_element(xpath: "//footer//a[text()=\"#{footer_link}\"]").visible?).to be_truthy
-
       end
     end
   end

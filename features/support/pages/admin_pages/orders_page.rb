@@ -11,6 +11,7 @@ class OrdersPage < MainBasePage
   select_list(:sltMakeStatus, id: 'fabrication_state')
 
   # Order's right panel ~~~~~~~~~~~~~~~~~~
+  link(:btnMarkAsShipped, text: 'Mark order as Shipped')
   span(:spnOrderDetails, text: 'Order Details')
   span(:spnCustomerDetails, text: 'Customer Details')
   span(:spnAdjustments, text: 'Adjustments')
@@ -29,6 +30,10 @@ class OrdersPage < MainBasePage
 
   def specify_search_order(order_num)
     self.txtUserSearch_element.value = order_num
+  end
+
+  def mark_order_as_shipped
+    self.btnMarkAsShipped.when_present.click
   end
 
   def filter_results

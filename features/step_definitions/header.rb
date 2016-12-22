@@ -31,13 +31,28 @@ end
 Then(/^I hover mouse to 'My Account' link\.$/) do
   on(HomePage).hover_my_account
 end
-And(/^I can open (.*)\.$/) do |menu_item|
-  on(MyProfilePage).link_element(xpath: "//a[text()='#{menu_item}']").when_present.click
+
+
+And(/^I can open:$/) do |table|
+  @browser.scroll.to :bottom
+  data = table.raw
+  data.each do |rowdata|
+    on(HomePage).hover_my_account
+    rowdata.each do |menu_link|
+      on(MyProfilePage).link_element(xpath: "//a[text()='#{menu_link}']").when_present.click
+      puts "#{menu_link} menu opened"
+    end
+  end
 end
 
-And(/^url includes "(.*)"\.$/) do |url|
-  expect(on(MyProfilePage).current_url).to include(url)
-end
+#
+# And(/^I can open (.*)\.$/) do |menu_item|
+#   on(MyProfilePage).link_element(xpath: "//a[text()='#{menu_item}']").when_present.click
+# end
+#
+# And(/^url includes "(.*)"\.$/) do |url|
+#   expect(on(MyProfilePage).current_url).to include(url)
+# end
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,11 +82,6 @@ Then(/^"([^"]*)" locale changed\.$/) do |locale|
     end
   end
 end
-And(/^header message changed to "([^"]*)"\.$/) do |msg|
-  on(HomePage) do |page|
-    expect(page.div_element(xpath: "//div[text()='#{msg}']").visible?).to be_truthy
-  end
-end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When(/^I can see navigation home menu with all elements\.$/) do
@@ -94,3 +104,4 @@ Then(/^I can open navigation home submenus:$/) do |table|
     expect(page.divLookbooks_element.present?).to be_truthy
   end
 end
+

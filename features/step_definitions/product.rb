@@ -30,3 +30,29 @@ Then(/^add the dress to cart\.$/) do
   end
 end
 
+Given(/^left bar blocks:$/) do |table|
+  @left_bar_titles = table.raw
+end
+
+Given(/^right bar elements:$/) do |table|
+  @right_bar_titles = table.raw
+end
+
+When(/^left side bar contains titles\.$/) do
+  data = @left_bar_titles
+  data.each do |rowdata|
+    rowdata.each do |panel_item|
+      expect(on(ProductPage).link_element(text: panel_item).present?).to be_truthy
+    end
+  end
+end
+
+Then(/^they can be expanded and collapsed\.$/) do
+  data = @left_bar_titles
+  puts data.inspect
+end
+
+
+And(/^right side bar contains customization elements with "Add to bag" button\.$/) do
+  sleep 1
+end
