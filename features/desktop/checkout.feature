@@ -5,7 +5,7 @@ Feature: Checkout process.
   @smoke
   Scenario Outline: As an anonymous user I can buy a dress.
     When I go to "<Country>" site version.
-    Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
+    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     Then I fill in form fields with:
       | Email                   | anonymous_user@fameandpartners.com  |
@@ -32,15 +32,15 @@ Feature: Checkout process.
     And it appears in "<Country>" orders admin area.
 
     Examples:
-      | Country   | Ship Country  | State           | City    | Dress Size | Skirt Length |
-      | USA       | United States | Washington      | Seattle | US 10      | PETITE       |
-      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD     |
+      | Country   | Ship Country  | State           | City    | Dress Size | Height & Hemline |
+      | USA       | United States | Washington      | Seattle | US 10      | PETITE           |
+      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD         |
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress.
     When I go to "<Country>" site version.
     And I login as user.
-    Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
+    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     Then I fill in form fields with:
       | Email                   | auto.user.fm@gmail.com    |
@@ -68,14 +68,14 @@ Feature: Checkout process.
     And it appears in "<Country>" orders admin area.
 
     Examples:
-      | Country   | Ship Country  | State           | City    | Dress Size | Skirt Length |
-      | USA       | United States | Washington      | Seattle | US 10      | PETITE       |
-      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD     |
+      | Country   | Ship Country  | State           | City    | Dress Size | Height & Hemline |
+      | USA       | United States | Washington      | Seattle | US 10      | PETITE           |
+      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD         |
 
   @smoke
   Scenario Outline: As an anonymous user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
     When I go to "<Country>" site version.
-    Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
+    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     And I fill in form fields with:
       | Email                   | anonymous_user@fameandpartners.com    |
@@ -103,15 +103,15 @@ Feature: Checkout process.
     And it appears in "<Country>" orders admin area.
 
     Examples:
-      | Country   | Ship Country  | State   | City      | Dress Size | Skirt Length |
-      | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE       |
-      | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD     |
+      | Country   | Ship Country  | State   | City      | Dress Size | Height & Hemline |
+      | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE           |
+      | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD         |
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
     When I go to "<Country>" site version.
     And I login as user.
-    Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
+    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     And I fill in form fields with:
       | Email                   | auto.user.fm@gmail.com    |
@@ -140,14 +140,14 @@ Feature: Checkout process.
     And it appears in "<Country>" orders admin area.
 
     Examples:
-      | Country   | Ship Country  | State   | City      | Dress Size | Skirt Length |
-      | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE       |
-      | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD     |
+      | Country   | Ship Country  | State   | City      | Dress Size | Height & Hemline |
+      | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE           |
+      | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD         |
 
   @smoke
   Scenario Outline: As a user I can buy a dress with a discount coupon.
     When I go to "<Country>" site version.
-    Then specify "<Dress Size>" dress Size and "<Skirt Length>" skirt length of the dress.
+    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     Then I fill in form fields with:
       | Email                   | anonymous_user@fameandpartners.com  |
@@ -175,9 +175,9 @@ Feature: Checkout process.
     And it appears in "<Country>" orders admin area.
 
     Examples:
-      | Country   | Ship Country  | State           | City    | Dress Size | Skirt Length |
-      | USA       | United States | Washington      | Seattle | US 10      | PETITE       |
-      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD     |
+      | Country   | Ship Country  | State           | City    | Dress Size | Height & Hemline |
+      | USA       | United States | Washington      | Seattle | US 10      | PETITE           |
+      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD         |
 
 
 

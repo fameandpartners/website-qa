@@ -56,3 +56,20 @@ end
 And(/^right side bar contains customization elements with "Add to bag" button\.$/) do
   sleep 1
 end
+
+When(/^I select "Dress Size" and "Height & Hemline":$/) do |table|
+  on(ProductPage) do |page|
+    data = table.rows_hash
+    page.open_dress_size
+    page.specify_your_size(dress_size: data['Dress Size'])
+    page.open_skirt_length
+    page.specify_your_height_hemline(height_hemline: data['Height & Hemline'].downcase)
+  end
+end
+
+Then(/^I can add a dress to bag\.$/) do
+  on(ProductPage) do |page|
+    page.add_to_bag
+    page.divDressSize_element.wait_while_present
+  end
+end

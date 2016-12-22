@@ -21,3 +21,10 @@ Feature: Product page.
 
 
     Scenario: As a user I can customize a dress and add it to bag.
+      When I select "Dress Size" and "Height & Hemline":
+        | Dress Size        | US 10    |
+        | Height & Hemline  | STANDARD |
+      Then I can add a dress to bag.
+      And I go to checkout process.
+
+

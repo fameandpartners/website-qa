@@ -136,3 +136,9 @@ Then(/^apply a coupon for 25% discount\.$/) do
   end
 end
 
+
+And(/^I go to checkout process\.$/) do
+  on(CheckOutPage) do |page|
+    expect(page.current_url).to include('/checkout')
+  end
+end

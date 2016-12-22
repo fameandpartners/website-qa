@@ -11,6 +11,17 @@ module Product
     self.div_element(xpath: "//div[text()='Dress Size']").when_present(30).click
   end
 
+
+  def specify_your_size(dress_size:)
+    self.divDressSize_element.wait_until_present
+    self.link_element(xpath: "//a[contains(text(),'#{dress_size}')]").when_present(30).click
+  end
+
+  def specify_your_height_hemline(height_hemline:)
+    self.divSkirtLength_element.wait_until_present
+    self.link_element(xpath: "//a[contains(text(),'#{height_hemline}')]").when_present(30).click
+  end
+
   def select_dress_size(size)
     self.divDressSize_element.wait_until_present
     self.link_element(xpath: "//a[contains(text(),'#{size}')]").when_present(30).click
