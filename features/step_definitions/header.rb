@@ -58,6 +58,7 @@ end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ User can change locale. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 When(/^I change to "([^"]*)" locale\.$/) do |locale|
+  on(ProductPage).visit_site_version(country: 'Australia', url: '')
   on(HomePage) do |page|
     page.click_locale_menu
     page.select_locale(locale)
