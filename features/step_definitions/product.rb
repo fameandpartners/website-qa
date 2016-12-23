@@ -30,16 +30,12 @@ Then(/^add the dress to cart\.$/) do
   end
 end
 
-Given(/^left bar blocks:$/) do |table|
-  @left_bar_titles = table.raw
-end
-
 Given(/^right bar elements:$/) do |table|
-  @right_bar_titles = table.raw
+  @right_bar_elements = table.raw
 end
 
-When(/^left side bar contains titles\.$/) do
-  data = @left_bar_titles
+When(/^left side bar contains info blocks\:$/) do |table|
+  data = table.raw
   data.each do |rowdata|
     rowdata.each do |panel_item|
       expect(on(ProductPage).link_element(text: panel_item).present?).to be_truthy
@@ -47,14 +43,40 @@ When(/^left side bar contains titles\.$/) do
   end
 end
 
-Then(/^they can be expanded and collapsed\.$/) do
-  data = @left_bar_titles
-  puts data.inspect
+Then(/^they can be expanded or collapsed\.$/) do
+  on(ProductPage) do |page|
+    page.expand_description
+    page.divDescription_element.wait_until_present
+    page.collapse_description
+    page.divDescription_element.wait_while_present
+
+    page.expand_fabric_information
+    page.divFabric_element.wait_until_present
+    page.collapse_fabric_information
+    page.divFabric_element.wait_while_present
+
+    page.expand_about_model
+    page.divAboutModel_element.wait_until_present
+    page.collapse_about_model
+    page.divAboutModel_element.wait_while_present
+
+    page.expand_share
+    share_icons=%w(lnkFacebookShare lnkTwitterShare lnkPinterestShare)
+    expect(share_icons.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+    page.lstShareIcons_element.wait_until_present
+    page.collapse_share
+    page.lstShareIcons_element.wait_while_present
+  end
 end
 
 
-And(/^right side bar contains customization elements with "Add to bag" button\.$/) do
-  sleep 1
+And(/^right bar contains customization elements\:$/) do |table|
+  data = table.raw
+  data.each do |rowdata|
+    rowdata.each do |panel_item|
+      expect(on(ProductPage).div_element(text: panel_item).present?).to be_truthy
+    end
+  end
 end
 
 When(/^I select "Dress Size" and "Height & Hemline":$/) do |table|
@@ -71,5 +93,29 @@ Then(/^I can add a dress to bag\.$/) do
   on(ProductPage) do |page|
     page.add_to_bag
     page.divDressSize_element.wait_while_present
+  end
+end
+
+
+Then(/^they can be opened and closed\.$/) do
+  on(ProductPage) do |page|
+    page.open_dress_size
+    page.close_dress_size
+    page.open_skirt_length
+    page.close_skirt_length
+    page.open_color
+    page.close_color
+    page.open_customize
+    page.close_customize
+  end
+end
+
+But(/^"Add to bag" button becomes enabled when "Dress Size" and "Height & Hemline" are selected\.$/) do
+  on(ProductPage) do |page|
+    page.open_dress_size
+    page.select_dress_size('US 10')
+    page.open_skirt_length
+    page.select_skirt_length('STANDARD'.downcase)
+    expect(page.lnkAddToBag_element.attribute_value('disabled')).to be_falsy
   end
 end
