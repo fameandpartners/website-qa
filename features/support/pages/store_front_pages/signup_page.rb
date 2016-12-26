@@ -17,20 +17,23 @@ class SignUpPage < MainBasePage
 
 
   def specify_first_name(f_name)
-    self.txtFirstName_element.when_present.set(f_name)
+    self.txtFirstName_element.value = f_name
   end
 
   def specify_last_name(l_name)
-    self.txtLastName_element.when_present.set(l_name)
+    self.txtLastName_element.value = l_name
   end
 
   def specify_email(email)
-    self.txtEmail_element.when_present.set(email)
+    self.txtEmail_element.value = email
   end
 
   def specify_passwords(pwd)
-    self.txtPwd_element.when_present.set(pwd)
-    self.txtPwdConfirm_element.when_present.set(pwd)
+    self.txtPwd_element.value = pwd
+  end
+
+  def specify_confirm_passwords(pwd)
+    self.txtPwdConfirm_element.value = pwd
   end
 
   def click_create_an_account

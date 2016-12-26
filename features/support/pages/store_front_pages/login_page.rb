@@ -61,7 +61,7 @@ class LoginPage < MainBasePage
   def remember_me(rem_me)
     case rem_me
       when true
-        self.chkRemMe_element.set
+        self.chkRemMe_element.check
       when false
         self.chkRemMe_element.clear
     end

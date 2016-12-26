@@ -27,25 +27,29 @@ Feature: Login page
 #    And be sure I was logged in.
 
   Scenario: User can NOT login with fake email.
-    When I specify fake email.
+    When I open Login form.
+    Then I specify fake email.
     But password is correct.
     And I click 'Login' button.
     Then I will see "Invalid email or password." error message.
 
   Scenario: User can NOT login with incorrect password.
-    When I specify registered email.
+    When I open Login form.
+    Then I specify registered email.
     But password is incorrect.
     And I click 'Login' button.
     Then I will see "Invalid email or password." error message.
 
   Scenario: User can NOT login with empty login but correct password.
-    When I do not specify email.
+    When I open Login form.
+    Then I do not specify email.
     But password is correct.
     And I click 'Login' button.
     Then I will see "Invalid email or password." error message.
 
   Scenario: User can NOT login without password.
-    When I specify registered email.
+    When I open Login form.
+    Then I specify registered email.
     But password is empty.
     And I click 'Login' button.
     Then I will see "Invalid email or password." error message.

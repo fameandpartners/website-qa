@@ -20,7 +20,7 @@ When(/^I open Login form\.$/) do
 end
 Then(/^I want to login with email as user\.$/) do
   on(LoginPage) do |page|
-    page.specify_credentials(CONFIG['user_email'],CONFIG['user_pwd'])
+    page.specify_registered_user(browser_name)
     page.submit_login
   end
 end
@@ -34,7 +34,7 @@ end
 #~~~ Login with Remember Me option. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Then(/^I want to login with Remember Me option\.$/) do
   on(LoginPage) do |page|
-    page.specify_credentials(CONFIG['user_email'],CONFIG['user_pwd'])
+    page.specify_registered_user(browser_name)
     page.remember_me(true)
     page.submit_login
   end
@@ -47,9 +47,8 @@ Then(/^I want to login with Facebook account\.$/) do
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ User can NOT login with fake email. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-When(/^I specify fake email\.$/) do
+Then(/^I specify fake email\.$/) do
   on(LoginPage) do |page|
-    page.click_my_account
     page.specify_email('fake@email.com')
   end
 end
@@ -64,11 +63,8 @@ Then(/^I will see "([^"]*)" error message\.$/) do |msg|
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ User can NOT login with incorrect password. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-When(/^I specify registered email\.$/) do
-  on(LoginPage) do |page|
-    page.click_my_account
-    page.specify_email(CONFIG['user_email'])
-  end
+Then(/^I specify registered email\.$/) do
+  on(LoginPage).specify_registered_user(browser_name)
 end
 
 But(/^password is incorrect\.$/) do
@@ -76,11 +72,8 @@ But(/^password is incorrect\.$/) do
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ User can NOT login with correct password and empty login. ~~~~~~~~~~~~~~~~~~
-When(/^I do not specify email\.$/) do
-  on(LoginPage) do |page|
-    page.click_my_account
-    page.specify_email('')
-  end
+Then(/^I do not specify email\.$/) do
+  on(LoginPage).specify_email('')
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ User can NOT login with correct password and empty login. ~~~~~~~~~~~~~~~~~~
@@ -91,9 +84,6 @@ When(/^I do not specify nor email nor password\.$/) do
     page.submit_login
   end
 end
-
-
-
 
 #~~~ I should specify incorrect email format. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 When(/^I specify incorrect email format\.$/) do

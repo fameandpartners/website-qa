@@ -2,23 +2,32 @@ Feature: My Profile page.
   As user I can open own profile.
   As user I can modify my data.
 
-  Background: Login as user.
-    Given I am on Home page as logged in user.
-
-  @smoke
-  Scenario: Update 'Account Settings'.
-    When I open 'My Details' page.
+  @WIP
+  Scenario: As a user I can change my First and Last names.
+    When I am on "My Details" page.
     Then I can modify First and Last names with:
       |First Name| Lorem   |
       |Last Name | Ipsum   |
+    And names were updated.
 
+  @smoke
+  Scenario: As a user I can change my email.
+     #add parallel temp emails
+    When I registered as a new user.
+    Then I can change my email.
+    And login with new email.
 
+  @WIP
+  Scenario: As a user I can change my password.
+    When I registered as a new user.
+    Then I can change my password.
+    And can login with new password.
 
-  @wip
-  Scenario: Email can be changed.
-
-  @wip
-  Scenario: Password can be changed.
-
-  @wip
   Scenario: Profile fields can not be blank.
+    When I am on "My Details" page.
+    Then I clear my profile fields.
+    And try to save profile changes.
+    But "can't be blank" appears for:
+      | First name |
+      | Last name  |
+      | Email      |

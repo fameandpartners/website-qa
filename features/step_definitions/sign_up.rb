@@ -18,6 +18,7 @@ Then(/^I want to create a new account\.$/) do
     @new_user_email = "#{SecureRandom.uuid}@lorem.com"
     page.specify_email(@new_user_email)
     page.specify_passwords(CONFIG['user_pwd'])
+    page.specify_confirm_passwords(CONFIG['user_pwd'])
     page.newsletter(false)
     page.click_create_an_account
   end
