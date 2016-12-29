@@ -145,8 +145,8 @@ Feature: Checkout process.
       | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD         |
 
   @smoke
-  Scenario Outline: As a user I can buy a dress with a discount coupon.
-    When I go to "<Country>" site version.
+  Scenario: As a user I can buy a dress with a discount coupon.
+    When I go to "USA" site version.
     Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     Then I fill in form fields with:
@@ -172,16 +172,15 @@ Feature: Checkout process.
     But check "Order summary" with a discount coupon.
     And click on 'Place My Order' button.
     Then "Thanks for your order!" page with order number displayed.
-    And it appears in "<Country>" orders admin area.
+    And it appears in "USA" orders admin area.
 
-    Examples:
-      | Country   | Ship Country  | State           | City    | Dress Size | Height & Hemline |
-      | USA       | United States | Washington      | Seattle | US 10      | PETITE           |
-      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD         |
-
-
-
-
+  Scenario: As a user I can delete a dress from checkout.
+    When I go to "USA" site version.
+    Then specify "US 10" dress Size and "STANDARD" skirt length of the dress.
+    And add the dress to cart.
+    Then I can delete the dress from cart.
+    But "Opps, looks like your bag is empty." popup appears.
+    And I can continue shopping.
 
 #  Scenario Outline: User validation errors fields.
 #    When I am on Connie dress page

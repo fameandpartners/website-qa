@@ -11,7 +11,7 @@ end
 Then (/^I open My profile via My Account link\.$/) do
   on(HomePage).click_my_account
 end
-And(/^Account settings page opened\.$/) do
+And(/^"Account settings" page opened\.$/) do
   on(MyProfilePage) do |page|
     expect(page.current_url).to include('/profile')
     expect(page.tabAccSettings_element.visible?).to be_truthy
@@ -35,16 +35,6 @@ And(/^I can open:$/) do |table|
     end
   end
 end
-
-#
-# And(/^I can open (.*)\.$/) do |menu_item|
-#   on(MyProfilePage).link_element(xpath: "//a[text()='#{menu_item}']").when_present.click
-# end
-#
-# And(/^url includes "(.*)"\.$/) do |url|
-#   expect(on(MyProfilePage).current_url).to include(url)
-# end
-
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ User can logout. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,17 +73,72 @@ When(/^I can see navigation home menu with all elements\.$/) do
   end
 end
 
-Then(/^I can open navigation home submenus:$/) do |table|
+Then(/^I can open and close navigation home submenus:$/) do |table|
   on(HomePage) do |page|
     data = table.rows_hash
     page.click_nav_menu(data['New this week'])
     expect(page.divNewThisWeek_element.present?).to be_truthy
+    page.click_nav_menu(data['New this week'])
+    expect(page.divNewThisWeek_element.present?).to be_falsey
     page.click_nav_menu(data['SHOP'])
     expect(page.divShop_element.present?).to be_truthy
+    page.click_nav_menu(data['SHOP'])
+    expect(page.divShop_element.present?).to be_falsey
     page.click_nav_menu(data['FAME WEDDINGS'])
     expect(page.divFameWeddings_element.present?).to be_truthy
+    page.click_nav_menu(data['FAME WEDDINGS'])
+    expect(page.divFameWeddings_element.present?).to be_falsey
     page.click_nav_menu(data['LOOKBOOKS'])
     expect(page.divLookbooks_element.present?).to be_truthy
+    page.click_nav_menu(data['LOOKBOOKS'])
+    expect(page.divLookbooks_element.present?).to be_falsey
   end
 end
 
+
+And(/^can open "Blog" page\.$/) do
+  on(HomePage) do |page|
+    page.open_glog
+  end
+  @browser.windows.last.use
+  on(BlogPage) do |page|
+    expect(page.current_url).to include('blog.fameandpartners.com')
+  end
+end
+
+When(/^I open "Search"\.$/) do
+  on(HomePage) do |page|
+    page.open_search
+  end
+end
+
+Then(/^I can specify desired dress for search\.$/) do
+  on(HomePage) do |page|
+    page.specify_dress_for_search('Kirrily')
+    page.txtSearch_element.send_keys :return
+  end
+end
+
+And(/^the founded dress can be opened\.$/) do
+  on(HomePage) do |page|
+    page.open_dress('Kirrily')
+  end
+end
+
+
+When(/^I slide out shopping bag\.$/) do
+  on(HomePage).slideout_shopping_cart
+end
+
+Then(/^it contains bag's elements\.$/) do
+  on(HomePage) do |page|
+    sleep 2
+    checkout_ctrls=%w(divBack hYourBag btnCheckout btnContinueToPayment pOrderTotal)
+    expect(checkout_ctrls.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+  end
+end
+
+And(/^I can slide in shopping bag\.$/) do
+  on(HomePage).slidein_shopping_cart
+  sleep 1
+end

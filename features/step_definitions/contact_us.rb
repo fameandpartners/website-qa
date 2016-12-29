@@ -1,3 +1,5 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~ User can open 'Contact Us' page. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 When(/^I open 'Contact Us' page\.$/) do
   on(ContactUsPage).open_contact_us
 end
@@ -9,34 +11,32 @@ Then(/^there are all required 'Contact Us' controls\.$/) do
     expect(contact_us_ctrls.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
   end
 end
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~ User can send an enquiry to all help categories. ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Given(/^I have user's data:$/) do |table|
+  @user_data = table.rows_hash
+end
 
-Then(/^I fill in contact info with:$/) do |table|
+Then(/^I can send an enquiry to all help categories:$/) do |table|
   on(ContactUsPage) do |page|
-    data = table.rows_hash
-    page.specify_first_name(fname: data['First Name'])
-    page.specify_last_name(lname: data['Last Name'])
-    page.specify_email(email: data['Email'])
-    page.select_country_code(cnt_code: data['Country code'])
-    page.specify_phone_number(phone_number: data['Phone number'])
+    data = table.hashes
+    data.each do |contact_us_data|
+      page.specify_first_name(fname: @user_data['First Name'])
+      page.specify_last_name(lname: @user_data['Last Name'])
+      page.specify_email(email: @user_data['Email'])
+      page.select_country_code(cnt_code: @user_data['Country code'])
+      page.specify_phone_number(phone_number: @user_data['Phone number'])
+      page.select_can_we_help(contact_us_data['help'])
+      page.select_category(contact_us_data['category'])
+      msg = "I'm typing message for category '#{contact_us_data['category']}' to help me with '#{contact_us_data['help']}'"
+      puts msg
+      on(ContactUsPage).type_enquiry(msg)
+      page.submit_enquiry
+      page.hThanks_element.when_present
+      steps %{
+        When I open 'Contact Us' page.
+      }
+    end
   end
 end
-
-
-And(/^I select "(.*)" type and select "(.*)" category\.$/) do |help, category|
-  on(ContactUsPage) do |page|
-    page.select_can_we_help(help)
-    page.select_category(category)
-  end
-end
-Then(/^I describe my enquiry\.$/) do
-  on(ContactUsPage).type_enquiry('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed risus quis nisl suscipit porta ullamcorper id neque. Aenean pellentesque dui eu ex aliquet accumsan.')
-end
-
-And(/^submit my enquiry\.$/) do
-  on(ContactUsPage) do |page|
-    page.submit_enquiry
-    sleep 1
-    expect(page.hThanks_element.visible?).to be_truthy
-  end
-end
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

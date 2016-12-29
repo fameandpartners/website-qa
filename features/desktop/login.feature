@@ -1,4 +1,4 @@
-Feature: Login page
+Feature: Login.
   As registered user I can login.
   As unregistered user I can not login.
   As registered user I reset my password.

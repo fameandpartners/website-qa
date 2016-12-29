@@ -18,10 +18,19 @@ module Header
     div(:divShop, id: 'rect-dresses')
     div(:divFameWeddings, id: 'rect-wedding')
     div(:divLookbooks, id: 'rect-lookbook')
+    link(:lnkBlog, text: 'BLOG')
   link(:lnkSearch, xpath: "//a[contains(@class,'icon-search')]")
   text_field(:txtSearch, id: 'searchValue')
   link(:lnkWishlist, href: '/moodboards')
   link(:lnkShoppingCart, xpath: "//div[@id='home-menu']//a[contains(@class,'shopping-cart')]")
+    div(:divSlideCart, xpath: "//div[contains(@class,'cart-wrapper')]")
+    div(:divBack, xpath: "//div[contains(@class,'cta-icon-text')]")
+    h2(:hYourBag, text: 'Your Bag')
+    button(:btnCheckout, xpath: "//button[text()='CHECKOUT ']")
+    button(:btnContinueToPayment, value: 'Continue to payment')
+    paragraph(:pOrderTotal, xpath: "//p[contains(text(),'Order Total')]")
+
+
 
   def click_my_account
     self.spnMyAccount_element.when_present.click
@@ -63,5 +72,28 @@ module Header
     self.span_element(text: nav_menu_item).when_present.click
   end
 
+  def open_glog
+    self.lnkBlog_element.when_present.click
+  end
+
+  def open_search
+    self.lnkSearch_element.when_present.click
+  end
+
+  def specify_dress_for_search(dress_search)
+    self.txtSearch_element.value = dress_search
+  end
+
+  def open_dress(dress_name)
+    self.span_element(text: dress_name).when_present.click
+  end
+
+  def slideout_shopping_cart
+    self.lnkShoppingCart_element.when_present.click
+  end
+
+  def slidein_shopping_cart
+    self.divBack_element.when_present.click
+  end
 
 end

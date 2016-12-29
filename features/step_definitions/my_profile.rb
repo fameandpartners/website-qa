@@ -39,9 +39,6 @@ And(/^there is also on "My Orders" (.*) page\.$/) do |country|
   end
 end
 
-
-
-
 When(/^I registered as a new user\.$/) do
   on(HomePage).visit_site_version(country: 'USA', url: '/signup')
   on(SignUpPage) do |page|
@@ -55,6 +52,7 @@ When(/^I registered as a new user\.$/) do
     page.click_create_an_account
   end
 end
+
 Then(/^I can change my email\.$/) do
   on(HomePage).visit_site_version(country: 'USA', url: '/profile')
   on(MyProfilePage) do |page|

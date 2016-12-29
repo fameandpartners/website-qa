@@ -1,5 +1,5 @@
-Feature: Sign Up.
-  As unregistered user I can register.
+Feature: Sign up.
+  As unregistered user I can sign up.
 
   Background: Open home page
     Given I am on Home page.

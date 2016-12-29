@@ -47,6 +47,10 @@ class CheckOutPage < MainBasePage
   button(:btnCross, xpath: "//div[@class='vex-dialog-message']//button[text()='X']")
   button(:btnOK, xpath: "//div[@class='vex-dialog-message']//button[text()='OK']")
 
+  # Empty cart popup
+  link(:lnkContShopping, xpath: "//div[contains(@class,'product-form-side')]//a[text()='Continue Shopping']")
+
+
 
   # 1. Your information methods:
   def specify_email(email:)

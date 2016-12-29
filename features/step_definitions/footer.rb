@@ -13,7 +13,8 @@ end
 
 When(/^I fill up subscribe form\.$/) do
   @browser.scroll.to :bottom
-  on(HomePage).specify_subscribe_email('test@mail.com')
+  @subscribe_email = "#{SecureRandom.uuid}@lorem.com"
+  on(HomePage).specify_subscribe_email(@subscribe_email)
 end
 
 Then(/^Click "Subscribe" button\.$/) do

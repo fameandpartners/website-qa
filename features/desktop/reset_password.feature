@@ -1,4 +1,4 @@
-Feature: Reset Password
+Feature: Reset password.
   As registered user I can reset own password.
   As unregistered user I can not reset own password.
 

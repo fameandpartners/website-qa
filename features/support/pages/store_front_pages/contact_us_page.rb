@@ -16,15 +16,15 @@ class ContactUsPage < MainBasePage
   h1(:hThanks, text: "Thanks! We won't play hard to get, we'll get back to you ASAP.")
 
   def specify_first_name(fname:)
-    self.txtFirstName_element.when_present.set(fname)
+    self.txtFirstName_element.value = fname
   end
 
   def specify_last_name(lname:)
-    self.txtLastName_element.when_present.set(lname)
+    self.txtLastName_element.value = lname
   end
 
   def specify_email(email:)
-    self.txtEmail_element.when_present.set(email)
+    self.txtEmail_element.value = email
   end
 
   def select_country_code(cnt_code:)
@@ -32,7 +32,7 @@ class ContactUsPage < MainBasePage
   end
 
   def specify_phone_number(phone_number:)
-    self.txtPhone_element.when_present.set(phone_number)
+    self.txtPhone_element.value = phone_number
   end
 
   def select_can_we_help(help)
@@ -44,7 +44,7 @@ class ContactUsPage < MainBasePage
   end
 
   def type_enquiry(enquiry)
-    self.txtEnquiry_element.when_present.set(enquiry)
+    self.txtEnquiry_element.value = enquiry
   end
 
   def submit_enquiry

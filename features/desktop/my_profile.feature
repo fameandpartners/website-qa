@@ -1,4 +1,4 @@
-Feature: My Profile page.
+Feature: My Profile.
   As user I can open own profile.
   As user I can modify my data.
 
@@ -12,7 +12,6 @@ Feature: My Profile page.
 
   @smoke
   Scenario: As a user I can change my email.
-     #add parallel temp emails
     When I registered as a new user.
     Then I can change my email.
     And login with new email.

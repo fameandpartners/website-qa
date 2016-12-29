@@ -12,7 +12,8 @@ class HomePage < MainBasePage
       when false
         self.btnDecline_element.when_present.click
     end
-
   end
+
+
 
 end

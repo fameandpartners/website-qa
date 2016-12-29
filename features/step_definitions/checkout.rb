@@ -142,3 +142,20 @@ And(/^I go to checkout process\.$/) do
     expect(page.current_url).to include('/checkout')
   end
 end
+
+Then(/^I can delete the dress from cart\.$/) do
+  on(CheckOutPage) do |page|
+    page.span_element(xpath: "//div[contains(@class,'product-form-side')]//a[text()='Kirrily']/../..//span[@class='icon btn-close']")\
+.when_present.click
+    sleep 3
+  end
+end
+
+But(/^"([^"]*)" popup appears\.$/) do |msg|
+  on(CheckOutPage).h2_element(xpath: "//div[contains(@class,'product-form-side')]//h2[text()='#{msg}']").when_present
+end
+
+And(/^I can continue shopping\.$/) do
+  on(CheckOutPage).lnkContShopping_element.when_present.click
+  expect(on(HomePage).current_url).to include('fameandpartners.com/dresses')
+end
