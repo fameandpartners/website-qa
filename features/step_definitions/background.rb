@@ -68,3 +68,13 @@ end
 Given(/^I am on product page\.$/) do
   on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-kirrily-1100?color=spot')
 end
+
+
+Given(/^open admin users page\.$/) do
+  on(LoginPage) do |page|
+    page.visit_site_version(country: 'USA', url: '/spree_user/sign_in')
+    page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+    page.submit_login
+    page.visit_site_version(country: 'USA', url: '/admin/users')
+  end
+end

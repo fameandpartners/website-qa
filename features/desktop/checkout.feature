@@ -147,7 +147,7 @@ Feature: Checkout process.
   @smoke
   Scenario: As a user I can buy a dress with a discount coupon.
     When I go to "USA" site version.
-    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
+    Then specify "US 10" dress Size and "STANDARD" skirt length of the dress.
     And add the dress to cart.
     Then I fill in form fields with:
       | Email                   | anonymous_user@fameandpartners.com  |
