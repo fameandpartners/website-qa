@@ -29,9 +29,9 @@ class LoginPage < MainBasePage
     self.txtPwd_element.value = pwd
   end
 
-  def specify_login_email(user_email)
-    self.txtEmail_element.value = user_email
-  end
+  # def specify_login_email(user_email)
+  #   self.txtEmail_element.value = user_email
+  # end
 
   def specify_login_pwd(pwd)
     self.txtPwd_element.value =  pwd

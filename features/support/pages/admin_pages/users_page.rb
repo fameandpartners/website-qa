@@ -16,6 +16,7 @@ class UsersPage < MainBasePage
   checkbox(:chkAdminRole, id: 'user_spree_role_admin')
   checkbox(:chkUserRole, id: 'user_spree_role_user')
   button(:btnCreateUser, xpath: "//button[text()='Create']")
+  button(:btnUpdateUser, xpath: "//button[text()='Update']")
   span(:spnEditLink, text: 'Edit')
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -49,12 +50,31 @@ class UsersPage < MainBasePage
     self.spnEditLink_element.when_present.click
   end
 
-  def set_user_role(sts)
-    self.chkUserRole_element.check
+  def set_user_role(role)
+    case role
+      when 'user'
+        self.chkUserRole_element.check
+      when 'admin'
+        self.chkAdminRole_element.check
+    end
   end
+
+  def unset_user_role(role)
+    case role
+      when 'user'
+        self.chkUserRole_element.uncheck
+      when 'admin'
+        self.chkAdminRole_element.uncheck
+    end
+  end
+
 
   def save_user
     self.btnCreateUser_element.when_present.click
+  end
+
+  def update_user
+    self.btnUpdateUser_element.when_present.click
   end
 
   def specify_srch_user(email)
@@ -64,6 +84,11 @@ class UsersPage < MainBasePage
   def click_search
     self.btnSearchUsr_element.when_present.click
   end
+
+  def edit_user(email)
+    self.link_element(xpath: "//a[text()='#{email}']/../..//a[@data-action='edit']").when_present.click
+  end
+
 
   def delete_user(email,confirm)
     if self.link_element(xpath: "//a[text()='#{email}']").visible?
