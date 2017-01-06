@@ -155,9 +155,9 @@ Feature: Checkout process.
       | Last Name               | Ipsum                               |
       | Street Address          | Lorem street 8                      |
       | Street Address (contd)  | apt. 8                              |
-      | Country                 | <Ship Country>                      |
-      | State                   | <State>                             |
-      | City                    | <City>                              |
+      | Country                 | United States                       |
+      | State                   | Washington                          |
+      | City                    | Seattle                             |
       | Phone Number            | 2255-4422                           |
       | Zipcode                 | 12345                               |
     And set "This is also my billing address".
@@ -179,7 +179,7 @@ Feature: Checkout process.
     Then specify "US 10" dress Size and "STANDARD" skirt length of the dress.
     And add the dress to cart.
     Then I can delete the dress from cart.
-    But "Opps, looks like your bag is empty." popup appears.
+    But "Oops, looks like your bag is empty." popup appears.
     And I can continue shopping.
 
 #  Scenario Outline: User validation errors fields.
