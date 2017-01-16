@@ -10,7 +10,7 @@ Given(/^I am on 'Contact Us' page\.$/) do
   visit ContactUsPage
 end
 
-Given(/^As a customer I create a new order\.$/) do |table|
+Given(/^as a customer I create a new order\.$/) do |table|
   on(MainBasePage).visit_site_version(country: 'USA', url: '/login')
   on(LoginPage) do |page|
     page.specify_registered_user(browser_name)
@@ -58,6 +58,7 @@ Given(/^As a customer I create a new order\.$/) do |table|
     expect(@product_price).to eql(@prices[:sub_total])
     expect(@product_price).to eql(@prices[:order_total])
     page.place_my_order
+    page.h3_element(xpath: "//h3[text()='Order # #{@order_number}']").when_present(30)
   end
 end
 

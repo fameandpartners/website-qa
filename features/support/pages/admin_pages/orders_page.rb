@@ -49,6 +49,9 @@ class OrdersPage < MainBasePage
   end
 
   def new_adjustment
+    # if @browser.alert.visible?
+    #   @browser.alert.ok
+    # end
     self.lnkNewAdjustment_element.when_present.click
   end
   def specify_adjustment_amount(amount)
@@ -76,5 +79,12 @@ class OrdersPage < MainBasePage
         @browser.alert.close
     end
   end
+
+  def change_make_status(make_sts)
+    self.sltMakeStatus_element.when_present(30).select(make_sts)
+    self.divProgressMsg_element.when_present
+    self.divProgressMsg_element.wait_until_present
+  end
+
 
 end

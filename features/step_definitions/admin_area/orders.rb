@@ -1,7 +1,80 @@
+Given(/^I create a new guest user order\.$/) do |table|
+  on(ProductPage) do |page|
+    page.visit_site_version(country: 'USA', url: '/dresses/dress-kirrily-1100')
+    page.open_dress_size
+    page.select_dress_size('US 10')
+    page.open_skirt_length
+    page.select_skirt_length('PETITE'.downcase)
+    page.add_to_bag
+  end
+  on(CheckOutPage) do |page|
+    page.specify_first_name(fname: 'Lorem')
+    page.specify_last_name(lname: 'Ipsum')
+    page.specify_email(email: 'test@email.com')
+    page.specify_phone_num(phone_num: '2255-4422')
+    page.select_country(country: 'United States')
+    page.specify_street_address(street: 'Lorem street 8')
+    page.specify_street_address_contd(street_cnd: 'apt. 8')
+    page.specify_city(city: 'Seattle')
+    page.zipcode(zipcode: '12345')
+    page.select_state(state: 'Washington')
+    page.select_ship_address(true)
+    @order_number = page.div_element(xpath: "//div[contains(@class,'hidden')]//div[contains(text(),'Number')]").text.scan(/[A-Z]\d{,9}$/).first
+    puts @order_number
+    page.pay_securely
+    data = table.rows_hash
+    page.close_fee_popup
+    page.fill_in_credit(data)
+    sub_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Sub Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    shipping = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Shipping')]//span").text.gsub(/[^\d\.]/, '').to_f
+    order_total = page.span_element(xpath: "//div[contains(@class,'product-form-side')]//p[contains(text(),'Order Total')]//span").text.gsub(/[^\d\.]/, '').to_f
+    @prices = {
+        sub_total:  sub_total,
+        shipping: shipping,
+        order_total: order_total
+    }
+    page.place_my_order
+    page.h3_element(xpath: "//h3[text()='Order # #{@order_number}']").when_present(30)
+  end
+end
+
+Then(/^I go to created guest user order\.$/) do
+  on(LogoutPage).visit_site_version(country: 'USA', url: '/logout')
+  on(LoginPage) do |page|
+    page.visit_site_version(country: 'USA', url: '/spree_user/sign_in')
+    page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+    page.submit_login
+  end
+
+  on(OrdersPage) do |page|
+    page.visit_site_version(country: 'USA', url: "/admin/orders/#{@order_number}")
+    on(LoginPage) do |page|
+      if page.btnLogin_element.visible?
+        page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+        page.submit_login
+      end
+    end
+    page.h1_element(xpath: "//h1[contains(text(),'#{@order_number}')]").when_present
+  end
+end
+
+And(/^I can change "Make status" to:$/) do |table|
+  on (OrdersPage) do |page|
+    data = table.raw
+    data.each do |rowdata|
+      rowdata.each do |make_status|
+        page.change_make_status(make_status)
+        # page.refresh
+        page.sltMakeStatus_element.when_present
+        expect(page.sltMakeStatus_element.selected_options(&:text)[0]).to eql(make_status)
+        puts "\"#{make_status}\" make status was selected."
+      end
+    end
+  end
+end
 
 And(/^it appears in "([^"]*)" orders admin area\.$/) do |country|
   on(LogoutPage).visit_site_version(country: country, url: '/logout')
-
   on(LoginPage) do |page|
     page.visit_site_version(country: country, url: '/spree_user/sign_in')
     page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
@@ -25,7 +98,7 @@ And(/^it appears in "([^"]*)" orders admin area\.$/) do |country|
   end
 end
 
-When(/^I go to created order\.$/) do
+Then(/^I go to created order\.$/) do
   on(LogoutPage).visit_site_version(country: 'USA', url: '/logout')
   on(LoginPage) do |page|
     page.visit_site_version(country: 'USA', url: '/spree_user/sign_in')
@@ -43,6 +116,8 @@ When(/^I go to created order\.$/) do
     expect(@prices[:order_total]).to eql(admin_order_total)
   end
 end
+
+
 
 Then(/^I can add an adjustment for it\.$/) do
   on(OrdersPage) do |page|
@@ -85,25 +160,9 @@ And(/^be sure that it recalculated correctly after adjustment removing\.$/) do
   end
 end
 
-Then(/^I can change "Make status" to:$/) do |table|
-  on (OrdersPage) do |page|
-    data = table.raw
-    data.each do |rowdata|
-      rowdata.each do |make_status|
-        page.sltMakeStatus_element.when_present(30).select(make_status)
-        page.divProgressMsg_element.wait_until_present
-        page.refresh
-        expect(page.sltMakeStatus_element.selected_options(&:text)[0]).to eql(make_status)
-        puts "\"#{make_status}\" make status was selected."
-      end
-    end
-  end
-end
-
 Then(/^I change make status to "([^"]*)"\.$/) do |make_status|
   on (OrdersPage) do |page|
-    page.sltMakeStatus_element.when_present(30).select(make_status)
-    page.divProgressMsg_element.wait_until_present
+    page.change_make_status(make_status)
   end
 end
 
@@ -119,6 +178,14 @@ And(/^"Return or exchange" is available for user\.$/) do
     page.tblMyOrders_element.when_present(30)
     expect(page.link_element(xpath: "//a[text()='#{@order_number}']/../..//a[text()='Return or exchange']").visible?).to be_truthy
   end
+end
 
 
+And(/^order sidebar menu contains:$/) do |table|
+  data = table.raw
+  data.each do |rowdata|
+    rowdata.each do |menu_item|
+      expect(on(OrdersPage).span_element(xpath: "//span[text()='#{menu_item}']").present?).to be_truthy
+    end
+  end
 end
