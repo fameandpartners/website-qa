@@ -7,7 +7,6 @@ Feature: Footer.
       Then footer contains links to:
         | Why Shop With Us  |
         | About Us          |
-        | Growth Plan       |
         | Fame Chain        |
         | From our CEO      |
         | Privacy Policy    |
