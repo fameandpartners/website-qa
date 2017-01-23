@@ -61,10 +61,10 @@ Before do |scenario|
     when :spree_admin
       @browser.window.maximize
     when :desktop
-      puts 'desktop'
+      # puts 'desktop'
       @browser.window.maximize
     when :mobile
-      puts 'mobile'
+      # puts 'mobile'
       @browser.window.resize_to(720,1100)
   end
 
