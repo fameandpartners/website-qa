@@ -1,6 +1,6 @@
 class UsersPage < MainBasePage
 
-  page_url(CONFIG['base_url']+'/admin/users')
+  page_url(CONFIG['base_url']+'/spree_admin/users')
 
   link(:btnNewUser, id: 'admin_new_user_link')
   text_field(:txtUserSearch, id: 'q_email_cont')
@@ -54,7 +54,7 @@ class UsersPage < MainBasePage
     case role
       when 'user'
         self.chkUserRole_element.check
-      when 'admin'
+      when 'spree_admin'
         self.chkAdminRole_element.check
     end
   end
@@ -63,7 +63,7 @@ class UsersPage < MainBasePage
     case role
       when 'user'
         self.chkUserRole_element.uncheck
-      when 'admin'
+      when 'spree_admin'
         self.chkAdminRole_element.uncheck
     end
   end

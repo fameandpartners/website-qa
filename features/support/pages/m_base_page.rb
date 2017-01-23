@@ -1,14 +1,14 @@
-require_relative 'spree_admin_pages/adm_modules/admin_header'
-require_relative 'store_front_pages/modules/header'
-require_relative 'store_front_pages/modules/product'
-require_relative 'store_front_pages/modules/footer'
+# require_relative 'spree_admin_pages/adm_modules/admin_header'
+require_relative 'mobile_pages/m_modules/m_header'
+require_relative 'mobile_pages/m_modules/m_product'
+require_relative 'mobile_pages/m_modules/m_footer'
 
-class MainBasePage
+class MobileBasePage
   include PageObject
-  include Header
-  include Product
-  include Footer
-  include AdminHeader
+  include MobileHeader
+  include MobileProduct
+  include MobileFooter
+  # include AdminHeader
 
 
   URLS = {

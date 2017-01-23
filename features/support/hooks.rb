@@ -54,11 +54,11 @@ Before do |scenario|
   end
   # puts File.basename(__dir__)
   platform = File.basename(File.dirname(scenario.location.file)).to_sym
-  #=> :admin:, :desktop or :mobile
+  #=> :spree_admin:, :desktop or :mobile
   # puts platform
   # Output the platform (or whatever conditional logic you want)
   case platform
-    when :admin
+    when :spree_admin
       @browser.window.maximize
     when :desktop
       puts 'desktop'

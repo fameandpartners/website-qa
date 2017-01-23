@@ -31,7 +31,7 @@ And(/^be sure a new account was created\.$/) do
   visit LogoutPage
   on(HomePage).click_my_account
   on(LoginPage) do |page|
-    page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+    page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login
   end
   visit UsersPage

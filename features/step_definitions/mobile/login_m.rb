@@ -1,6 +1,6 @@
 Given(/^open mobile login page\.$/) do
-  on LoginPage do |page|
-    page.visit_site_version(country: 'USA', url: '/dresses/dress-kirrily-1100')
+  on MobileLoginPage do |page|
+    page.visit_site_version(country: 'USA', url: '/login')
   end
 end
 

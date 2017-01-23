@@ -24,7 +24,7 @@ Given(/^as a customer I create a new order\.$/) do |table|
     page.open_skirt_length
     page.select_skirt_length('PETITE'.downcase)
     @product_price = page.divProductPrice_element.text.gsub(/[^\d\.]/, '').to_f
-    puts "Product price is: #{@product_price}"
+    puts "MProduct price is: #{@product_price}"
     page.add_to_bag
   end
   on(CheckOutPage) do |page|
@@ -74,8 +74,16 @@ end
 Given(/^open admin users page\.$/) do
   on(LoginPage) do |page|
     page.visit_site_version(country: 'USA', url: '/spree_user/sign_in')
-    page.specify_credentials(CONFIG['admin'],CONFIG['admin_pwd'])
+    page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login
-    page.visit_site_version(country: 'USA', url: '/admin/users')
+    page.visit_site_version(country: 'USA', url: '/spree_admin/users')
+  end
+end
+
+Given(/^I login to admin area\.$/) do
+  on(LoginPage) do |page|
+    page.visit_site_version(country: 'USA', url: '/spree_user/sign_in')
+    page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
+    page.submit_login
   end
 end

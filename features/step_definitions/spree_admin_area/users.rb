@@ -14,7 +14,7 @@ end
 
 Then(/^it appears in user's list\.$/) do
   on(UsersPage) do |page|
-    page.visit_site_version(country: 'USA', url: '/admin/users')
+    page.visit_site_version(country: 'USA', url: '/spree_admin/users')
     page.specify_srch_user(@new_email_admin)
     page.click_search
     expect(page.link_element(xpath: "//a[text()='#{@new_email_admin}']").visible?).to be_truthy
@@ -31,7 +31,7 @@ end
 
 Then(/^it can be deleted\.$/) do
   on(UsersPage) do |page|
-    page.visit_site_version(country: 'USA', url: '/admin/users')
+    page.visit_site_version(country: 'USA', url: '/spree_admin/users')
     page.specify_srch_user(@new_email_admin)
     page.click_search
     page.delete_user(@new_email_admin, true)
@@ -43,7 +43,7 @@ end
 
 Then(/^it can be updated with new email and password\.$/) do
   on(UsersPage) do |page|
-    page.visit_site_version(country: 'USA', url: '/admin/users')
+    page.visit_site_version(country: 'USA', url: '/spree_admin/users')
     page.specify_srch_user(@new_email_admin)
     page.click_search
     page.edit_user(@new_email_admin)
@@ -76,7 +76,7 @@ end
 
 Then(/^it can be blocked\.$/) do
   on(UsersPage) do |page|
-    page.visit_site_version(country: 'USA', url: '/admin/users')
+    page.visit_site_version(country: 'USA', url: '/spree_admin/users')
     page.specify_srch_user(@new_email_admin)
     page.click_search
     page.edit_user(@new_email_admin)

@@ -2,12 +2,6 @@
 base_url: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com'
 base_url_au: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com.au'
 
-user_email: auto.user.fm@gmail.com
-user_pwd: 1qazxcv
-gmail_pwd: 1qazqwerty
-user_fname: Lorem
-user_lname: Ipsum
-
 twit_usr_name: twit_usr_fandp
 twit_email: auto.user.fm@gmail.com
 twit_pwd: 1qazxcv
@@ -16,11 +10,6 @@ fb_user: auto.user.fm@gmail.com
 fb_pwd: 1qazxcv
 fb_f_name: Fame
 fb_l_name: Partner
-
-anonymous_email: overflow100182@gmail.com
-anonymous_fname: Lorem
-anonymous_lname: Ipsum
-anonymous_pwd: 1qazqwerty
 
 safari_user: safari_user@fameandpartners.com
 safari_user_pwd: 1qazqwerty
@@ -35,18 +24,10 @@ chrome_afterpay_pwd: fameandpartners2016
 ie_user: ie_user@fameandpartners.com
 ie_user_pwd: 1qazqwerty
 
-anonymous_user: anonymous_user@fameandpartners.com
-anonymous_user_pwd:
-
-user_r_email: auto.user.fmr@gmail.com
-user_r_pwd: 1qazxcv
-
-
 coupon: SALE25 #coupon for 25% discount
 
-
-admin: andreypetrenko@thepaydock.com
-admin_pwd: 1qazxcv
+spree_admin: andreyp@fameandpartners.com
+admin_pwd: 1qazqwerty
 
 # Credit card:
 card_number: 5520000000000000

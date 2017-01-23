@@ -1,6 +1,6 @@
 class OrdersPage < MainBasePage
 
-  page_url(CONFIG['base_url']+'/admin/orders')
+  page_url(CONFIG['base_url']+'/spree_admin/orders')
 
   div(:divProgressMsg, xpath: "//div[@class='progress-message']")
   text_field(:txtUserSearch, id: 'q_number_cont')

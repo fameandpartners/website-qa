@@ -19,7 +19,6 @@ Feature: Footer.
         | Track My Order    |
         | Best Sellers      |
         | What's New        |
-        | Made in 48 Hours  |
         | Formal            |
         | Prom              |
         | View All Dresses  |
