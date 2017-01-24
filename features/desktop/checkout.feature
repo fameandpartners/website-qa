@@ -104,8 +104,8 @@ Feature: Checkout process.
 
     Examples:
       | Country   | Ship Country  | State   | City      | Dress Size | Height & Hemline |
-      | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE           |
-      | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD         |
+      | USA       | Austria       | Wien    | Ayia Napa | US 10      | PETITE           |
+      | Australia | China         | Shanxi  | Taiyuan   | AU 6       | STANDARD         |
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
@@ -141,8 +141,8 @@ Feature: Checkout process.
 
     Examples:
       | Country   | Ship Country  | State   | City      | Dress Size | Height & Hemline |
-      | USA       | Cyprus        | Larnaka | Ayia Napa | US 10      | PETITE           |
-      | Australia | Cyprus        | Larnaka | Ayia Napa | AU 6       | STANDARD         |
+      | USA       | Austria       | Wien    | Ayia Napa | US 10      | PETITE           |
+      | Australia | China         | Shanxi  | Taiyuan   | AU 6       | STANDARD         |
 
   @smoke
   Scenario: As a user I can buy a dress with a discount coupon.
