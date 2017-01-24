@@ -59,7 +59,7 @@ Then(/^I go to created guest user order\.$/) do
 end
 
 And(/^I can change "Make status" to:$/) do |table|
-  on (FameAdminPage) do |page|
+  on (OrdersPage) do |page|
     data = table.raw
     data.each do |rowdata|
       rowdata.each do |make_status|
@@ -80,7 +80,7 @@ And(/^it appears in "([^"]*)" orders admin area\.$/) do |country|
     page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login
   end
-  on(FameAdminPage) do |page|
+  on(OrdersPage) do |page|
     page.visit_site_version(country: country, url: "/admin/orders/#{@complete_order_number}")
     on(LoginPage) do |page|
       if page.btnLogin_element.visible?
@@ -105,7 +105,7 @@ Then(/^I go to created order\.$/) do
     page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login
   end
-  on(FameAdminPage) do |page|
+  on(OrdersPage) do |page|
     page.visit_site_version(country: 'USA', url: "/admin/orders/#{@order_number}")
     page.h1_element(xpath: "//h1[contains(text(),'#{@order_number}')]").when_present
     admin_sub_total = page.span_element(xpath: "//tr[@id='subtotal-row']//td[@class='total']//span").text.gsub(/[^\d\.]/, '').to_f
@@ -120,7 +120,7 @@ end
 
 
 Then(/^I can add an adjustment for it\.$/) do
-  on(FameAdminPage) do |page|
+  on(OrdersPage) do |page|
     page.open_adjustments
     page.new_adjustment
     adjustment_amount = 25
@@ -134,7 +134,7 @@ Then(/^I can add an adjustment for it\.$/) do
 end
 
 And(/^be sure that it recalculated correctly\.$/) do
-  on(FameAdminPage) do |page|
+  on(OrdersPage) do |page|
     page.open_order_details
     page.tblOrderDetails_element.when_present
     admin_order_total = page.span_element(xpath: "//span[@id='order_total']").text.gsub(/[^\d\.]/, '').to_f
@@ -144,14 +144,14 @@ And(/^be sure that it recalculated correctly\.$/) do
 end
 
 Then(/^I can remove added adjustment for it\.$/) do
-  on(FameAdminPage) do |page|
+  on(OrdersPage) do |page|
     page.open_adjustments
     page.delete_adjustment(true)
   end
 end
 
 And(/^be sure that it recalculated correctly after adjustment removing\.$/) do
-  on(FameAdminPage) do |page|
+  on(OrdersPage) do |page|
     page.open_order_details
     page.tblOrderDetails_element.when_present
     admin_order_total = page.span_element(xpath: "//span[@id='order_total']").text.gsub(/[^\d\.]/, '').to_f
@@ -161,7 +161,7 @@ And(/^be sure that it recalculated correctly after adjustment removing\.$/) do
 end
 
 Then(/^I change make status to "([^"]*)"\.$/) do |make_status|
-  on (FameAdminPage) do |page|
+  on (OrdersPage) do |page|
     page.change_make_status(make_status)
   end
 end
@@ -185,7 +185,7 @@ And(/^order sidebar menu contains:$/) do |table|
   data = table.raw
   data.each do |rowdata|
     rowdata.each do |menu_item|
-      expect(on(FameAdminPage).span_element(xpath: "//span[text()='#{menu_item}']").present?).to be_truthy
+      expect(on(OrdersPage).span_element(xpath: "//span[text()='#{menu_item}']").present?).to be_truthy
     end
   end
 end
