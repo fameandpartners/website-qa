@@ -1,4 +1,4 @@
-Feature: Orders.
+Feature: Orders (admin area).
 
 #  Background: Create a new order.
 #    Given As a customer I create a new order.

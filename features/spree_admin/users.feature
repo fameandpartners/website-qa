@@ -1,4 +1,4 @@
-Feature: Users
+Feature: Users (admin area).
   As admin I can create a new user.
   As admin I can assign admin or user role.
   As admin I can delete a user.

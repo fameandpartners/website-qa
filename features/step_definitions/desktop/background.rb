@@ -73,16 +73,16 @@ end
 
 Given(/^open admin users page\.$/) do
   on(LoginPage) do |page|
-    page.visit_site_version(country: 'USA', url: '/spree_user/sign_in')
+    page.visit_site_version(country: 'USA', url: '/login')
     page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login
-    page.visit_site_version(country: 'USA', url: '/spree_admin/users')
+    page.visit_site_version(country: 'USA', url: '/admin/users')
   end
 end
 
 Given(/^I login to admin area\.$/) do
   on(LoginPage) do |page|
-    page.visit_site_version(country: 'USA', url: '/spree_user/sign_in')
+    page.visit_site_version(country: 'USA', url: '/login')
     page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login
   end
