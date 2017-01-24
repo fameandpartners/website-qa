@@ -7,18 +7,21 @@ And(/^there are all required Sign Up controls\.$/) do
   on(SignUpPage) do |page|
     login_ctrls=%w(txtFirstName txtLastName txtEmail txtPwd txtPwdConfirm chkNewsletter btnCreateAccount lnkSignIn)
     expect(login_ctrls.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+
   end
 end
 
 #~~~ Create a new account. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Then(/^I want to create a new account\.$/) do
   on(SignUpPage) do |page|
-    page.specify_first_name(CONFIG['user_fname'])
-    page.specify_last_name(CONFIG['user_lname'])
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    page.specify_first_name(first_name)
+    page.specify_last_name(last_name)
     @new_user_email = "#{SecureRandom.uuid}@lorem.com"
     page.specify_email(@new_user_email)
-    page.specify_passwords(CONFIG['user_pwd'])
-    page.specify_confirm_passwords(CONFIG['user_pwd'])
+    page.specify_passwords('1qazxcv')
+    page.specify_confirm_passwords('1qazxcv')
     page.newsletter(false)
     page.click_create_an_account
   end
@@ -28,8 +31,8 @@ And(/^be sure a new account was created\.$/) do
     page.click_my_account
     expect(page.current_url).to include('/profile')
   end
-  visit LogoutPage
-  on(HomePage).click_my_account
+  on(LogoutPage).visit_site_version(country: 'USA', url: '/logout')
+  on(HomePage).visit_site_version(country: 'USA', url: '/login')
   on(LoginPage) do |page|
     page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login

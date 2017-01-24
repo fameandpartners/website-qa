@@ -1,6 +1,6 @@
 class LoginPage < MainBasePage
 
-  page_url(CONFIG['base_url']+'/spree_user/sign_in')
+  page_url(CONFIG['base_url']+'/login')
 
   h1(:hLogin, xpath: "//h1[text()='Login']")
   link(:lnkFaceBook, xpath: "//a[text()='Log in with Facebook']")

@@ -1,6 +1,6 @@
 class UsersPage < MainBasePage
 
-  page_url(CONFIG['base_url']+'/spree_admin/users')
+  page_url(CONFIG['base_url']+'/admin/users')
 
   link(:btnNewUser, id: 'admin_new_user_link')
   text_field(:txtUserSearch, id: 'q_email_cont')
