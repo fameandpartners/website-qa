@@ -5,14 +5,18 @@ When(/^I login as user\.$/) do
     page.specify_registered_user(browser_name)
     page.submit_login
     session_data[browser_name][:is_authorized] = true
+      if page.btnLogin_element.visible?
+        page.specify_registered_user(browser_name)
+        page.submit_login
+      end
   end
-
 end
 Then (/^I open My profile via My Account link\.$/) do
   on(HomePage).click_my_account
 end
 And(/^"Account settings" page opened\.$/) do
   on(MyProfilePage) do |page|
+    page.tabAccSettings_element.when_present
     expect(page.current_url).to include('/profile')
     expect(page.tabAccSettings_element.visible?).to be_truthy
   end
@@ -30,7 +34,7 @@ And(/^I can open:$/) do |table|
   data.each do |rowdata|
     on(HomePage).hover_my_account
     rowdata.each do |menu_link|
-      on(MyProfilePage).link_element(xpath: "//a[text()='#{menu_link}']").when_present.click
+      on(MyProfilePage).link_element(xpath: "//a[text()='#{menu_link}']").when_present(30).click
       puts "#{menu_link} menu opened"
     end
   end
@@ -40,9 +44,9 @@ end
 #~~~ User can logout. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 And(/^I logout\.$/) do
   on(HomePage) do |page|
-    page.lnkLogout_element.when_present.click
+    page.lnkLogout_element.when_present(30).click
     page.click_my_account
-    expect(page.current_url).to include('/spree_user/sign_in')
+    expect(page.current_url).to include('/sign_in')
   end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -2,7 +2,7 @@ class MyProfilePage < MainBasePage
 
   page_url(CONFIG['base_url']+'/profile')
 
-  span(:tabAccSettings, xpath: "//span[contains(text(),'Account')]")
+  span(:tabAccSettings, xpath: "//span[text()='Account Settings']")
   text_field(:txtFirstName, id: 'profile_first_name')
   text_field(:txtLastName, id: 'profile_last_name')
   text_field(:txtEmail, id: 'profile_email')

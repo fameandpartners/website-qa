@@ -5,7 +5,7 @@ module Header
   link(:lnkAUS, href: 'https://www.fameandpartners.com.au')
   link(:lnkUSA, href: 'https://www.fameandpartners.com')
 
-  span(:spnMyAccount, xpath: "//span[@class='my-account']")
+  span(:spnMyAccount, xpath: "//span[text()='MY ACCOUNT']")
   link(:lnkMyOrders, href: '/user_orders')
   link(:lnkMyMoodboards, href: '/wishlist')
   link(:lnkMyDetails, href: '/profile')
@@ -33,7 +33,7 @@ module Header
 
 
   def click_my_account
-    self.spnMyAccount_element.when_present.click
+    self.spnMyAccount_element.when_present(30).click
   end
 
   def hover_my_account

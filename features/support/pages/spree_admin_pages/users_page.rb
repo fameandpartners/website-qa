@@ -23,7 +23,7 @@ class UsersPage < MainBasePage
   span(:btnCancel, text: 'Cancel')
 
   def new_user
-    self.btnNewUser_element.when_present.click
+    self.btnNewUser_element.when_present(30).click
   end
 
   def specify_user_email(email)

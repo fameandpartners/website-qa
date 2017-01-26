@@ -9,27 +9,7 @@ module Footer
   link(:lnkWhyShopWithUs, link: '/why-us')
 
 
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-  link(:lnkWhyShopWithUs, link: '/why-us')
-
-
-
-  link(:lnkContactUs, link: '')
-
-  link(:lnkContactUs, xpath: "//footer[@class='main js-footer']//a[@href='https://staging.fameandpartners.com/contact']")
+  link(:lnkContactUs, xpath: "//footer[@class='main js-footer']//a[contains(@href,'fameandpartners.com/contact')]")
 
 
   def open_contact_us
