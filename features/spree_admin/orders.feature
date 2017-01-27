@@ -24,8 +24,6 @@ Feature: Orders (admin area).
         | Shipments             |
         | Return Authorizations |
 
-
-
   Scenario: 'Make status' can be changed.
       Given I create a new guest user order.
         | Card number      | 5520000000000000  |

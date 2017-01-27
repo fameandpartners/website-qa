@@ -3,11 +3,11 @@ Given(/^I am on Home page\.$/) do
 end
 
 Given(/^I am on 'Contact Us' page\.$/) do
-  visit ContactUsPage
+  on(MainBasePage).visit_site_version(country: 'USA', url: '/contact', basic_auth: true)
 end
 
 Given(/^as a customer I create a new order\.$/) do |table|
-  on(MainBasePage).visit_site_version(country: 'USA', url: '/login')
+  on(MainBasePage).visit_site_version(country: 'USA', url: '/login', basic_auth: true)
   on(LoginPage) do |page|
     page.specify_registered_user(browser_name)
     page.submit_login

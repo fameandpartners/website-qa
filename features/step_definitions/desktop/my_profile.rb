@@ -33,7 +33,7 @@ And(/^there is also on "My Orders" (.*) page\.$/) do |country|
 end
 
 When(/^I registered as a new user\.$/) do
-  on(HomePage).visit_site_version(country: 'USA', url: '/signup')
+  on(HomePage).visit_site_version(country: 'USA', url: '/signup', basic_auth: true)
   on(SignUpPage) do |page|
     page.specify_first_name('Temp')
     page.specify_last_name('User')
