@@ -10,13 +10,14 @@ class MainBasePage
   include Footer
   include AdminHeader
 
+  CREDENTIALS = 'fandpstaging:auth4fandpstaging@'.freeze
 
   URLS = {
-      home_us: "https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com",
-      home_au: "https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com.au"
+      home_us: "staging.fameandpartners.com",
+      home_au: "staging.fameandpartners.com.au"
   }.freeze
 
-  def visit_site_version(base_name: :home_us, country: nil, url:)
+  def visit_site_version(base_name: :home_us, country: nil, url:, basic_auth: false)
     if country
       case country
         when 'USA'
@@ -25,7 +26,10 @@ class MainBasePage
           base_name = :home_au
       end
     end
-    @browser.goto("#{URLS[base_name]}#{url}")
+
+    credentials = basic_auth ? CREDENTIALS : ''
+
+    @browser.goto("https://#{credentials}#{URLS[base_name]}#{url}")
   end
 
 end

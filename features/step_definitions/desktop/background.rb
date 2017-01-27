@@ -63,6 +63,7 @@ Given(/^open "([^"]*)" home page\.$/) do |site_ver|
 end
 
 Given(/^I am on product page\.$/) do
+  on(ProductPage).visit_site_version(country: 'USA', url: '', basic_auth: true)
   on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-kirrily-1100?color=spot')
 end
 

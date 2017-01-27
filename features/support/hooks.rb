@@ -45,26 +45,23 @@ Before do |scenario|
     Selenium::WebDriver::Firefox.path= "#{browser_path}"
   end
   if environment == :grid
+
     @browser = Watir::Browser.new(:remote, :url=>"http://#{url}/wd/hub", :desired_capabilities=> {browserName: browser_name,version: browser_version})
-    # @browser.window.maximize
+    @browser.window.maximize
   else
     @browser = Watir::Browser.new browser_name
     @browser = Watir::Browser.new
-    # @browser.window.maximize
+
   end
-  # puts File.basename(__dir__)
+
   platform = File.basename(File.dirname(scenario.location.file)).to_sym
-  #=> :spree_admin:, :desktop or :mobile
-  # puts platform
-  # Output the platform (or whatever conditional logic you want)
+
   case platform
     when :spree_admin
       @browser.window.maximize
     when :desktop
-      # puts 'desktop'
       @browser.window.maximize
     when :mobile
-      # puts 'mobile'
       @browser.window.resize_to(720,1100)
   end
 
