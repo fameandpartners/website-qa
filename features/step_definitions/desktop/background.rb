@@ -1,5 +1,5 @@
 Given(/^I am on Home page\.$/) do
-  on(ProductPage).visit_site_version(country: 'USA', url: '')
+  on(ProductPage).visit_site_version(country: 'USA', url: '', basic_auth: true)
 end
 
 Given(/^I am on 'Contact Us' page\.$/) do
@@ -59,7 +59,7 @@ Given(/^as a customer I create a new order\.$/) do |table|
 end
 
 Given(/^open "([^"]*)" home page\.$/) do |site_ver|
-  on(HomePage).visit_site_version(country: site_ver, url: '')
+  on(HomePage).visit_site_version(country: site_ver, url: '', basic_auth: true)
 end
 
 Given(/^I am on product page\.$/) do
@@ -70,7 +70,7 @@ end
 
 Given(/^open admin users page\.$/) do
   on(LoginPage) do |page|
-    page.visit_site_version(country: 'USA', url: '/login')
+    page.visit_site_version(country: 'USA', url: '/login', basic_auth: true)
     page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login
     page.visit_site_version(country: 'USA', url: '/admin/users')
@@ -79,7 +79,7 @@ end
 
 Given(/^I login to admin area\.$/) do
   on(LoginPage) do |page|
-    page.visit_site_version(country: 'USA', url: '/login')
+    page.visit_site_version(country: 'USA', url: '/login', basic_auth: true)
     page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login
   end

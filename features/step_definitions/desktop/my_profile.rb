@@ -1,5 +1,5 @@
 When(/^I am on "My Details" page\.$/) do
-  visit HomePage
+  on(HomePage).visit_site_version(country: 'USA', url: '', basic_auth: true)
   on(HomePage).click_my_account
   on(LoginPage) do |page|
     page.specify_registered_user(browser_name)
