@@ -70,7 +70,6 @@ class CheckOutPage < MainBasePage
     self.txtStreetAddressContd_element.value = street_cnd
   end
   def select_country(country:)
-    # @browser.divCountry_element.scroll.to
     @browser.div(id: 'order_ship_address_attributes_country_id_chosen').scroll.to
     self.divCountry_element.when_present.click
     self.list_item_element(xpath: "//li[text()='#{country}']").when_present.click

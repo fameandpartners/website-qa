@@ -152,10 +152,10 @@ Then(/^I can delete the dress from cart\.$/) do
 end
 
 But(/^"([^"]*)" popup appears\.$/) do |msg|
-  on(CheckOutPage).h2_element(xpath: "//div[contains(@class,'product-form-side')]//h2[text()='#{msg}']").when_present
+  on(CheckOutPage).h2_element(xpath: "//div[contains(@class,'product-form-side')]//h2[text()='#{msg}']").when_present(30)
 end
 
 And(/^I can continue shopping\.$/) do
-  on(CheckOutPage).lnkContShopping_element.when_present.click
+  on(CheckOutPage).lnkContShopping_element.when_present(30).click
   expect(on(HomePage).current_url).to include('fameandpartners.com/dresses')
 end

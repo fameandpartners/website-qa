@@ -84,3 +84,4 @@ Given(/^I login to admin area\.$/) do
     page.submit_login
   end
 end
+

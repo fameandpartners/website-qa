@@ -55,7 +55,7 @@ class LoginPage < MainBasePage
   end
 
   def submit_login
-    self.btnLogin_element.when_present.click
+    self.btnLogin_element.when_present(30).click
   end
 
   def remember_me(rem_me)
