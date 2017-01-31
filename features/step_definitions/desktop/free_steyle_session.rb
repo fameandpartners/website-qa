@@ -4,7 +4,6 @@ When(/^I open "Free Styling Session" page\.$/) do
   end
 end
 
-
 Then(/^I can book via:$/) do |table|
   on(FreeStylingSessionPage) do |page|
     data = table.hashes
@@ -37,10 +36,35 @@ Then(/^I can book via:$/) do |table|
       }
     end
   end
-
 end
 
 Then(/^next check logic visibility of elements:$/) do |table|
-  # table is a table.hashes.keys # => [:session_type, :Email Address, :Phone number, :Timezone, :Preferred time]
-  pending
+  on(FreeStylingSessionPage) do |page|
+    data = table.hashes
+    data.each do |session_data|
+      page.select_session_type(session_data['session_type'])
+      if session_data['session_type'] == 'Email'
+        visible_form_elements=%w(txtFullName sltSessionType txtEmail)
+        expect(visible_form_elements.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+        expect(page.txtPhoneNumber_element.visible?).to be_falsey
+        expect(page.sltSessionTimezone_element.visible?).to be_falsey
+        expect(page.sltPreferredTime_element.visible?).to be_falsey
+      elsif session_data['session_type'] == 'Text'
+        visible_form_elements=%w(txtFullName sltSessionType txtEmail txtPhoneNumber)
+        expect(visible_form_elements.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+        expect(page.sltSessionTimezone_element.visible?).to be_falsey
+        expect(page.sltPreferredTime_element.visible?).to be_falsey
+      elsif session_data['session_type'] == 'Video Chat'
+        visible_form_elements=%w(txtFullName sltSessionType txtEmail sltSessionTimezone sltPreferredTime)
+        expect(visible_form_elements.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+        expect(page.txtPhoneNumber_element.visible?).to be_falsey
+      elsif session_data['session_type'] == 'Phone'
+        visible_form_elements=%w(txtFullName sltSessionType txtEmail txtPhoneNumber sltSessionTimezone sltPreferredTime)
+        expect(visible_form_elements.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+      elsif session_data['session_type'] == 'At Home'
+        visible_form_elements=%w(txtFullName sltSessionType txtEmail txtPhoneNumber sltSessionTimezone sltPreferredTime)
+        expect(visible_form_elements.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+      end
+    end
+  end
 end
