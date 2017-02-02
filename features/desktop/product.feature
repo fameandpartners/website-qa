@@ -29,4 +29,8 @@ Feature: Product.
       Then I can add a dress to bag.
       And I go to checkout process.
 
-
+    Scenario: I can open free styling session from PDP.
+      Then I can open Free Styling Session via "Book NOW" link.
+      And Free Styling Session is available.
+      Then I can open Free Styling Session via "Amber Bond" image link.
+      And Free Styling Session is available.

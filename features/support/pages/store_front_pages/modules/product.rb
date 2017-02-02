@@ -34,7 +34,9 @@ module Product
   div(:divProductPrice, xpath: "//div[@class='price']")
   link(:lnkAddToBag, text: 'ADD TO BAG')
 
-
+  link(:lnkBookNow, link:'/styling-session')
+  link(:lnkBookNow,xpath:"//span[@class='cta-link-arrow-right']/..")
+  image(:imgAmber,xpath:"//img[contains(@src,'tile-styling-advice')]")
   def expand_description
     unless self.divDescription_element.visible?
       self.lnkDescription_element.when_present.click
@@ -158,5 +160,14 @@ module Product
   def add_to_bag
     self.lnkAddToBag_element.when_present(30).click
   end
+
+  def click_book_now
+    self.lnkBookNow_element.when_present(30).click
+  end
+
+  def click_amber_image
+    self.imgAmber_element.when_present(30).click
+  end
+
 
 end

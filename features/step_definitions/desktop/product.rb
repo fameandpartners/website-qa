@@ -120,3 +120,24 @@ But(/^"Add to bag" button becomes enabled when "Dress Size" and "Height & Hemlin
     expect(page.lnkAddToBag_element.attribute_value('disabled')).to be_falsy
   end
 end
+
+
+
+And(/^Free Styling Session is available\.$/) do
+  on(FreeStylingSessionPage) do |page|
+    page.frmFormStyleSession_element.when_present(30)
+  end
+end
+
+Then(/^I can open Free Styling Session via "Book NOW" link\.$/) do
+  on(ProductPage) do |page|
+    page.click_book_now
+  end
+end
+
+Then(/^I can open Free Styling Session via "Amber Bond" image link\.$/) do
+  on(ProductPage) do |page|
+    page.visit_site_version(country: 'USA', url: '/dresses/dress-kirrily-1100?color=spot')
+    page.click_amber_image
+  end
+end
