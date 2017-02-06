@@ -3,11 +3,12 @@ class CheckOutPage < MainBasePage
 
   page_url(CONFIG['base_url']+'/checkout')
 
+  div(:divAddressForm, xpath:"//div[@data-name='address']")
   # "Deliver to" block.
-  text_field(:txtEmail, id: 'order_ship_address_attributes_email')
-  text_field(:txtFirstName, id: 'order_ship_address_attributes_firstname')
-  text_field(:txtLastName, id: 'order_ship_address_attributes_lastname')
-  text_field(:txtPhoneNumber, id: 'order_ship_address_attributes_phone') #new one
+  text_field(:txtEmail, id:'order_ship_address_attributes_email')
+  text_field(:txtFirstName, id:'order_ship_address_attributes_firstname')
+  text_field(:txtLastName, id:'order_ship_address_attributes_lastname')
+  text_field(:txtPhoneNumber, id:'order_ship_address_attributes_phone') #new one
 
 
 

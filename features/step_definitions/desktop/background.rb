@@ -62,7 +62,7 @@ Given(/^open "([^"]*)" home page\.$/) do |site_ver|
   on(HomePage).visit_site_version(country: site_ver, url: '', basic_auth: true)
 end
 
-Given(/^I am on product page\.$/) do
+When(/^I am on product page\.$/) do
   on(ProductPage).visit_site_version(country: 'USA', url: '', basic_auth: true)
   on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-kirrily-1100?color=spot')
 end
@@ -85,3 +85,19 @@ Given(/^I login to admin area\.$/) do
   end
 end
 
+
+Given(/^enable China New Year flag\.$/) do
+  on(HomePage) do |page|
+    page.visit_site_version(country: 'USA', url: '', basic_auth: true)
+    page.visit_site_version(country: 'USA', url: '/login')
+  end
+  on(LoginPage) do |page|
+    page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
+    page.submit_login
+    page.visit_site_version(country: 'USA', url: '/fame_admin/backend/features')
+  end
+  on(FameAdminPage) do |page|
+    page.cny_flag('enable')
+  end
+
+end

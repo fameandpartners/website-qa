@@ -34,7 +34,7 @@ module Product
   div(:divProductPrice, xpath: "//div[@class='price']")
   link(:lnkAddToBag, text: 'ADD TO BAG')
 
-  link(:lnkBookNow, link:'/styling-session')
+  # link(:lnkBookNow, link:'/styling-session')
   link(:lnkBookNow,xpath:"//span[@class='cta-link-arrow-right']/..")
   image(:imgAmber,xpath:"//img[contains(@src,'tile-styling-advice')]")
   def expand_description
