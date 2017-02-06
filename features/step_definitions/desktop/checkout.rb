@@ -128,14 +128,12 @@ But(/^check "Order summary" with custom duty fees\.$/) do
   end
 end
 
-
 Then(/^apply a coupon for 25% discount\.$/) do
   on(CheckOutPage) do |page|
     page.specify_coupon(CONFIG['coupon'])
     page.apply_coupon
   end
 end
-
 
 And(/^I go to checkout process\.$/) do
   on(CheckOutPage) do |page|

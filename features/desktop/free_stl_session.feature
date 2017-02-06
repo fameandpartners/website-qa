@@ -12,17 +12,13 @@ Feature: Free Styling Session.
       Then I can book via:
         | session_type |
         | Email        |
-        | Text         |
         | Video Chat   |
         | Phone        |
-        | At Home      |
 
     Scenario: Check logic visibility of free Styling session form elements.
       When I open "Free Styling Session" page.
       Then next check logic visibility of elements:
         | session_type | full_name | email_address | phone_number | timezone | preferred_time |
         | Email        | true      | true          |              |          |                |
-        | Text         | true      | true          | true         |          |                |
         | Video Chat   | true      | true          |              | true     | true           |
         | Phone        | true      | true          | true         | true     | true           |
-        | At Home      | true      | true          | true         | true     | true           |
