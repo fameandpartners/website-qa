@@ -107,6 +107,7 @@ Feature: Checkout process.
       | USA       | Austria       | Wien    | Ayia Napa | US 10      | PETITE           |
       | Australia | China         | Shanxi  | Taiyuan   | AU 6       | STANDARD         |
 
+  # check IE
   @smoke
   Scenario Outline: As a registered user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
     When I go to "<Country>" site version.
@@ -174,6 +175,7 @@ Feature: Checkout process.
     Then "Thanks for your order!" page with order number displayed.
     And it appears in "USA" orders admin area.
 
+  #check ie
   Scenario: As a user I can delete a dress from checkout.
     When I go to "USA" site version.
     Then specify "US 10" dress Size and "STANDARD" skirt length of the dress.
@@ -182,33 +184,4 @@ Feature: Checkout process.
     But "Oops, looks like your bag is empty." popup appears.
     And I can continue shopping.
 
-#  Scenario Outline: User validation errors fields.
-#    When I am on Connie dress page
-#    Then I select "<Site Version>" site version
-#    And I select "<Dress Size>" size
-#    And I select "<Skirt Length>" skirt length
-#    Then I should see add to cart link enabled.
-#    And I click on "ADD TO BAG" link.
-#    And I open the cart sidebar with the checkout button.
-#    And I click on "CHECKOUT" button.
-#    Then I fill in form fields with blank spaces:
-#      | First Name |
-#      | Last Name  |
-#    And I fill in form fields with:
-#      | Email                   | invalid-email |
-#      | Street Address          | Street X      |
-#      | Street Address (cont'd) | House Y       |
-#      | City                    | Melbourne     |
-#      | Phone Number            | 2255-4422     |
-#      | <Zipcode Label>         | 12345         |
-#    And I select "<State>" state
-#    And I select "<Country>" country
-#    And I click on "Pay Securely" button
-#    Then I should see "Customer E-Mail is invalid"
-#    Then I should see "First name can't be blank"
-#    Then I should see "Last name can't be blank"
-#    Examples:
-#      | Site Version | Country       | State      | Zipcode Label | Dress Size | Skirt Length |
-#      | Australia    | Australia     | Queensland | Postcode      | AU 14      | Standard     |
-#      | USA          | United States | California | Zipcode       | US 10      | Petite       |
 

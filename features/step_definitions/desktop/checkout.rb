@@ -1,6 +1,5 @@
 #~~~ Successfully buy a dress as registered user.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # require 'pry-remote'
-
 Then(/^I fill in form fields with:$/) do |table|
   on(CheckOutPage) do |page|
     data = table.rows_hash
@@ -48,11 +47,8 @@ Then(/^"([^"]*)" page with order number displayed\.$/) do |message|
     expect(@order_number).to eql(@complete_order_number)
   end
 end
-
-
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Successfully buy a dress as registered user.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 And(/^set "([^"]*)"\.$/) do |shipment|
   on(CheckOutPage) do |page|
     page.select_ship_address(true)
@@ -107,9 +103,6 @@ But(/^check "Order summary" with a discount coupon\.$/) do
     expect(@prices[:order_total]).to eql(order_total_coupon)
   end
 end
-
-
-
 
 But(/^check "Order summary" with custom duty fees\.$/) do
   on(CheckOutPage) do |page|
