@@ -5,6 +5,7 @@ Feature: China New Year.
     Given enable China New Year flag.
 
     Scenario: As a customer during the CNY 2017 dates, I want to know about delivery delays.
+      Given I login as "user".
       When I am on product page.
       Then check CNY delivery time is "Estimated delivery, 3 - 4 weeks".
       And open cart.
@@ -25,3 +26,8 @@ Feature: China New Year.
         | Expiration Year  | 2020              |
         | CVC              | 123               |
       And check estimated delivery on order confirm page.
+      Then check Expected delivery date in profile.
+
+
+
+#

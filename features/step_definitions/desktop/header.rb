@@ -5,10 +5,10 @@ When(/^I login as user\.$/) do
     page.specify_registered_user(browser_name)
     page.submit_login
     session_data[browser_name][:is_authorized] = true
-      if page.btnLogin_element.visible?
-        page.specify_registered_user(browser_name)
-        page.submit_login
-      end
+      # if page.btnLogin_element.visible?
+      #   page.specify_registered_user(browser_name)
+      #   page.submit_login
+      # end
   end
 end
 Then (/^I open My profile via My Account link\.$/) do

@@ -26,8 +26,8 @@ end
 
 And(/^there is also on "My Orders" (.*) page\.$/) do |country|
   on(MyProfilePage).visit_site_version(country: country, url: '/user_orders')
-  on(UserOrdersPage) do |page|
-    page.tblOrdersTable_element.when_present
+  on(MyProfilePage) do |page|
+    page.tblOrdersTable_element.when_present(30)
     expect(page.link_element(xpath: "//a[text()='#{@complete_order_number}']").visible?).to be_truthy
   end
 end

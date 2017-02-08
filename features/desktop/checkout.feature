@@ -73,7 +73,7 @@ Feature: Checkout process.
       | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD         |
 
   @smoke
-  Scenario Outline: As an anonymous user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
+  Scenario Outline: As an anonymous user I can buy a dress with an extra $30 fee charge shipping.
     When I go to "<Country>" site version.
     Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
@@ -107,9 +107,8 @@ Feature: Checkout process.
       | USA       | Austria       | Wien    | Ayia Napa | US 10      | PETITE           |
       | Australia | China         | Shanxi  | Taiyuan   | AU 6       | STANDARD         |
 
-  # check IE
   @smoke
-  Scenario Outline: As a registered user I can buy a dress shipping to Cyprus with an extra $30 fee charge.
+  Scenario Outline: As a registered user I can buy a dress with an extra $30 fee charge shipping.
     When I go to "<Country>" site version.
     And I login as user.
     Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
@@ -175,7 +174,6 @@ Feature: Checkout process.
     Then "Thanks for your order!" page with order number displayed.
     And it appears in "USA" orders admin area.
 
-  #check ie
   Scenario: As a user I can delete a dress from checkout.
     When I go to "USA" site version.
     Then specify "US 10" dress Size and "STANDARD" skirt length of the dress.

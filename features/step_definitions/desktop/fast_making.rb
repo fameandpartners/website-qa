@@ -14,7 +14,7 @@ end
 And(/^([^"]*) Express Making\.$/) do |fast_making|
   on(FameAdminPage) do |page|
     page.fast_making_flag(fast_making)
-    page.restart_fame_admin
+    page.expire_cache
   end
 end
 

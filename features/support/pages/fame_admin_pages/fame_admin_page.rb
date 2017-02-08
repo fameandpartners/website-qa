@@ -10,6 +10,7 @@ class FameAdminPage < MainBasePage
   link(:lnkFeatureFlags,link: '/fame_admin/backend/features')
   link(:lnkFastMaking,xpath: "//a[contains(@href,'feature=getitquick_unavailable')]")
   link(:lnkCNY_flag,xpath:"//a[contains(@href,'feature=cny_delivery_delays')]")
+  div(:divExpiredCacheMsg,xpath:"//div[text()='Expired whole cache']")
 
   def fast_making_flag(sts)
     case sts
@@ -30,22 +31,22 @@ class FameAdminPage < MainBasePage
       when 'enable'
         if self.lnkCNY_flag_element.text == 'Enable'
           self.lnkCNY_flag_element.when_present.click
-          self.restart_fame_admin
+          self.expire_cache
         end
       when 'disable'
         if self.lnkCNY_flag_element.text == 'Disable'
           self.lnkCNY_flag_element.when_present.click
-          self.restart_fame_admin
+          self.expire_cache
         end
     end
     sleep 3
   end
 
-
-  def restart_fame_admin
+  def expire_cache
     self.visit_site_version(country: 'USA', url: '/fame_admin/backend/caches')
     self.txtExpire_element.value = 'EXPIRE'
     self.btnExpire_element.when_present.click
+    self.div_element(xpath:"//div[text()='Expired whole cache']").when_present
   end
 
 end

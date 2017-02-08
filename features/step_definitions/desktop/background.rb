@@ -1,5 +1,5 @@
 Given(/^I am on Home page\.$/) do
-  on(ProductPage).visit_site_version(country: 'USA', url: '', basic_auth: true)
+  on(HomePage).visit_site_version(country: 'USA', url: '', basic_auth: true)
 end
 
 Given(/^I am on 'Contact Us' page\.$/) do
@@ -89,7 +89,9 @@ end
 Given(/^enable China New Year flag\.$/) do
   on(HomePage) do |page|
     page.visit_site_version(country: 'USA', url: '', basic_auth: true)
-    page.visit_site_version(country: 'USA', url: '/login')
+    page.click_my_account
+
+    # page.visit_site_version(country: 'USA', url: '/login')
   end
   on(LoginPage) do |page|
     page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
@@ -98,6 +100,37 @@ Given(/^enable China New Year flag\.$/) do
   end
   on(FameAdminPage) do |page|
     page.cny_flag('enable')
+    page.visit_site_version(country: 'USA', url: '/logout')
   end
+end
 
+Given(/^I login as "([^"]*)"\.$/) do |user_role|
+  on(LoginPage) do |page|
+    session_data[browser_name][:is_authorized] = true
+    page.visit_site_version(country: 'USA', url: '', basic_auth: true)
+    page.visit_site_version(country: 'USA', url: '/login')
+    case user_role
+      when 'admin'
+        page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
+      when 'user'
+        page.specify_registered_user(browser_name)
+    end
+    page.submit_login
+  end
+end
+
+Given(/^as admin I disable China New Year feature flag\.$/) do
+  on(HomePage) do |page|
+    page.visit_site_version(country: 'USA', url: '', basic_auth: true)
+    page.visit_site_version(country: 'USA', url: '/login')
+  end
+  on(LoginPage) do |page|
+    page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
+    page.submit_login
+    page.visit_site_version(country: 'USA', url: '/fame_admin/backend/features')
+  end
+  on(FameAdminPage) do |page|
+    page.cny_flag('disable')
+    page.visit_site_version(country: 'USA', url: '/logout')
+  end
 end

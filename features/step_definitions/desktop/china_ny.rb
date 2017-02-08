@@ -1,6 +1,5 @@
 Then(/^check CNY delivery time is "([^"]*)"\.$/) do |pdp_delivery|
   on(ProductPage) do |page|
-    session_data[browser_name][:is_authorized] = false
     exp_delivery = page.list_item_element(xpath:"//li[contains(text(),'Estimated delivery')]").text
     expect(exp_delivery).to eql(pdp_delivery)
   end
@@ -22,7 +21,6 @@ And(/^add a dress to cart\.$/) do
 end
 Then(/^check CNY delivery time on checkout\.$/) do |msg|
   on(CheckOutPage) do |page|
-
     page.divAddressForm_element.when_present
     estim_delivery = @browser.dd(xpath:"//div[contains(@class,'product-form')]//dd[text()='Estimated delivery: 3 - 4 weeks']").text
     expect(estim_delivery).to eql('Estimated Delivery: 3 - 4 Weeks')
@@ -55,6 +53,8 @@ But(/^complete order\.$/) do |table|
     data = table.rows_hash
     page.close_fee_popup
     page.fill_in_credit(data)
+    @order_number = page.div_element(xpath: "//div[contains(@class,'hidden')]//div[contains(text(),'Number')]").text.scan(/[A-Z]\d{,9}$/).first
+    puts "Your order number is: #{@order_number}"
     page.place_my_order
   end
 end
@@ -64,5 +64,15 @@ And(/^check estimated delivery on order confirm page\.$/) do
     deliver_date = (Date.today + 28).strftime('%d of %b, %Y')
     page.h1_element(xpath: "//h1[text()='Thanks for your order!']").when_present(30)
     expect(page.h4_element(xpath: "//h4[text()='Expect Standard delivery: #{deliver_date}']").visible?).to be_truthy
+  end
+end
+
+Then(/^check Expected delivery date in profile\.$/) do
+  on(MyProfilePage) do |page|
+    page.visit_site_version(country: 'USA', url: '/user_orders')
+    page.tblOrdersTable_element.when_present
+    d = (Date.today + 28).strftime('%m/%d/%y')
+    prof_exp_delivery_date = page.cell_element(xpath:"//a[text()='#{@order_number}']/../..//td[text()='#{d}']").text
+    puts prof_exp_delivery_date
   end
 end

@@ -10,13 +10,14 @@ end
 When(/^I go to "([^"]*)" site version\.$/) do |country|
   session_data[browser_name][:is_authorized] = false
   on(ProductPage).visit_site_version(country: country, url: '', basic_auth: true)
-  on(ProductPage).visit_site_version(country: country, url: '/dresses/dress-kirrily-1100?color=spot')
+  # on(ProductPage).visit_site_version(country: country, url: '/dresses/dress-kirrily-1100?color=spot')
   @country_version=country
 end
 
 
 Then(/^specify "([^"]*)" dress Size and "([^"]*)" skirt length of the dress\.$/) do |dress_size, skirt_length|
   on(ProductPage) do |page|
+    page.visit_site_version(country: @country_version, url: '/dresses/dress-kirrily-1100?color=spot')
     page.open_dress_size
     page.select_dress_size(dress_size)
     page.open_skirt_length

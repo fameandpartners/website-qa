@@ -7,6 +7,10 @@ Then(/^I fill in form fields with:$/) do |table|
       page.specify_first_name(fname: data['First Name'])
       page.specify_last_name(lname: data['Last Name'])
       page.specify_email(email: data['Email'])
+    elsif browser_name == 'internet explorer'
+      page.specify_first_name(fname: 'Internet')
+      page.specify_last_name(lname: 'Explorer')
+      page.specify_email(email: CONFIG['ie_user'])
     end
     page.specify_phone_num(phone_num: data['Phone Number'])
     page.select_country(country: data['Country'])
@@ -148,5 +152,8 @@ end
 
 And(/^I can continue shopping\.$/) do
   on(CheckOutPage).lnkContShopping_element.when_present(30).click
-  expect(on(HomePage).current_url).to include('fameandpartners.com/dresses')
+  on(HomePage) do |page|
+    page.list_item_element(text:'Dresses').when_present(30)
+    expect(page.current_url).to include('fameandpartners.com/dresses')
+  end
 end

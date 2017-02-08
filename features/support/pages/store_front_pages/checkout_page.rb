@@ -1,6 +1,5 @@
 class CheckOutPage < MainBasePage
 
-
   page_url(CONFIG['base_url']+'/checkout')
 
   div(:divAddressForm, xpath:"//div[@data-name='address']")
@@ -9,8 +8,6 @@ class CheckOutPage < MainBasePage
   text_field(:txtFirstName, id:'order_ship_address_attributes_firstname')
   text_field(:txtLastName, id:'order_ship_address_attributes_lastname')
   text_field(:txtPhoneNumber, id:'order_ship_address_attributes_phone') #new one
-
-
 
   # "Delivery Address" block.
   div(:divCountry, id: 'order_ship_address_attributes_country_id_chosen')
@@ -27,8 +24,6 @@ class CheckOutPage < MainBasePage
   # "Billing Address" balock.
   span(:spnBillingAddress, xpath: "//span[text()='Billing Address']")
 
-
-
   # "Payment Method" step.
   text_field(:txtCardNumber, id: 'number')
   text_field(:txtNameOnCard, id: 'name')
@@ -36,7 +31,6 @@ class CheckOutPage < MainBasePage
   text_field(:txtExpYear, id: 'year')
   text_field(:txtCVC, id: 'card_code')
   button(:btnPlaceOrder, text: 'Place your order now')
-
 
   # Right checkout panel
   text_field(:txtCoupon, xpath: "//div[contains(@class,'hidden-sm')]//input[@placeholder='Discount code']")
@@ -50,7 +44,6 @@ class CheckOutPage < MainBasePage
 
   # Empty cart popup
   link(:lnkContShopping, xpath: "//div[contains(@class,'product-form-side')]//a[text()='Continue Shopping']")
-
 
 
   # 1. Your information methods:

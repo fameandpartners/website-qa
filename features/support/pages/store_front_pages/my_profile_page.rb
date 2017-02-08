@@ -2,6 +2,8 @@ class MyProfilePage < MainBasePage
 
   page_url(CONFIG['base_url']+'/profile')
 
+  table(:tblOrdersTable, xpath: "//table[contains(@class,'orders-table')]")
+
   span(:tabAccSettings, xpath: "//span[text()='Account Settings']")
   text_field(:txtFirstName, id: 'profile_first_name')
   text_field(:txtLastName, id: 'profile_last_name')
