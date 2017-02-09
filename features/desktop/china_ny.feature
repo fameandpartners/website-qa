@@ -27,7 +27,4 @@ Feature: China New Year.
         | CVC              | 123               |
       And check estimated delivery on order confirm page.
       Then check Expected delivery date in profile.
-
-
-
-#
+      And check Expected delivery date in email.

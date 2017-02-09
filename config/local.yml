@@ -35,3 +35,8 @@ card_name: Zaphod Beeblebrox
 exp_month: 12
 exp_year: 2020
 cd_cvc: 123
+
+# Customer IO
+customer_io_url: https://fly.customer.io
+customer_io_login: andreypetrenko@thepaydock.com
+customer_io_pwd: 1qazxcv

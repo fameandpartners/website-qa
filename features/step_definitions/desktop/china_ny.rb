@@ -76,3 +76,25 @@ Then(/^check Expected delivery date in profile\.$/) do
     puts prof_exp_delivery_date
   end
 end
+
+And(/^check Expected delivery date in email\.$/) do
+  on(CustomerIO) do |page|
+    page.goto_cio_url('')
+    page.specify_cio_login(CONFIG['customer_io_login'])
+    page.specify_cio_pwd(CONFIG['customer_io_pwd'])
+    page.click_cio_signin
+    page.goto_cio_url('/env/24584/deliveries')
+    page.open_email('Order Confirmation','R767685456')
+    #sleep 10
+
+    # page.in_iframe(xpath: "//iframe[contains(@class, 'ember-view')]") do |frame|
+    # page.in_iframe(xpath: "//iframe[contains(@class, ember)]") do |frame|
+    #   page.cell_element(xpath: "//td[contains(text(), 'Order Confirmation')]", frame: frame).when_present(30)
+    # end
+
+
+
+
+    # expect(page.paragraph_element(text:'How long will your order take to arrive:').present?).to be_truthy
+  end
+end
