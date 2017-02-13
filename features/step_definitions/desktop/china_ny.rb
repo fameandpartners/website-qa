@@ -84,17 +84,12 @@ And(/^check Expected delivery date in email\.$/) do
     page.specify_cio_pwd(CONFIG['customer_io_pwd'])
     page.click_cio_signin
     page.goto_cio_url('/env/24584/deliveries')
-    page.open_email('Order Confirmation','R767685456')
-    #sleep 10
-
-    # page.in_iframe(xpath: "//iframe[contains(@class, 'ember-view')]") do |frame|
-    # page.in_iframe(xpath: "//iframe[contains(@class, ember)]") do |frame|
-    #   page.cell_element(xpath: "//td[contains(text(), 'Order Confirmation')]", frame: frame).when_present(30)
-    # end
-
-
-
-
-    # expect(page.paragraph_element(text:'How long will your order take to arrive:').present?).to be_truthy
+    page.open_email('Order Confirmation',@order_number)
+    sleep 5
+    expect(@browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[text()='How long will your order take to arrive:']").visible?).to be_truthy
+    expect(@browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[text()='Estimated Delivery: 3 - 4 weeks']").visible?).to be_truthy
+    expect(@browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[text()='Estimated Delivery: 3 - 4 weeks']").visible?).to be_truthy
+    order_volume = @browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[contains(text(),'high order volume')]").text
+    expect(order_volume).to eql("We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment.\nWe'll be back to our normal timeline of 7-10 days soon.")
   end
 end
