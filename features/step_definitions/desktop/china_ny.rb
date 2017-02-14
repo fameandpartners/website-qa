@@ -61,9 +61,12 @@ end
 
 And(/^check estimated delivery on order confirm page\.$/) do
   on(OrderPage) do |page|
-    deliver_date = (Date.today + 28).strftime('%d of %b, %Y')
+    exp_deliver_date = (Date.today + 28).strftime('%d of %b, %Y')
     page.h1_element(xpath: "//h1[text()='Thanks for your order!']").when_present(30)
-    expect(page.h4_element(xpath: "//h4[text()='Expect Standard delivery: #{deliver_date}']").visible?).to be_truthy
+    @browser.scroll.to :center
+    expect(page.h4_element(xpath: "//h4[text()='Expect Standard delivery: #{exp_deliver_date}']").visible?).to be_truthy
+    order_deliver_date = page.h4_element(xpath: "//h4[text()='Expect Standard delivery: #{exp_deliver_date}']").text
+    puts order_deliver_date
   end
 end
 
