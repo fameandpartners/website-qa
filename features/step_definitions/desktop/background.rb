@@ -100,6 +100,7 @@ Given(/^enable China New Year flag\.$/) do
   end
   on(FameAdminPage) do |page|
     page.cny_flag('enable')
+    page.expire_cache
     page.visit_site_version(country: 'USA', url: '/logout')
   end
 end
@@ -132,5 +133,11 @@ Given(/^as admin I disable China New Year feature flag\.$/) do
   on(FameAdminPage) do |page|
     page.cny_flag('disable')
     page.visit_site_version(country: 'USA', url: '/logout')
+  end
+end
+
+Given(/^I am on Wedding Atelier page\.$/) do
+  on(HomePage) do |page|
+
   end
 end

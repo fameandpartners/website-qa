@@ -10,6 +10,7 @@ class FameAdminPage < MainBasePage
   link(:lnkFeatureFlags,link: '/fame_admin/backend/features')
   link(:lnkFastMaking,xpath: "//a[contains(@href,'feature=getitquick_unavailable')]")
   link(:lnkCNY_flag,xpath:"//a[contains(@href,'feature=cny_delivery_delays')]")
+  link(:lnkIeqlChange_flag,xpath:"//a[contains(@href,'feature=i_equal_change')]")
   div(:divExpiredCacheMsg,xpath:"//div[text()='Expired whole cache']")
 
   def fast_making_flag(sts)
@@ -31,15 +32,27 @@ class FameAdminPage < MainBasePage
       when 'enable'
         if self.lnkCNY_flag_element.text == 'Enable'
           self.lnkCNY_flag_element.when_present.click
-          self.expire_cache
         end
       when 'disable'
         if self.lnkCNY_flag_element.text == 'Disable'
           self.lnkCNY_flag_element.when_present.click
-          self.expire_cache
         end
     end
-    sleep 3
+  end
+
+  def i_eql_change(sts)
+    self.lnkCNY_flag_element.when_present(30)
+    case sts
+      when 'enable'
+        if self.lnkIeqlChange_flag_element.text == 'Enable'
+          self.lnkIeqlChange_flag_element.when_present.click
+          self.expire_cache
+        end
+      when 'disable'
+        if self.lnkIeqlChange_flag_element.text == 'Disable'
+          self.lnkIeqlChange_flag_element.when_present.click
+        end
+    end
   end
 
   def expire_cache
