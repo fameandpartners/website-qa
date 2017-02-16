@@ -138,6 +138,7 @@ end
 
 Given(/^I am on Wedding Atelier page\.$/) do
   on(HomePage) do |page|
-
+    page.visit_site_version(country: 'USA', url: '', basic_auth: true)
+    page.visit_site_version(country: 'USA', url: '/wedding-atelier')
   end
 end
