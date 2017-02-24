@@ -24,5 +24,16 @@ Feature: Wedding Atelier application.
           | USA       |
           | Australia |
 
-    
-    Scenario: As user I can update account details.    Scenario: As user I can update account details.
+#    Scenario: User can update wedding details.
+
+    Scenario: As user I can update account details.
+      When I open my wedding account.
+      Then I can update:
+        | First name    |
+        | Last name     |
+        | Email address |
+        | Date of birth |
+        | Passwords     |
+      And specified data were updated.
+
+#    Scenario: As user I can update size profile.
