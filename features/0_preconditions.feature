@@ -1,3 +1,4 @@
+@preconditions
 Feature: Set preconditions.
 
   Background: Login as admin.
