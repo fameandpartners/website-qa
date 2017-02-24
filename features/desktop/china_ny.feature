@@ -4,7 +4,7 @@ Feature: China New Year.
   Background: Enable China New Year flag.
     Given enable China New Year flag.
 
-    Scenario: As a customer during the CNY 2017 dates, I want to know about delivery delays.
+    Scenario: As a customer during the CNY dates, I want to know about delivery delays.
       Given I login as "user".
       When I am on product page.
       Then check CNY delivery time is "Estimated delivery, 3 - 4 weeks".

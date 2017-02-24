@@ -35,7 +35,11 @@ end
 
 #~~~ Login with Facebook account. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Then(/^I want to login with Facebook account\.$/) do
-  pending
+  on(LoginPage) do |page|
+    page.open_facebook_login_form
+    page.specify_facebook_user(browser_name)
+    page.submit_facebook_login
+  end
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ User can NOT login with fake email. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

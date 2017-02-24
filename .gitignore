@@ -156,3 +156,4 @@ screenshots/
 cucumber_smoke_chrome.json
 cucumber_checkout.json
 features/test.rb
+features/file.csv

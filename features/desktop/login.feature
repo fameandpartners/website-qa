@@ -20,11 +20,11 @@ Feature: Login.
     When I open Login form.
     Then I want to login with Remember Me option.
 
-#  @wip #@smoke @regression
-#  Scenario: Login with Facebook account.
-#    When I open Login form.
-#    Then I want to login with Facebook account.
-#    And be sure I was logged in.
+  @smoke
+  Scenario: Login with Facebook account.
+    When I open Login form.
+    Then I want to login with Facebook account.
+    And be sure I was logged in.
 
   Scenario: User can NOT login with fake email.
     When I open Login form.

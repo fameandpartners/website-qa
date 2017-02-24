@@ -25,3 +25,4 @@ Feature: Wedding Atelier application.
           | Australia |
 
     
+    Scenario: As user I can update account details.    Scenario: As user I can update account details.

@@ -62,6 +62,8 @@ end
 
 Then(/^create wedding board\.$/) do
   on(WeddingAtelier) do |page|
+    extend WeddingAtelierHelper
+
     page.specify_wedding_board_name("#{@fname_for_board}'s wedding board")
     page.open_wedding_role
     page.select_wedding_role('Bride')
@@ -69,29 +71,17 @@ Then(/^create wedding board\.$/) do
     page.open_calendar
     page.open_months
     page.open_years
-    # select next year
-    wed_year=Date.today.next_year.strftime('%Y')
-    page.select_future_year(wed_year)
 
-    # select 3rd month from current
-    wed_month_name=Date.today.next_month(3).strftime('%b')
-    wed_month_num=Date.today.next_month(3).strftime('%m')
-    page.select_future_month(wed_month_name)
-    max_day = Date.new(Date.today.year, Date.today.month, -1).day
-    wed_day = Random.new.rand(1..max_day)
-    page.select_day(wed_day)
-    sleep 3
-    wedding_date="#{wed_month_num}/#{wed_day}/#{wed_year}"
-    puts "Wedding date is: #{wedding_date}"
+    wed_date = get_wed_date_hash
 
+    @wed_countdown = wed_date[:countdown]
 
-    current_date=Date.today.strftime('%d/%m/%Y')
-    date = Date.strptime(wedding_date, '%m/%d/%Y')
-    formatted_date = date.strftime('%d/%m/%Y')
-    a_date = Date.parse(formatted_date)
-    b_date = Date.parse(current_date)
-    @wed_countdown=(a_date-b_date).to_i
+    puts "Wedding date is: #{wed_date[:full_date]}"
     puts "#{@wed_countdown} days left to wedding."
+
+    page.select_future_year(wed_date[:year])
+    page.select_future_month(wed_date[:month])
+    page.select_day(wed_date[:day])
     page.click_next
   end
 end
@@ -110,5 +100,89 @@ And(/^wedding board with countdown appears\.$/) do
   end
 end
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Scenario: As user I can update account details. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When(/^I open my wedding account\.$/) do
+  on(HomePage).visit_site_version(country: 'USA', url: '', basic_auth: true)
+  on(WeddingAtelier) do |page|
+    extend WeddingAtelierHelper
+    page.open_sing_in_up('USA','Signup')
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    email = Faker::Internet.safe_email(first_name+'_'+last_name)
+    @pwd = Faker::Internet.password(10, 20, true)
+    page.specify_user_first_name(first_name)
+    page.specify_user_last_name(last_name)
+    page.specify_user_email(email)
+    page.specify_user_pwd(@pwd)
+    puts <<-EOS
+User has been generated with next data:
+  First name: #{first_name}
+   Last name: #{last_name}
+       Email: #{email}
+    Password: #{@pwd}
+    EOS
+    page.proceed_sign_up
+    dress_height = MainBasePage::HEIGHT[rand(MainBasePage::HEIGHT.length)]
+    page.open_height_size
+    page.select_random_height(dress_height)
+    puts "Selected height is: #{dress_height}"
+    dress_size = MainBasePage::USA_SIZES[rand(MainBasePage::USA_SIZES.length)]
+    page.select_random_dress_size(dress_size)
+    puts "Selected dress size is: #{dress_size}"
+    page.click_next
 
+    page.specify_wedding_board_name("#{first_name}'s wedding board")
+    page.open_wedding_role
+    page.select_wedding_role('Bride')
+    page.open_calendar
+    page.open_months
+    page.open_years
+
+    wed_date = get_wed_date_hash
+    page.select_future_year(wed_date[:year])
+    page.select_future_month(wed_date[:month])
+    page.select_day(wed_date[:day])
+    page.click_next
+    page.visit_site_version(country: 'USA', url: '/wedding-atelier/my-account')
+  end
+end
+
+Then(/^I can update:$/) do |table|
+  on(WeddingAtelier) do |page|
+    @new_first_name = Faker::Name.first_name
+    @new_last_name = Faker::Name.last_name
+    @new_email = Faker::Internet.safe_email(@new_first_name+'_'+@new_last_name)
+    @new_pwd = Faker::Internet.password(10, 20, true)
+    page.specify_first_name(@new_first_name)
+    page.specify_last_name(@new_last_name)
+    page.specify_email_address(@new_email)
+    # page.specify_date_of_birth(date_of_birth)
+    page.specify_current_password(@pwd)
+    page.specify_new_password(@new_pwd)
+    page.specify_confirm_password(@new_pwd)
+    page.update_profile
+    puts <<-EOS
+User data has been updated to:
+  First name: #{@new_first_name}
+   Last name: #{@new_last_name}
+       Email: #{@new_email}
+    Password: #{@new_pwd}
+      EOS
+    page.visit_site_version(country: 'USA', url: '/logout')
+  end
+end
+
+And(/^specified data were updated\.$/) do
+  on(WeddingAtelier) do |page|
+    page.open_sing_in_up('USA','Signin')
+    page.specify_signin_email(@new_email)
+    page.specify_signin_pwd(@new_pwd)
+    page.sign_in_wed_atl
+    page.visit_site_version(country: 'USA', url: '/wedding-atelier/my-account')
+    page.tabAccountDetails_element.when_present(30)
+    expect(page.txtProfileFirstName_element.value).to eql(@new_first_name)
+    expect(page.txtProfileLastName_element.value).to eql(@new_last_name)
+    expect(page.txtProfileEmailAddress_element.value).to eql(@new_email)
+  end
+end
 

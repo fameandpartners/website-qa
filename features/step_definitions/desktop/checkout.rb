@@ -53,7 +53,7 @@ Then(/^"([^"]*)" page with order number displayed\.$/) do |message|
 end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~ Successfully buy a dress as registered user.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-And(/^set "([^"]*)"\.$/) do |shipment|
+And(/^set "This is also my billing address"\.$/) do
   on(CheckOutPage) do |page|
     page.select_ship_address(true)
   end

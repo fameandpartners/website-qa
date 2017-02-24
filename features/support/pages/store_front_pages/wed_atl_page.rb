@@ -40,16 +40,23 @@ class WeddingAtelier < MainBasePage
   # .scroll_into_view
 
   # Wedding profile board ~~~~~~~~~~
-
-
   link(:tabBridesmaidDresses,text:'Bridesmaid dresses')
   link(:tabBridesmaidDresses,text:'Wedding details')
   link(:tabBridesmaidDresses,text:'Bridal party')
   span(:tabBridesmaidDresses,text:'Bridal Gowns')
 
-
-
-
+  # Account details ~~~~~~~~~~~~~~~~
+  link(:tabMyOrders, href:'#my-orders')
+  link(:tabAccountDetails, href:'#account-details')
+  link(:tabSizeProfile, href:'#size-profile')
+  text_field(:txtProfileFirstName, id:'first-name')
+  text_field(:txtProfileLastName, id:'last-name')
+  text_field(:txtProfileEmailAddress, id:'email-address')
+  text_field(:txtProfileDateOfBirth, id:'date-of-birth')
+  text_field(:txtProfileCurrentPassword, id:'current-password')
+  text_field(:txtProfileNewPassword, id:'new-password')
+  text_field(:txtProfileConfirmPassword, id:'confirm-password')
+  button(:btnUpdate, text:'Update')
 
   def open_sing_in_up(country, sign_type)
     case sign_type
@@ -74,6 +81,14 @@ class WeddingAtelier < MainBasePage
     self.txtEmail_element.value = user_email
     self.txtPwd_element.value = user_pwd
   end
+  def specify_signin_email(email)
+    self.txtEmail_element.value = email
+  end
+
+  def specify_signin_pwd(pwd)
+    self.txtPwd_element.value = pwd
+  end
+
   def sign_in_wed_atl
     self.btnSignIn_element.when_present.click
   end
@@ -141,7 +156,6 @@ class WeddingAtelier < MainBasePage
     self.span_element(xpath:"//span[text()='#{month}']").when_present(30).click
   end
   def select_day(day)
-    # self.cell_element(xpath:"//td[text()='#{day}']").when_present(30).click
     self.cell_element(xpath:"//td[@class='day' and text()='#{day}']").when_present(30).click
   end
 
@@ -163,4 +177,34 @@ class WeddingAtelier < MainBasePage
     end
   end
 
+
+  # Account details page methods ~~~~~~~~~~~~~~~~~
+  def specify_first_name(fname)
+    self.txtProfileFirstName_element.value = fname
   end
+  def specify_last_name(lname)
+    self.txtProfileLastName_element.value = lname
+  end
+  def specify_email_address(email)
+    self.txtProfileEmailAddress_element.value = email
+  end
+  def specify_date_of_birth(date_of_birth)
+    self.txtProfileDateOfBirth_element.value = date_of_birth
+  end
+  def specify_current_password(current_pwd)
+    self.txtProfileCurrentPassword_element.value = current_pwd
+  end
+  def specify_new_password(new_pwd)
+    self.txtProfileNewPassword_element.value = new_pwd
+  end
+  def specify_confirm_password(confirm_pwd)
+    self.txtProfileConfirmPassword_element.value = confirm_pwd
+  end
+  def update_profile
+    self.btnUpdate_element.when_present.click
+  end
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+end
