@@ -132,6 +132,7 @@ Given(/^as admin I disable China New Year feature flag\.$/) do
   end
   on(FameAdminPage) do |page|
     page.cny_flag('disable')
+    page.expire_cache
     page.visit_site_version(country: 'USA', url: '/logout')
   end
 end

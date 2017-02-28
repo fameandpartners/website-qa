@@ -24,7 +24,8 @@ Feature: Footer.
         | View All Dresses  |
 
     Scenario: User can subscribe from footer.
-      When I fill up subscribe form.
+      When I fill up subscribe form with random email.
       Then Click "Subscribe" button.
       And "Thanks for signing up" footer popup appears.
-      And it can be closed.
+      Then it can be closed.
+#      And user has been subscribed.

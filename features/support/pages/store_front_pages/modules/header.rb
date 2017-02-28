@@ -69,7 +69,7 @@ module Header
   end
 
   def click_nav_menu(nav_menu_item)
-    self.span_element(text: nav_menu_item).when_present.click
+    self.span_element(text: nav_menu_item).when_present(30).click
   end
 
   def open_glog

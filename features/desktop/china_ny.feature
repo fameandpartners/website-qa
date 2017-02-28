@@ -7,7 +7,7 @@ Feature: China New Year.
     Scenario: As a customer during the CNY dates, I want to know about delivery delays.
       Given I login as "user".
       When I am on product page.
-      Then check CNY delivery time is "Estimated delivery, 3 - 4 weeks".
+      Then check CNY delivery time is "Estimated delivery, 2 weeks".
       And open cart.
       And cart contains "CNY delay delivery" message.
       """

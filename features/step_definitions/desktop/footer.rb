@@ -10,10 +10,14 @@ Then(/^footer contains links to:$/) do |table|
     end
   end
 end
-
-When(/^I fill up subscribe form\.$/) do
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Scenario: User can subscribe from footer. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When(/^I fill up subscribe form with random email\.$/) do
   @browser.scroll.to :bottom
-  @subscribe_email = "#{SecureRandom.uuid}@lorem.com"
+  first_name = Faker::Name.first_name.downcase.to_sym
+  last_name = Faker::Name.last_name.downcase.to_sym
+  @subscribe_email = "#{first_name}_#{last_name}@ipsum.com"
+  puts "Generated email is: #{@subscribe_email}"
   on(HomePage).specify_subscribe_email(@subscribe_email)
 end
 
@@ -22,9 +26,13 @@ Then(/^Click "Subscribe" button\.$/) do
 end
 
 And(/^"([^"]*)" footer popup appears\.$/) do |msg|
-  on(HomePage).paragraph_element(xpath: "//p[contains(text(),'#{msg}')]").when_present
+  on(HomePage).paragraph_element(xpath: "//p[contains(text(),'#{msg}')]").when_present(30)
 end
 
-And(/^it can be closed\.$/) do
+Then(/^it can be closed\.$/) do
   on(HomePage).close_footer_popup
+end
+
+And(/^user has been subscribed\.$/) do
+  pending
 end

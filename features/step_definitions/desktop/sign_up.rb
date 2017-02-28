@@ -12,18 +12,26 @@ And(/^there are all required Sign Up controls\.$/) do
 end
 
 #~~~ Create a new account. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Then(/^I want to create a new account\.$/) do
+Then(/^I want to create a new random account\.$/) do
   on(SignUpPage) do |page|
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     page.specify_first_name(first_name)
     page.specify_last_name(last_name)
-    @new_user_email = "#{SecureRandom.uuid}@lorem.com"
+    @new_user_email = Faker::Internet.safe_email(first_name+'_'+last_name)
     page.specify_email(@new_user_email)
-    page.specify_passwords('1qazxcv')
-    page.specify_confirm_passwords('1qazxcv')
+    pwd = Faker::Internet.password(10, 20, true)
+    page.specify_passwords(pwd)
+    page.specify_confirm_passwords(pwd)
     page.newsletter(false)
     page.click_create_an_account
+    puts <<-EOS
+User has been generated with next data:
+  First name: #{first_name}
+   Last name: #{last_name}
+       Email: #{@new_user_email}
+    Password: #{pwd}
+    EOS
   end
 end
 And(/^be sure a new account was created\.$/) do

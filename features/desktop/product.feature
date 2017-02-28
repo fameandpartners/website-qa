@@ -1,4 +1,4 @@
-Feature: Product.
+Feature: Product page.
 
   Background: Open product page.
     Given I am on product page.
