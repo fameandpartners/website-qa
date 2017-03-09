@@ -20,8 +20,7 @@ class MainBasePage
 
   URLS = {
       home_us: "#{test_server}.fameandpartners.com",
-      # home_us: "staging.fameandpartners.com",
-      home_au: "staging.fameandpartners.com.au"
+      home_au: "#{test_server}.fameandpartners.com.au"
   }.freeze
 
   def visit_site_version(base_name: :home_us, country: nil, url:, basic_auth: false)

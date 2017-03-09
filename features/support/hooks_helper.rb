@@ -21,9 +21,8 @@ module HooksHelper
   end
 
   def test_server
-    ENV.fetch('SRV', 'qa1')
+    ENV.fetch('SRV', 'staging')
   end
-
 
   def session_data
     @session_data ||= {
