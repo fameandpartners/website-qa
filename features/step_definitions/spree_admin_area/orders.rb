@@ -167,6 +167,7 @@ Then(/^I change make status to "([^"]*)"\.$/) do |make_status|
   end
 end
 
+
 And(/^"Return or exchange" is available for user\.$/) do
   on(MainBasePage).visit_site_version(country: 'USA', url: '/logout')
   on(MainBasePage).visit_site_version(country: 'USA', url: '/login')

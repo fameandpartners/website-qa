@@ -22,8 +22,8 @@ end
 Then(/^check CNY delivery time on checkout\.$/) do |msg|
   on(CheckOutPage) do |page|
     page.divAddressForm_element.when_present
-    estim_delivery = @browser.dd(xpath:"//div[contains(@class,'product-form')]//dd[text()='Estimated delivery: 3 - 4 weeks']").text
-    expect(estim_delivery).to eql('Estimated Delivery: 3 - 4 Weeks')
+    estim_delivery = @browser.dd(xpath:"//div[contains(@class,'product-form')]//dd[text()='Estimated delivery: 2 weeks']").text
+    expect(estim_delivery).to eql('Estimated Delivery: 2 Weeks')
 
     chk_msg_delivery = page.paragraph_element(xpath:"//div[contains(@class,'product-form')]//p[contains(text(),'delivery timeline')]").text
     puts chk_msg_delivery
@@ -90,8 +90,8 @@ And(/^check Expected delivery date in email\.$/) do
     page.open_email('Order Confirmation',@order_number)
     sleep 5
     expect(@browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[text()='How long will your order take to arrive:']").visible?).to be_truthy
-    expect(@browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[text()='Estimated Delivery: 3 - 4 weeks']").visible?).to be_truthy
-    expect(@browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[text()='Estimated Delivery: 3 - 4 weeks']").visible?).to be_truthy
+    expect(@browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[text()='Estimated Delivery: 2 weeks']").visible?).to be_truthy
+    expect(@browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[text()='Estimated Delivery: 2 weeks']").visible?).to be_truthy
     order_volume = @browser.iframe(xpath:"//iframe[contains(@class,'ember')]").p(xpath: "//p[contains(text(),'high order volume')]").text
     expect(order_volume).to eql("We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment.\nWe'll be back to our normal timeline of 7-10 days soon.")
   end

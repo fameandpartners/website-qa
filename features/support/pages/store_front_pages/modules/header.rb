@@ -17,7 +17,6 @@ module Header
     div(:divNewThisWeek, id: 'rect-new-this-week')
     div(:divShop, id: 'rect-dresses')
     div(:divWeddingShop, id: 'rect-wedding')
-
     div(:divLookbooks, id: 'rect-lookbook')
     link(:lnkBlog, text: 'BLOG')
   link(:lnkSearch, xpath: "//a[contains(@class,'icon-search')]")

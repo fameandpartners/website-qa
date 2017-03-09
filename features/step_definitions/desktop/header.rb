@@ -92,6 +92,7 @@ Then(/^I can open and close navigation home submenus:$/) do |table|
     expect(page.divWeddingShop_element.present?).to be_truthy
     page.click_nav_menu(data['WEDDING SHOP'])
     expect(page.divWeddingShop_element.present?).to be_falsey
+    expect(page.link_element(xpath:"//a[@href='/the-evening-shop' and text()='EVENING SHOP']").present?).to be_truthy
     page.click_nav_menu(data['LOOKBOOKS'])
     expect(page.divLookbooks_element.present?).to be_truthy
     page.click_nav_menu(data['LOOKBOOKS'])

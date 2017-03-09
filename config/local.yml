@@ -1,4 +1,3 @@
-#base_url: 'https://www.fameandpartners.com'
 base_url: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com'
 base_url_au: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com.au'
 

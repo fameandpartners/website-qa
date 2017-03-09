@@ -16,7 +16,8 @@ Feature: Header.
     Then I can open and close navigation home submenus:
       | New this week | New this week |
       | SHOP          | Shop          |
-      | FAME WEDDINGS | FAME WEDDINGS |
+      | WEDDING SHOP  | WEDDING SHOP  |
+      | EVENING SHOP  | EVENING SHOP  |
       | LOOKBOOKS     | LOOKBOOKS     |
       | BLOG          | BLOG          |
     And can open "Blog" page.

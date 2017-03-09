@@ -153,7 +153,7 @@ end
 And(/^I can continue shopping\.$/) do
   on(CheckOutPage).lnkContShopping_element.when_present(30).click
   on(HomePage) do |page|
-    page.list_item_element(text:'Dresses').when_present(30)
+    page.ordered_list_element(css:".breadcrumb.hidden-xs.hidden-sm").when_present(30)
     expect(page.current_url).to include('fameandpartners.com/dresses')
   end
 end
