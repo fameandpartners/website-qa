@@ -7,7 +7,8 @@ Given(/^I am on 'Contact Us' page\.$/) do
 end
 
 Given(/^as a customer I create a new order\.$/) do |table|
-  on(MainBasePage).visit_site_version(country: 'USA', url: '/login', basic_auth: true)
+  on(MainBasePage).visit_site_version(country: 'USA', url: '', basic_auth: true)
+  on(MainBasePage).visit_site_version(country: 'USA', url: '/login')
   on(LoginPage) do |page|
     page.specify_registered_user(browser_name)
     page.submit_login
@@ -20,7 +21,7 @@ Given(/^as a customer I create a new order\.$/) do |table|
     page.open_skirt_length
     page.select_skirt_length('PETITE'.downcase)
     @product_price = page.divProductPrice_element.text.gsub(/[^\d\.]/, '').to_f
-    puts "MProduct price is: #{@product_price}"
+    puts "Product price is: #{@product_price}"
     page.add_to_bag
   end
   on(CheckOutPage) do |page|

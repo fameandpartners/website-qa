@@ -11,18 +11,19 @@ module Header
   link(:lnkMyDetails, href: '/profile')
   link(:lnkLogout, href: '/logout')
 
-  div(:divHomeMenu, id: 'home-menu')
+  # div(:divHomeMenu, id: 'home-menu')
   image(:imgLogo, src: 'https://d3uvjcfk5ey2fu.cloudfront.net/assets/logo/new-logo-ad36b2761e48c30c432a93f99e7df38a.svg')
   div(:divNavMainMenu, xpath: "//div[contains(@class,'nav-main-menu')]")
     div(:divNewThisWeek, id: 'rect-new-this-week')
     div(:divShop, id: 'rect-dresses')
-    div(:divFameWeddings, id: 'rect-wedding')
+    div(:divWeddingShop, id: 'rect-wedding')
+
     div(:divLookbooks, id: 'rect-lookbook')
     link(:lnkBlog, text: 'BLOG')
   link(:lnkSearch, xpath: "//a[contains(@class,'icon-search')]")
   text_field(:txtSearch, id: 'searchValue')
   link(:lnkWishlist, href: '/moodboards')
-  link(:lnkShoppingCart, xpath: "//div[@id='home-menu']//a[contains(@class,'shopping-cart')]")
+  link(:lnkShoppingCart, xpath: "//div[@class='nav-menu-container']//a[contains(@class,'shopping-cart')]")
     div(:divSlideCart, xpath: "//div[contains(@class,'cart-wrapper')]")
     div(:divBack, xpath: "//div[contains(@class,'cta-icon-text')]")
     h2(:hYourBag, text: 'Your Bag')
@@ -89,7 +90,7 @@ module Header
   end
 
   def slideout_shopping_cart
-    self.lnkShoppingCart_element.when_present.click
+    self.lnkShoppingCart_element.when_present(30).click
   end
 
   def slidein_shopping_cart

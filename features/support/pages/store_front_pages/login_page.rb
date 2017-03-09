@@ -29,9 +29,9 @@ class LoginPage < MainBasePage
     self.txtPwd_element.value = pwd
   end
 
-  def specify_login_pwd(pwd)
-    self.txtPwd_element.value =  pwd
-  end
+  # def specify_login_pwd(pwd)
+  #   self.txtPwd_element.value =  pwd
+  # end
 
   def open_facebook_login_form
     self.lnkFaceBook_element.when_present(30).click

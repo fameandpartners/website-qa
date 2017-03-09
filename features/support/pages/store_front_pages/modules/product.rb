@@ -134,7 +134,7 @@ module Product
 
   def select_skirt_length(length)
     self.divSkirtLength_element.wait_until_present
-    self.link_element(xpath: "//a[contains(text(),'#{length}')]").when_present(30).click
+    self.link_element(xpath: "//a[text()='#{length}']").when_present(30).click
   end
 
   def open_color
