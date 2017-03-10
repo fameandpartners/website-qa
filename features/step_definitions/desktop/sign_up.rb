@@ -49,6 +49,7 @@ And(/^be sure a new account was created\.$/) do
   on(UsersPage) do |page|
     page.specify_srch_user(@new_user_email)
     page.click_search
+    sleep 2
     expect(page.link_element(xpath: "//a[text()='#{@new_user_email}']").visible?).to be_truthy
   end
 
