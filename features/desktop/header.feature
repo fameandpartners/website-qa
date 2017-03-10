@@ -10,17 +10,17 @@ Feature: Header.
     When I change to "Australia" locale.
     Then "Australia" locale changed.
 
-  @smoke
-  Scenario: Navigation Home menu.
-    When I can see navigation home menu with all elements.
-    Then I can open and close navigation home submenus:
-      | New this week | New this week |
-      | SHOP          | Shop          |
-      | WEDDING SHOP  | WEDDING SHOP  |
-      | EVENING SHOP  | EVENING SHOP  |
-      | LOOKBOOKS     | LOOKBOOKS     |
-      | BLOG          | BLOG          |
-    And can open "Blog" page.
+#  @smoke
+#  Scenario: Navigation Home menu.
+#    When I can see navigation home menu with all elements.
+#    Then I can open and close navigation home submenus:
+#      | New this week | New this week |
+#      | SHOP ALL          | Shop all          |
+#      | THE WEDDING SHOP  | The Wedding Shop  |
+#      | THE EVENING SHOP  | THE EVENING SHOP  |
+#      | LOOKBOOKS     | LOOKBOOKS     |
+#      | BLOG          | BLOG          |
+#    And can open "Blog" page.
 
   @smoke
   Scenario: Open My profile via 'My Account' link.
