@@ -36,3 +36,22 @@ end
 And(/^user has been subscribed\.$/) do
   pending
 end
+
+Then(/^footer contains next social networks:$/) do |table|
+  data = table.rows_hash
+  @browser.scroll.to :bottom
+  on(HomePage) do |page|
+    expect(page.link_element(xpath:"//a[@class='icon-instagram' and @href='#{data['Instagram']}']").visible?).to be_truthy
+    puts "Instagram URL icon presented"
+    expect(page.link_element(xpath:"//a[@class='icon-facebook2' and @href='#{data['Facebook']}']").visible?).to be_truthy
+    puts "Facebook URL icon presented"
+    expect(page.link_element(xpath:"//a[@class='icon-twitter' and @href='#{data['Twitter']}']").visible?).to be_truthy
+    puts "Twitter URL icon presented"
+    expect(page.link_element(xpath:"//a[@class='icon-pinterest' and @href='#{data['Pinterest']}']").visible?).to be_truthy
+    puts "Pinterest URL icon presented"
+    expect(page.link_element(xpath:"//a[@class='icon-tumblr' and @href='#{data['Tumblr']}']").visible?).to be_truthy
+    puts "Tumblr URL icon presented"
+    expect(page.link_element(xpath:"//a[@class='icon-polyvore' and @href='#{data['Polyvore']}']").visible?).to be_truthy
+    puts "Polyvore URL icon presented"
+  end
+end

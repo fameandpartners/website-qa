@@ -29,3 +29,12 @@ Feature: Footer.
       And "Thanks for signing up" footer popup appears.
       Then it can be closed.
 #      And user has been subscribed.
+
+    Scenario: Footer contains social icons with linked urls to them.
+      Then footer contains next social networks:
+        | Instagram | https://instagram.com/FameandPartners     |
+        | Facebook  | https://www.facebook.com/FameandPartners  |
+        | Twitter   | https://twitter.com/FameandPartners       |
+        | Pinterest | https://www.pinterest.com/fameandpartners |
+        | Tumblr    | http://fameandpartners.tumblr.com         |
+        | Polyvore  | http://fameandpartners.polyvore.com       |
