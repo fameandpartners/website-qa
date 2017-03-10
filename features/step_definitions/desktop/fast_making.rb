@@ -21,8 +21,8 @@ end
 But(/^check it is available on storefront\.$/) do
   on(HomePage) do |page|
     page.visit_site_version(country: 'USA', url: '')
-    page.click_nav_menu('Shop')
-    expect(on(HomePage).link_element(text: 'Express Making').visible?).to be_truthy
+    # page.click_nav_menu('Shop')
+    # expect(on(HomePage).link_element(text: 'Express Making').visible?).to be_truthy
     @browser.scroll.to :bottom
     expect(page.link_element(xpath: "//footer//a[text()='Made in 48 Hours']").visible?).to be_truthy
     page.visit_site_version(country: 'USA', url: '/getitquick')
@@ -33,8 +33,8 @@ end
 But(/^check it is unavailable on storefront\.$/) do
   on(HomePage) do |page|
     page.visit_site_version(country: 'USA', url: '')
-    page.click_nav_menu('Shop')
-    expect(on(HomePage).link_element(text: 'Express Making').visible?).to be_falsey
+    # page.click_nav_menu('Shop')
+    # expect(on(HomePage).link_element(text: 'Express Making').visible?).to be_falsey
     @browser.scroll.to :bottom
     expect(page.link_element(xpath: "//footer//a[text()='Made in 48 Hours']").visible?).to be_falsey
     page.visit_site_version(country: 'USA', url: '/getitquick')
