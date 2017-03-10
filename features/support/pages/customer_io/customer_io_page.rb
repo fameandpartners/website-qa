@@ -24,6 +24,6 @@ class CustomerIO
   end
 
   def open_email(subject, order)
-    self.link_element(text:"#{subject} ##{order}").when_present(30).click
+    self.link_element(text:"#{subject} #{order}").when_present(30).click
   end
 end

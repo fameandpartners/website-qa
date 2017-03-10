@@ -61,7 +61,7 @@ end
 
 And(/^check estimated delivery on order confirm page\.$/) do
   on(OrderPage) do |page|
-    exp_deliver_date = (Date.today + 28).strftime('%d of %b, %Y')
+    exp_deliver_date = (Date.today + 14).strftime('%d of %b, %Y')
     page.h1_element(xpath: "//h1[text()='Thanks for your order!']").when_present(30)
     @browser.scroll.to :center
     expect(page.h4_element(xpath: "//h4[text()='Expect Standard delivery: #{exp_deliver_date}']").visible?).to be_truthy
@@ -74,7 +74,7 @@ Then(/^check Expected delivery date in profile\.$/) do
   on(MyProfilePage) do |page|
     page.visit_site_version(country: 'USA', url: '/user_orders')
     page.tblOrdersTable_element.when_present
-    d = (Date.today + 28).strftime('%m/%d/%y')
+    d = (Date.today + 14).strftime('%m/%d/%y')
     prof_exp_delivery_date = page.cell_element(xpath:"//a[text()='#{@order_number}']/../..//td[text()='#{d}']").text
     puts prof_exp_delivery_date
   end
