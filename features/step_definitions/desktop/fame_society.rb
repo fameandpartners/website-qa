@@ -1,16 +1,13 @@
-When(/^I open "([^"]*)" page\.$/) do |arg|
+When(/^I open "The Fame Society" page\.$/) do
   on(HomePage) do |page|
     page.visit_site_version(country: 'USA', url: '', basic_auth: true)
     page.visit_site_version(country: 'USA', url: '/fame-society-application')
   end
 end
 
-Then(/^I open "([^"]*)" form\.$/) do |arg|
-  on(FameSocietyPage) do |page|
-    page.open_fame_society_form
-  end
+Then(/^I open "The Fame Society Application" form\.$/) do
+  on(FameSocietyPage).open_fame_society_form
 end
-
 
 And(/^sign up for "Fame Society"\.$/) do
   on(FameSocietyPage) do |page|

@@ -186,3 +186,15 @@ And(/^specified data were updated\.$/) do
   end
 end
 
+
+When(/^I open my wedding size profile\.$/) do
+  on(HomePage).visit_site_version(country: 'USA', url: '', basic_auth: true)
+  on(WeddingAtelier) do |page|
+    page.open_sing_in_up('USA','Signin')
+    page.specify_registered_user(browser_name)
+  end
+end
+
+Then(/^I can change size profile parameters\.$/) do
+  sleep 3
+end
