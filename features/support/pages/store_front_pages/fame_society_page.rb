@@ -1,6 +1,7 @@
 class FameSocietyPage < MainBasePage
 
   span(:spnAllyNow, text: 'APPLY NOW')
+  span(:spnJoinNow, text: 'JOIN NOW')
   text_field(:txtFullaName, name:'full_name')
   text_field(:txtEmail, name:'email')
   textarea(:txaAboutYou, name:'about')
@@ -14,6 +15,10 @@ class FameSocietyPage < MainBasePage
 
   def open_fame_society_form
     self.spnAllyNow_element.when_present(30).click
+  end
+
+  def open_fame_society_invitation_form
+    self.spnJoinNow_element.when_present(30).click
   end
 
   def specify_full_name(full_name)

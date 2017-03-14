@@ -21,9 +21,9 @@ class WeddingAtelier < MainBasePage
   span(:spnHeightDress,xpath:"//span[contains(@id,'height-container')]")
 
   # "Wedding board" step ~~~~~~~~~~~
-  text_field(:txtBoardName, id:'spree_user_events_attributes_0_name')
-  span(:spnWeddingRole,id:'select2-spree_user_event_role-container')
-  text_field(:txtBridesmaidsAmount, id:'spree_user_events_attributes_0_number_of_assistants')
+  text_field(:txtBoardName, id:'weddding_name')
+  select_list(:spnWeddingRole, id:'wedding_role')
+  text_field(:txtBridesmaidsAmount, id:'wedding_bridesmaids')
   i(:icnCalendar,xpath:"//i[@class='calendar-icon']")
   list_item(:lstBride,text:'Bride')
   list_item(:lstBridesmaid,text:'Bridesmaid')
@@ -135,11 +135,8 @@ class WeddingAtelier < MainBasePage
   def specify_wedding_board_name(board_name)
     self.txtBoardName_element.value = board_name
   end
-  def open_wedding_role
-    self.spnWeddingRole_element.when_present(30).click
-  end
   def select_wedding_role(wedding_role)
-    self.list_item_element(xpath:"//li[text()='#{wedding_role}']").when_present(30).click
+    self.spnWeddingRole_element.select(wedding_role)
   end
   def specify_bridesmaids_amount(amount)
     self.txtBridesmaidsAmount_element.value = amount

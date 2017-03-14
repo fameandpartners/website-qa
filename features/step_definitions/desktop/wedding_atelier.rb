@@ -65,7 +65,6 @@ Then(/^create wedding board\.$/) do
     extend WeddingAtelierHelper
 
     page.specify_wedding_board_name("#{@fname_for_board}'s wedding board")
-    page.open_wedding_role
     page.select_wedding_role('Bride')
     page.specify_bridesmaids_amount(2)
     page.open_calendar
@@ -132,7 +131,6 @@ User has been generated with next data:
     page.click_next
 
     page.specify_wedding_board_name("#{first_name}'s wedding board")
-    page.open_wedding_role
     page.select_wedding_role('Bride')
     page.open_calendar
     page.open_months
