@@ -6,7 +6,7 @@ class WeddingAtelier < MainBasePage
   # Sign In form ~~~~~~~~~~~~~~~~~~~
   text_field(:txtEmail, id:'spree_user_email')
   text_field(:txtPwd, id:'spree_user_password')
-  button(:btnSignIn, value:'Sign in')
+  button(:btnSignIn, value:'Log in')
   link(:btnForgotPwd, href:'/spree_user/password/new')
 
   # Sign Up form ~~~~~~~~~~~~~~~~~~~
@@ -24,6 +24,8 @@ class WeddingAtelier < MainBasePage
   text_field(:txtBoardName, id:'weddding_name')
   select_list(:spnWeddingRole, id:'wedding_role')
   text_field(:txtBridesmaidsAmount, id:'wedding_bridesmaids')
+  span(:spnDecrease, class:'number-field-button dec')
+  span(:spnIncrease, class:'number-field-button inc')
   i(:icnCalendar,xpath:"//i[@class='calendar-icon']")
   list_item(:lstBride,text:'Bride')
   list_item(:lstBridesmaid,text:'Bridesmaid')
@@ -84,49 +86,36 @@ class WeddingAtelier < MainBasePage
   def specify_signin_email(email)
     self.txtEmail_element.value = email
   end
-
   def specify_signin_pwd(pwd)
     self.txtPwd_element.value = pwd
   end
-
   def sign_in_wed_atl
-    self.btnSignIn_element.when_present.click
+    self.btnSignIn_element.when_present(30).click
   end
-
   def specify_user_first_name(first_name)
     self.txtFirstName_element.value = first_name
   end
-
   def specify_user_last_name(last_name)
     self.txtLastName_element.value = last_name
   end
-
   def specify_user_email(email)
     self.txtUserEmail_element.value = email
   end
-
   def specify_user_pwd(pwd)
     self.txtUserPwd_element.value = pwd
   end
-
   def proceed_sign_up
     self.btnProceedSignUp_element.when_present(30).click
   end
-
   def click_next
     self.btnNext_element.when_present(30).click
   end
-
-
-
   def open_height_size
     self.spnHeightDress_element.when_present(30).click
   end
-
   def select_random_height(dress_height)
     self.list_item_element(xpath:"//li[contains(text(),'#{dress_height}')]").when_present(30).click
   end
-
   def select_random_dress_size(dress_size)
     self.label_element(xpath:"//label[text()='#{dress_size}']").when_present(30).click
   end
@@ -139,27 +128,27 @@ class WeddingAtelier < MainBasePage
     self.spnWeddingRole_element.select(wedding_role)
   end
   def specify_bridesmaids_amount(amount)
-    self.txtBridesmaidsAmount_element.value = amount
+    i = 0
+    while i < amount  do
+      self.spnIncrease_element.when_present(30).click
+      i += 1
+    end
   end
   def open_calendar
     self.icnCalendar_element.when_present(30).click
   end
-
   def open_months
     self.thMonth_element.when_present(30).click
   end
-
   def select_future_month(month)
     self.span_element(xpath:"//span[text()='#{month}']").when_present(30).click
   end
   def select_day(day)
     self.cell_element(xpath:"//td[@class='day' and text()='#{day}']").when_present(30).click
   end
-
   def open_years
     self.thYears_element.when_present(30).click
   end
-
   def select_future_year(year)
     self.span_element(xpath:"//span[text()='#{year}']").when_present(30).click
   end
@@ -173,7 +162,6 @@ class WeddingAtelier < MainBasePage
         self.btnInviteLater_element.when_present(30).click
     end
   end
-
 
   # Account details page methods ~~~~~~~~~~~~~~~~~
   def specify_first_name(fname)
