@@ -9,7 +9,7 @@ module HooksHelper
   end
 
   def url
-    ENV.fetch('URL', '192.168.13.131:4444')
+    ENV.fetch('URL', '192.168.87.28:4444')
   end
 
   def environment

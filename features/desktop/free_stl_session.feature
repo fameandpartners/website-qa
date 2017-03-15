@@ -4,6 +4,7 @@ Feature: Free Styling Session.
   Background: Open Free Styling Session page.
     Given I am on Home page.
 
+    @smoke
     Scenario: User can book for Free Styling Session page.
       Given I have user's data:
         | Full Name    | Lorem Ipsum         |

@@ -15,7 +15,7 @@ Given(/^as a customer I create a new order\.$/) do |table|
     session_data[browser_name][:is_authorized] = true
   end
   on(ProductPage) do |page|
-    page.visit_site_version(country: 'USA', url: '/dresses/dress-kirrily-1100')
+    page.visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
     page.open_dress_size
     page.select_dress_size('US 10')
     page.open_skirt_length
@@ -65,7 +65,7 @@ end
 
 When(/^I am on product page\.$/) do
   on(ProductPage).visit_site_version(country: 'USA', url: '', basic_auth: true)
-  on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-kirrily-1100?color=spot')
+  on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
 end
 
 
