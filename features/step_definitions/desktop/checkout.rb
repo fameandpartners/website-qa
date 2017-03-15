@@ -141,7 +141,7 @@ end
 Then(/^I can delete the dress from cart\.$/) do
   on(CheckOutPage) do |page|
     page.span_element(xpath: "//div[contains(@class,'product-form-side')]//a[text()='Kirrily']/../..//span[@class='icon btn-close']")\
-.when_present.click
+.when_present(30).click
     sleep 3
   end
 end
