@@ -1,7 +1,7 @@
 Given(/^I create a new guest user order\.$/) do |table|
   on(ProductPage) do |page|
     page.visit_site_version(country: 'USA', url: '', basic_auth: true)
-    page.visit_site_version(country: 'USA', url: '/dresses/dress-kirrily-1100')
+    page.visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
     page.open_dress_size
     page.select_dress_size('US 10')
     page.open_skirt_length
