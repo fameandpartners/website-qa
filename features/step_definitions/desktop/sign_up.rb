@@ -45,7 +45,7 @@ And(/^be sure a new account was created\.$/) do
     page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
     page.submit_login
   end
-  visit UsersPage
+  on(HomePage).visit_site_version(country: 'USA', url: '/admin/users')
   on(UsersPage) do |page|
     page.specify_srch_user(@new_user_email)
     page.click_search
