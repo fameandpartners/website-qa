@@ -9,7 +9,7 @@ And(/^open cart\.$/) do
 end
 And(/^cart contains "CNY delay delivery" message\.$/) do |msg|
   on(ProductPage) do |page|
-    page.hYourBag_element.when_present
+    page.divCartFrame_element.when_present(30)
     cart_msg_delivery = page.paragraph_element(xpath:"//p[contains(text(),'high order volume')]").text
     puts cart_msg_delivery
     expect(cart_msg_delivery).to eql(msg)
