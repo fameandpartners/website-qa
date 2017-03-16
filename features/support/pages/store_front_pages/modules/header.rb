@@ -23,7 +23,7 @@ module Header
   text_field(:txtSearch, id: 'searchValue')
   link(:lnkWishlist, href: '/moodboards')
   link(:lnkShoppingCart, xpath: "//div[@class='nav-menu-container']//a[contains(@class,'shopping-cart')]")
-    div(:divSlideCart, xpath: "//div[contains(@class,'cart-wrapper')]")
+    div(:divCartFrame, xpath: "//div[contains(@class,'cart-wrapper')]")
     div(:divBack, xpath: "//div[contains(@class,'cta-icon-text')]")
     h2(:hYourBag, text: 'Your Bag')
     button(:btnCheckout, xpath: "//button[text()='CHECKOUT ']")
