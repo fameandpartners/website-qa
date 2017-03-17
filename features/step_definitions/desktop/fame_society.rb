@@ -17,6 +17,7 @@ And(/^sign up for "Fame Society"\.$/) do
     email = Faker::Internet.safe_email(first_name+'_'+last_name)
     about = Faker::Lorem.paragraph
     blog_url = Faker::Internet.url('blog.example.com')
+    social_handle = Faker::Internet.url('social.handle.com')
     country = Faker::Address.country
     street_adress = Faker::Address.street_address
     postal_code = Faker::Address.postcode
@@ -28,7 +29,7 @@ And(/^sign up for "Fame Society"\.$/) do
     page.specify_about_you(about)
     page.specify_blog_url(blog_url)
     page.specify_mailing_address(mailing_address)
-    page.specify_social_handles('Some lorem ipsum')
+    page.specify_social_handles(social_handle)
     page.specify_dress_size(dress_size)
     page.submit_fame_society_form
     page.h2_element(text:'Thanks for applying').when_present(30)
@@ -57,6 +58,7 @@ And(/^sign up for "Fame Society Invitation"\.$/) do
     email = Faker::Internet.safe_email(first_name+'_'+last_name)
     about = Faker::Lorem.paragraph
     blog_url = Faker::Internet.url('blog.example.com')
+    social_handle = Faker::Internet.url('social.handle.com')
     country = Faker::Address.country
     street_adress = Faker::Address.street_address
     postal_code = Faker::Address.postcode
@@ -68,7 +70,7 @@ And(/^sign up for "Fame Society Invitation"\.$/) do
     page.specify_about_you(about)
     page.specify_blog_url(blog_url)
     page.specify_mailing_address(mailing_address)
-    page.specify_social_handles('Some lorem ipsum')
+    page.specify_social_handles(social_handle)
     page.specify_dress_size(dress_size)
     page.submit_fame_society_form
     page.h2_element(text:'Welcome to The Fame Society.').when_present(30)

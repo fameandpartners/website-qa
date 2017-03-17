@@ -82,7 +82,7 @@ class OrdersPage < MainBasePage
 
   def change_make_status(make_sts)
     self.sltMakeStatus_element.when_present(30).select(make_sts)
-    self.divProgressMsg_element.when_present
+    self.divProgressMsg_element.when_present(30)
     self.divProgressMsg_element.wait_until_present
   end
 
