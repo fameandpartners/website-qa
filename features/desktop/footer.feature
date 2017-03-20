@@ -5,23 +5,24 @@ Feature: Footer.
 
     Scenario: Footer contains required links.
       Then footer contains links to:
-        | Why Shop With Us  |
-        | About Us          |
-        | Fame Chain        |
-        | From our CEO      |
-        | Privacy Policy    |
-        | Terms             |
-        | Shipping Info     |
-        | Returns Policy    |
-        | Contact Us        |
-        | FAQs              |
-        | Size Guide        |
-        | Track My Order    |
-        | Best Sellers      |
-        | What's New        |
-        | Formal            |
-        | Prom              |
-        | View All Dresses  |
+        | link_title        | link_url                          |
+        | Why Shop With Us  | /why-us                           |
+        | About Us          | /about                            |
+        | Fame Society      | /fame-society-application         |
+        | From our CEO      | /from-our-ceo                     |
+        | Privacy Policy    | /privacy                          |
+        | Terms             | /terms                            |
+        | Shipping Info     | /faqs#collapse-delivery-how-long  |
+        | Returns Policy    | /faqs#collapse-returns-policy     |
+        | Contact Us        | /contact                          |
+        | FAQs              | /faqs                             |
+        | Size Guide        | /size-guide                       |
+        | Track My Order    | /faqs#collapse-orders-track       |
+        | Best Sellers      | /dresses/best-sellers             |
+        | What's New        | /dresses?order=newest             |
+        | Formal            | /dresses/formal                   |
+        | Prom              | /dresses/prom                     |
+        | View All Dresses  | /dresses                          |
 
     Scenario: User can subscribe from footer.
       When I fill up subscribe form with random email.

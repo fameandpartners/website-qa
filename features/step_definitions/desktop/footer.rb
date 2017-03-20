@@ -1,12 +1,10 @@
 Then(/^footer contains links to:$/) do |table|
   on (HomePage) do |page|
     @browser.scroll.to :bottom
-    data = table.raw
-    data.each do |rowdata|
-      rowdata.each do |footer_link|
-        puts footer_link
-        expect(page.link_element(xpath: "//footer//a[text()=\"#{footer_link}\"]").visible?).to be_truthy
-      end
+    data = table.hashes
+    data.each do |footer_link|
+      puts "Link title is: #{footer_link['link_title']} and link url is: #{footer_link['link_url']}"
+      expect(page.link_element(xpath: "//footer//a[text()=\"#{footer_link['link_title']}\" and contains(@href,'#{footer_link['link_url']}')]").visible?).to be_truthy
     end
   end
 end

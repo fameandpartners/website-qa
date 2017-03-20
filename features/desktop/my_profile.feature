@@ -2,25 +2,14 @@ Feature: My Profile.
   As user I can open own profile.
   As user I can modify my data.
 
-  @WIP
-  Scenario: As a user I can change my First and Last names.
-    When I am on "My Details" page.
-    Then I can modify First and Last names with:
-      |First Name| Lorem   |
-      |Last Name | Ipsum   |
-    And names were updated.
-
   @smoke
-  Scenario: As a user I can change my email.
-    When I registered as a new user.
-    Then I can change my email.
-    And login with new email.
-
-  @WIP
-  Scenario: As a user I can change my password.
-    When I registered as a new user.
-    Then I can change my password.
-    And can login with new password.
+  Scenario: As a user I can change my profile data.
+    Given I register a new user.
+    When I open "My Details" page.
+    Then I can modify profile data with random data.
+    And can login with new updated email and password.
+    Then I open "My Details" page.
+    And check updated profile data.
 
   Scenario: Profile fields can not be blank.
     When I am on "My Details" page.

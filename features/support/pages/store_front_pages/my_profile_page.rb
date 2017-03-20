@@ -13,20 +13,16 @@ class MyProfilePage < MainBasePage
   button(:btnSaveChanges, value: 'Save changes')
 
 
-  def specify_first_name_profile(data={})
-    self.txtFirstName_element.when_present.set(data['First Name'])
+  def specify_first_name_profile(f_name)
+    self.txtFirstName_element.value = f_name
   end
 
-  def specify_last_name_profile(data={})
-    self.txtLastName_element.when_present.set(data['Last Name'])
-  end
-
-  def update_profile(data)
-    self
+  def specify_last_name_profile(l_name)
+    self.txtLastName_element.value = l_name
   end
 
   def change_user_email(email)
-      self.txtEmail_element.value = email
+    self.txtEmail_element.value = email
   end
 
   def my_account_pwd(pwd)
