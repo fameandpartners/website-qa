@@ -138,7 +138,8 @@ end
 Then(/^it contains bag's elements\.$/) do
   on(HomePage) do |page|
     page.divCartFrame_element.when_present(30)
-    checkout_ctrls=%w(divBack hYourBag btnCheckout btnContinueToPayment pOrderTotal)
+    sleep 1
+    checkout_ctrls=%w(hYourBag btnCheckout btnContinueToPayment pOrderTotal)
     expect(checkout_ctrls.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
   end
 end
