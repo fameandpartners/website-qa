@@ -25,6 +25,16 @@ User has been generated with next data:
   end
 end
 
+
+And(/^there is also on "My Orders" (.*) page\.$/) do |country|
+  on(MyProfilePage) do |page|
+    page.visit_site_version(country: country, url: '/user_orders')
+    page.tblOrdersTable_element.when_present(30)
+    expect(page.link_element(xpath: "//a[text()='#{@complete_order_number}']").visible?).to be_truthy
+  end
+end
+
+
 When(/^I open "My Details" page\.$/) do
   on(MyProfilePage) do |page|
     page.visit_site_version(country: 'USA', url: '/profile')
