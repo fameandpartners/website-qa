@@ -1,13 +1,5 @@
 Feature: Orders (admin area).
 
-#  Background: Create a new order.
-#    Given As a customer I create a new order.
-#      | Card number      | 5520000000000000  |
-#      | Name on card     | Zaphod Beeblebrox |
-#      | Expiration Month | 10                |
-#      | Expiration Year  | 2020              |
-#      | CVC              | 123               |
-
     Scenario: Order contains sidebar menu.
       Given I create a new guest user order.
         | Card number      | 5520000000000000  |
