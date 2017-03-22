@@ -65,7 +65,6 @@ And(/^I can change "Make status" to:$/) do |table|
     data.each do |rowdata|
       rowdata.each do |make_status|
         page.change_make_status(make_status)
-        # page.refresh
         page.sltMakeStatus_element.when_present(30)
         expect(page.sltMakeStatus_element.selected_options(&:text)[0]).to eql(make_status)
         puts "\"#{make_status}\" make status was selected."
