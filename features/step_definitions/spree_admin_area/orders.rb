@@ -9,16 +9,33 @@ Given(/^I create a new guest user order\.$/) do |table|
     page.add_to_bag
   end
   on(CheckOutPage) do |page|
-    page.specify_first_name(fname: 'Lorem')
-    page.specify_last_name(lname: 'Ipsum')
-    page.specify_email(email: 'test@email.com')
-    page.specify_phone_num(phone_num: '2255-4422')
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    page.specify_first_name(fname: first_name)
+    page.specify_last_name(lname: last_name)
+
+    user_email = Faker::Internet.safe_email(first_name+'_'+last_name)
+    page.specify_email(email: user_email)
+
+    phone_num = Faker::PhoneNumber.cell_phone
+    page.specify_phone_num(phone_num: phone_num)
+
     page.select_country(country: 'United States')
-    page.specify_street_address(street: 'Lorem street 8')
-    page.specify_street_address_contd(street_cnd: 'apt. 8')
+
+    street_address = Faker::Address.street_address
+    page.specify_street_address(street: street_address)
+
+    address_contd = Faker::Address.secondary_address
+    page.specify_street_address_contd(street_cnd: address_contd)
+
     page.specify_city(city: 'Seattle')
-    page.zipcode(zipcode: '12345')
-    page.select_state(state: 'Washington')
+
+    zip = Faker::Base.numerify('#####')
+    page.zipcode(zipcode: zip)
+
+    state = Faker::Address.state
+    page.select_state(state: state)
+
     page.select_ship_address(true)
     @order_number = page.div_element(xpath: "//div[contains(@class,'hidden')]//div[contains(text(),'Number')]").text.scan(/[A-Z]\d{,9}$/).first
     puts @order_number

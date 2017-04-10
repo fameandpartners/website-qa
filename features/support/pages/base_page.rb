@@ -11,7 +11,7 @@ class MainBasePage
   include Product
   include Footer
   include AdminHeader
-
+  
   CREDENTIALS = 'fandpstaging:auth4fandpstaging@'.freeze
   USA_SIZES = ["US 0","US 2","US 4","US 6","US 8","US 10","US 12","US 14","US 16","US 18","US 20","US 22"].freeze
   AUS_SIZES = ["AU 4","AU 6","AU 8","AU 10","AU 12","AU 14","AU 16","AU 18","AU 20","AU 22","AU 24","AU 26"].freeze
