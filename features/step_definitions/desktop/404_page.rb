@@ -1,9 +1,16 @@
-When(/^I specify non existing URL\.$/) do
-  on(HomePage).visit_site_version(country: 'USA', url: '/lorem_ipsum')
+When(/^I specify non existing (.*) URL\.$/) do |country|
+  on(HomePage) do |page|
+    @response_code = page.visit_site_version(country: country, basic_auth: true, url: '/lorem_ipsum', response_code: true)
+  end
 end
 
 Then(/^404 page displays to user\.$/) do
-  on(FortyFourPage).div_element(xpath:"//*[@id='content-container']").when_present
+  on(FortyFourPage) do |page|
+    page.div_element(xpath:"//*[@id='content-container']").when_present
+    puts "I'm expecting for 404 response code"
+    expect(@response_code.to_i).to eql(404)
+    puts "Response code is really: #{@response_code}"
+  end
 end
 
 And(/^it has:$/) do |table|

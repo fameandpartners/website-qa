@@ -2,6 +2,8 @@
 require_relative 'mobile_pages/m_modules/m_header'
 require_relative 'mobile_pages/m_modules/m_product'
 require_relative 'mobile_pages/m_modules/m_footer'
+require 'net/http'
+require 'uri'
 
 class MobileBasePage
   include PageObject
@@ -25,7 +27,23 @@ class MobileBasePage
           base_name = :home_au
       end
     end
-    @browser.goto("#{URLS[base_name]}#{url}")
+    
+    site_url = "#{URLS[base_name]}#{url}"
+    puts "STATUS: (#{page_status_code(site_url)}) for page '#{site_url}'"
+    
+    @browser.goto(site_url)
+    site_url
+  end
+
+  def page_status_code(url)
+    uri = URI.parse(url)
+
+    connection = Net::HTTP.new(uri.host, uri.port)
+    connection.use_ssl = true
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = connection.request(request)
+    response.code
   end
 
 end

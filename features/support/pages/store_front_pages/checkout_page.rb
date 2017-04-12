@@ -3,6 +3,7 @@ class CheckOutPage < MainBasePage
   page_url(CONFIG['base_url']+'/checkout')
 
   div(:divAddressForm, xpath:"//div[@data-name='address']")
+  link(:lnkContinueShopping, xpath:"//a[@href='/dresses']")
   # "Deliver to" block.
   text_field(:txtEmail, id:'order_ship_address_attributes_email')
   text_field(:txtFirstName, id:'order_ship_address_attributes_firstname')
@@ -47,6 +48,9 @@ class CheckOutPage < MainBasePage
 
 
   # 1. Your information methods:
+  def continue_shopping
+    self.lnkContinueShopping_element.when_present(30).click
+  end
   def specify_email(email:)
     self.txtEmail_element.value = email
   end

@@ -37,6 +37,8 @@ module Product
   # link(:lnkBookNow, link:'/styling-session')
   link(:lnkBookNow,xpath:"//span[@class='cta-link-arrow-right']/..")
   image(:imgAmber,xpath:"//img[contains(@src,'tile-styling-advice')]")
+
+
   def expand_description
     unless self.divDescription_element.visible?
       self.lnkDescription_element.when_present.click
@@ -118,7 +120,7 @@ module Product
   end
 
   def select_dress_size(size)
-    self.divDressSize_element.wait_until_present
+    sleep 1
     self.link_element(xpath: "//a[contains(text(),'#{size}')]").when_present(30).click
   end
 
@@ -133,7 +135,7 @@ module Product
   end
 
   def select_skirt_length(length)
-    self.divSkirtLength_element.wait_until_present
+    sleep 1
     self.link_element(xpath: "//a[text()='#{length}']").when_present(30).click
   end
 
@@ -167,6 +169,20 @@ module Product
 
   def click_amber_image
     self.imgAmber_element.when_present(30).click
+  end
+
+
+  def get_random_dress_size(country)
+    case country
+      when 'USA'
+        MainBasePage::USA_SIZES[rand(MainBasePage::USA_SIZES.length)]
+      when 'Australia'
+        MainBasePage::AUS_SIZES[rand(MainBasePage::AUS_SIZES.length)]
+    end
+  end
+
+  def get_random_skirt_length
+    MainBasePage::LENGTH[rand(MainBasePage::LENGTH.length)]
   end
 
 
