@@ -13,7 +13,7 @@ Feature: China New Year.
       """
       We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon.
       """
-      Then specify "US 10" dress Size and "STANDARD" skirt length of the dress.
+      Then specify random dress size and growth for the dress.
       And add a dress to cart.
       Then check CNY delivery time on checkout.
       """

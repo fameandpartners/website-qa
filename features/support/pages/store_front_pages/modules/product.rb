@@ -125,7 +125,7 @@ module Product
   end
 
 
-  def change_metric
+  def change_metric(metric_type)
     self.chkMetric_element.when_present(30).click
   end
 

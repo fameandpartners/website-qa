@@ -14,13 +14,21 @@ When(/^I go to "([^"]*)" site version\.$/) do |country|
 end
 
 
-Then(/^specify "([^"]*)" dress Size and "([^"]*)" skirt length of the dress\.$/) do |dress_size, skirt_length|
+Then(/^specify random dress size and growth for the dress\.$/) do
   on(ProductPage) do |page|
     page.visit_site_version(country: @country_version, url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
-    page.open_dress_size
-    page.select_dress_size(dress_size)
-    page.open_skirt_length
-    page.select_skirt_length(skirt_length.downcase)
+
+    page.open_size_profile
+    page.change_metric('cm')
+    random_growth = page.get_random_growth.to_i
+    puts "Random growth is: #{random_growth}cm"
+    page.specify_your_growth(random_growth)
+
+    random_size = page.get_random_dress_size('USA')
+    puts "Random size is: #{random_size}"
+    page.specify_random_size(random_size)
+
+    page.save_pdp_size_profile
   end
 end
 
@@ -83,7 +91,7 @@ end
 When(/^I select random "Dress Size" and "Growth"\.$/) do
   on(ProductPage) do |page|
     page.open_size_profile
-    page.change_metric
+    page.change_metric('cm')
     random_growth = page.get_random_growth.to_i
     puts "Random growth is: #{random_growth}cm"
     page.specify_your_growth(random_growth)
@@ -120,7 +128,7 @@ end
 But(/^"Add to bag" button redirects to Checkout when "Size Profile" is selected\.$/) do
   on(ProductPage) do |page|
     page.open_size_profile
-    page.change_metric
+    page.change_metric('cm')
     random_growth = page.get_random_growth.to_i
     puts "Random growth is: #{random_growth}cm"
     page.specify_your_growth(random_growth)
