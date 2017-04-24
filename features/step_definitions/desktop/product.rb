@@ -63,7 +63,7 @@ Then(/^they can be expanded or collapsed\.$/) do
 
     page.expand_share
     share_icons=%w(lnkFacebookShare lnkTwitterShare lnkPinterestShare)
-    expect(share_icons.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
+    expect(share_icons.inject([]) { |arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
     page.lstShareIcons_element.wait_until_present
     page.collapse_share
     page.lstShareIcons_element.wait_while_present
@@ -73,54 +73,70 @@ end
 
 And(/^right bar contains customization elements\:$/) do |table|
   data = table.raw
-  data.each do |rowdata|
-    rowdata.each do |panel_item|
-      expect(on(ProductPage).div_element(text: panel_item).present?).to be_truthy
-    end
+  on(ProductPage) do |page|
+    expect(page.div_element(text: 'Color').present?).to be_truthy
+    expect(page.div_element(text: 'Customize').present?).to be_truthy
+    expect(page.link_element(text: 'Size Profile').present?).to be_truthy
   end
 end
 
-When(/^I select "Dress Size" and "Height & Hemline":$/) do |table|
+When(/^I select random "Dress Size" and "Growth"\.$/) do
   on(ProductPage) do |page|
-    data = table.rows_hash
-    page.open_dress_size
-    page.specify_your_size(dress_size: data['Dress Size'])
-    page.open_skirt_length
-    page.specify_your_height_hemline(height_hemline: data['Height & Hemline'].downcase)
+    page.open_size_profile
+    page.change_metric
+    random_growth = page.get_random_growth.to_i
+    puts "Random growth is: #{random_growth}cm"
+    page.specify_your_growth(random_growth)
+
+    random_size = page.get_random_dress_size('USA')
+    puts "Random size is: #{random_size}"
+    page.specify_random_size(random_size)
+
+    page.save_pdp_size_profile
   end
 end
 
 Then(/^I can add a dress to bag\.$/) do
   on(ProductPage) do |page|
     page.add_to_bag
-    page.divDressSize_element.wait_while_present
+    page.hDesignDress_element.wait_while_present
   end
 end
 
 
 Then(/^they can be opened and closed\.$/) do
   on(ProductPage) do |page|
-    page.open_dress_size
-    page.close_dress_size
-    page.open_skirt_length
-    page.close_skirt_length
     page.open_color
     page.close_color
     page.open_customize
     page.close_customize
+
+
+    page.open_size_profile
+    page.close_pdp_size_profile
   end
 end
 
-But(/^"Add to bag" button becomes enabled when "Dress Size" and "Height & Hemline" are selected\.$/) do
+But(/^"Add to bag" button redirects to Checkout when "Size Profile" is selected\.$/) do
   on(ProductPage) do |page|
-    page.open_dress_size
-    page.select_dress_size('US 10')
-    page.open_skirt_length
-    page.select_skirt_length('STANDARD'.downcase)
-    expect(page.lnkAddToBag_element.attribute_value('disabled')).to be_falsy
+    page.open_size_profile
+    page.change_metric
+    random_growth = page.get_random_growth.to_i
+    puts "Random growth is: #{random_growth}cm"
+    page.specify_your_growth(random_growth)
+
+    random_size = page.get_random_dress_size('USA')
+    puts "Random size is: #{random_size}"
+    page.specify_random_size(random_size)
+
+    page.save_pdp_size_profile
+    page.add_to_bag
+    page.hDesignDress_element.wait_while_present
+  end
+  on(CheckOutPage) do |page|
+    expect(page.current_url).to include('/checkout')
   end
 end
-
 
 
 And(/^Free Styling Session is available\.$/) do

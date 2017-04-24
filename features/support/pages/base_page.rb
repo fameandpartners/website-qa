@@ -41,7 +41,6 @@ class MainBasePage
     site_url = "https://#{credentials}#{URLS[base_name]}#{url}"
 
     @browser.goto(site_url)
-
     if response_code
       page_status_code(site_url)
     end

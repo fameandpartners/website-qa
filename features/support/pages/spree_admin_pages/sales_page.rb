@@ -75,7 +75,7 @@ class SalesPage < MainBasePage
   end
 
   def delete_sale(sale_name, confirm)
-    if self.link_element(xpath: "//td[text()='#{sale_name}']").visible?
+    if self.cell_element(xpath: "//td[text()='#{sale_name}']").visible?
       self.link_element(xpath: "//td[text()='#{sale_name}']/..//a[@data-action='remove']").when_present(30).click
       case confirm
         when true
@@ -86,7 +86,9 @@ class SalesPage < MainBasePage
     end
   end
 
-
+  def edit_sale(sale_name)
+    self
+  end
 
 
 end

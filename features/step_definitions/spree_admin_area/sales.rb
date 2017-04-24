@@ -2,21 +2,29 @@ When(/^I create a new Sale\.$/) do
   on(SalesPage) do |page|
     page.visit_site_version(country: 'USA', url: '/admin/sales')
     page.click_new_sale
-    @sale_name = Faker::Lorem.words(2, true)
-    page.specify_sale_name(@sale_name.join(" ").capitalize)
+    sale_name = Faker::Lorem.words(2, true)
+    @sale_name = sale_name.join(" ").capitalize
+    puts "Generated sale name is: #{@sale_name}"
+    page.specify_sale_name(@sale_name)
     sitewide_msg = Faker::Lorem.sentence(1)
     page.specify_sitewide_message("{discount} #{sitewide_msg}")
   end
 end
 
-Then(/^make it ([^"]*) discount type, active and sitewide\.$/) do |dicount_type|
+Then(/^make it ([^"]*) discount type, active and sitewide\.$/) do |discount_type|
   on(SalesPage) do |page|
     page.activate_sale(true)
     page.make_sitewide(true)
-    # @percent = Random.new.rand(10..35)
-    @percent = 34
+    case discount_type
+      when 'Percentage'
+        @percent = Random.new.rand(10..35)
+        puts "Specified percent sale is: #{@percent}%"
+      when 'Fixed'
+        @percent = Random.new.rand(11.2...76.9).round(2)
+        puts "Specified fixed sale is: #{@percent}%"
+    end
     page.specify_discount_size(@percent)
-    puts "Specified percent is: #{@percent}%"
+
     page.select_discount_type(dicount_type)
     page.select_currency('ALL')
     page.click_create_sale
@@ -24,7 +32,7 @@ Then(/^make it ([^"]*) discount type, active and sitewide\.$/) do |dicount_type|
   end
 end
 
-And(/^verify that sale price is applied to products on (.*) website\.$/) do |country|
+And(/^verify that percentage sale price is applied to products for (.*) website\.$/) do |country|
   @country = country
   on(ProductsPage) do |page|
     page.visit_site_version(country: country, url: '/dresses', basic_auth: true)
@@ -40,6 +48,24 @@ And(/^verify that sale price is applied to products on (.*) website\.$/) do |cou
     expect(sale_price).to eql(discount)
   end
 end
+
+And(/^verify that fixed sale price is applied to products for (.*) website\.$/) do |country|
+  @country = country
+  on(ProductsPage) do |page|
+    page.visit_site_version(country: country, url: '/dresses', basic_auth: true)
+    old_price = page.span_element(xpath: "(//span[@class='price-original'])[1]").text.gsub(/[^\d\.]/, '').to_f
+    sale_price = page.span_element(xpath: "(//span[@class='price-sale'])[1]").text.gsub(/[^\d\.]/, '').to_f
+    discount = old_price - @percent.to_f
+    puts <<-EOS
+  Sale is: #{@percent}%
+  Old price is: #{old_price}$
+  Sale price is: #{sale_price}$
+  Discount price is: #{discount}$
+    EOS
+    expect(sale_price).to eql(discount)
+  end
+end
+
 
 Then(/^add products into your cart and go to Checkout\.$/) do
   on(ProductsPage).link_element(xpath: "(//a[contains(@class,'product-name')])[1]").when_present(30).click
@@ -95,5 +121,62 @@ But(/^delete created sale\.$/) do
   on(SalesPage) do |page|
     page.visit_site_version(country: 'USA', url: '/admin/sales')
     page.delete_sale(@sale_name, true)
+    puts "'#{@sale_name}' sale is deleted"
   end
+end
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~ Sale site wide discount. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When(/^I create a new (.*) Sale\.$/) do |country|
+  on(SalesPage) do |page|
+    page.visit_site_version(country: country, url: '/admin/sales')
+    page.click_new_sale
+    sale_name = Faker::Lorem.words(2, true)
+    @sale_name = sale_name.join(" ").capitalize
+    puts "Generated sale name is: #{@sale_name}"
+    page.specify_sale_name(@sale_name)
+    sitewide_msg = Faker::Lorem.sentence(1)
+    page.specify_sitewide_message("{discount} #{sitewide_msg}")
+  end
+end
+
+Then(/^make it active, sitewide, (.*) discount type and (.*) currency\.$/) do |discount_type, currency|
+  on(SalesPage) do |page|
+    page.activate_sale(true)
+    page.make_sitewide(true)
+    case discount_type
+      when 'Percentage'
+        @percent = Random.new.rand(10..35)
+        puts "Specified percent sale is: #{@percent}%"
+      when 'Fixed'
+        @percent = Random.new.rand(11.2...76.9).round(2)
+        puts "Specified fixed sale is: #{@percent}%"
+    end
+    page.specify_discount_size(@percent)
+    page.select_discount_type(discount_type)
+    page.select_currency(currency)
+    page.click_create_sale
+    page.visit_site_version(country: 'USA', url: '/logout')
+    sleep 3
+  end
+end
+
+And(/^Regular and Sale prices are displayed on category pages\.$/) do
+  pending
+end
+
+And(/^Regular and Sale prices are displayed on PDP\.$/) do
+  pending
+end
+
+And(/^Sale price is displayed on cart and checkout\.$/) do
+  pending
+end
+
+And(/^Sale price is charged to payment method\.$/) do
+  pending
+end
+
+And(/^Sale price is displayed on order confirmation email\.$/) do
+  pending
 end

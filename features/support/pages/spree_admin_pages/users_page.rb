@@ -83,6 +83,7 @@ class UsersPage < MainBasePage
 
   def click_search
     self.btnSearchUsr_element.when_present.click
+    sleep 2
   end
 
   def edit_user(email)

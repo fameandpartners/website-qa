@@ -17,11 +17,12 @@ Before do |scenario|
       fail('Test Failure on assertion')
     end
   end
+
   if browser_path != nil
     Selenium::WebDriver::Firefox.path= "#{browser_path}"
   end
   if environment == :grid
-    @browser = Watir::Browser.new(:remote, :url=>"http://#{url}/wd/hub", :desired_capabilities=> {browserName: browser_name,version: browser_version})
+    @browser = Watir::Browser.new(:remote, :url => "http://#{url}/wd/hub", :desired_capabilities => {browserName: browser_name, version: browser_version})
     @browser.window.maximize
   else
     @browser = Watir::Browser.new browser_name
@@ -36,7 +37,7 @@ Before do |scenario|
     when :desktop
       @browser.window.maximize
     when :mobile
-      @browser.window.resize_to(720,1100)
+      @browser.window.resize_to(720, 1100)
   end
 end
 
