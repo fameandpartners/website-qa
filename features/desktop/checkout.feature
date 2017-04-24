@@ -144,10 +144,10 @@ Feature: Checkout process.
       | USA       | Austria       | Wien    | Ayia Napa | US 10      | PETITE           |
       | Australia | China         | Shanxi  | Taiyuan   | AU 6       | STANDARD         |
 
-  @smoke
+  @smoke #new size profile done
   Scenario: As a user I can buy a dress with a discount coupon.
     When I go to "USA" site version.
-    Then specify "US 10" dress Size and "STANDARD" skirt length of the dress.
+    Then specify random dress size and growth for the dress.
     And add the dress to cart.
     Then I fill in form fields with:
       | Email                   | anonymous_user@fameandpartners.com  |
@@ -174,9 +174,10 @@ Feature: Checkout process.
     Then "Thanks for your order!" page with order number displayed.
     And it appears in "USA" orders admin area.
 
+    #new size profile done
   Scenario: As a user I can delete a dress from checkout.
     When I go to "USA" site version.
-    Then specify "US 10" dress Size and "STANDARD" skirt length of the dress.
+    Then specify random dress size and growth for the dress.
     And add the dress to cart.
     Then I can delete the dress from cart.
     But "Oops, looks like your bag is empty." popup appears.
