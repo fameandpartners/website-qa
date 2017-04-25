@@ -58,4 +58,4 @@ Feature: Sales.
 #  2. Sale price is displayed on PDP - REGULAR PRICE + SALE PRICE
 #  3. Sale price is displayed on cart/checkout - SALE PRICE ONLY
 #  4. Sale price is charged to payment method - SALE PRICE ONLY
-  5. Sale price is displayed on order confirmation email - SALE PRICE ONLY
+#  5. Sale price is displayed on order confirmation email - SALE PRICE ONLY
