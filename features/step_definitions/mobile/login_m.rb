@@ -1,6 +1,6 @@
 Given(/^open mobile login page\.$/) do
   on MobileLoginPage do |page|
-    page.visit_site_version(country: 'USA', url: '/login')
+    page.visit_site_version(country: 'USA', url: '/login', basic_auth: true)
   end
 end
 
