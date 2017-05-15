@@ -119,8 +119,10 @@ end
 
 Then(/^I can specify desired dress for search\.$/) do
   on(HomePage) do |page|
+    puts "I want to find The Kismet dress"
     page.specify_dress_for_search('The Kismet')
     page.txtSearch_element.send_keys :return
+    puts "The Kismet is dress founded."
   end
 end
 
