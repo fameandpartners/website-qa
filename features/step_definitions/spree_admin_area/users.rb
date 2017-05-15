@@ -53,12 +53,12 @@ Then(/^it can be updated with new email and password\.$/) do
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     @updated_email = Faker::Internet.safe_email(first_name+'_'+last_name)
-    pwd = Faker::Internet.password(10, 20, true)
+    @updated_pwd = Faker::Internet.password(10, 20, true)
     page.specify_user_email(@updated_email)
     page.specify_user_first_name(first_name)
     page.specify_user_last_name(last_name)
-    page.specify_user_password(pwd)
-    page.specify_user_password_confirmation(pwd)
+    page.specify_user_password(@updated_pwd)
+    page.specify_user_password_confirmation(@updated_pwd)
     page.update_user
   end
 end
@@ -70,7 +70,7 @@ And(/^I can login with new email and password\.$/) do
   end
   on(LoginPage) do |page|
     page.specify_email(@updated_email)
-    page.specify_pwd('new1qazxcv')
+    page.specify_pwd(@updated_pwd)
     page.submit_login
     page.visit_site_version(country: 'USA', url: '/profile')
   end

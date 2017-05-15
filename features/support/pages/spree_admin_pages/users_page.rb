@@ -87,7 +87,7 @@ class UsersPage < MainBasePage
   end
 
   def edit_user(email)
-    self.link_element(xpath: "//a[text()='#{email}']/../..//a[@data-action='edit']").when_present.click
+    self.link_element(xpath: "//a[text()='#{email}']/../..//a[@data-action='edit']").when_present(30).click
   end
 
 
