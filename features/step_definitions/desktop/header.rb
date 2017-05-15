@@ -119,14 +119,14 @@ end
 
 Then(/^I can specify desired dress for search\.$/) do
   on(HomePage) do |page|
-    page.specify_dress_for_search('Kirrily')
+    page.specify_dress_for_search('The Kismet')
     page.txtSearch_element.send_keys :return
   end
 end
 
 And(/^the founded dress can be opened\.$/) do
   on(HomePage) do |page|
-    page.open_dress('Kirrily')
+    page.open_dress('The Kismet')
   end
 end
 

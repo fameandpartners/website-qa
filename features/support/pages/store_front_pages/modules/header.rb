@@ -85,7 +85,7 @@ module Header
   end
 
   def open_dress(dress_name)
-    self.span_element(text: dress_name).when_present.click
+    self.span_element(text: dress_name).when_present(30).click
   end
 
   def slideout_shopping_cart
