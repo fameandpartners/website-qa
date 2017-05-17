@@ -4,11 +4,11 @@ class Gmail
   page_url "http://gmail.com"
   inbox_url = 'https://mail.google.com/mail/#inbox'
 
-  text_field(:txtEmail, id: 'Email')
-  button(:btnNext, id: 'next')
-  text_field(:txtPasswd, id: 'Passwd')
+  text_field(:txtEmail, id: 'identifierId')
+  span(:btnNext, text: 'Next')
+  text_field(:txtPasswd, name: 'password')
   button(:btnSignInGmail, id: 'signIn')
-  span(:spnFandPemail, xpath: "//span[contains(text(),'reset your password')]")
+  span(:spnFandPemail, xpath: "//b[contains(text(),'Password Reset Instructions')]/../span")
   link(:lnkResetPwd, xpath: "//a[contains(text(),'https://')]")
 
   def specify_gmail(gmail)
@@ -24,7 +24,7 @@ class Gmail
   end
 
   def specify_gpwd(gpwd)
-    self.txtPasswd_element.when_present.set(gpwd)
+    self.txtPasswd_element.when_present(30).set(gpwd)
   end
 
   def sign_in_gmail

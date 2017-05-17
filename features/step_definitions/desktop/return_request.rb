@@ -4,19 +4,27 @@ Given(/^as a customer I buy a dress\.$/) do |table|
     page.visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
   end
   on(ProductPage) do |page|
-    page.open_dress_size
-    @dress_size = MainBasePage::USA_SIZES[rand(MainBasePage::USA_SIZES.length)]
-    page.select_dress_size(@dress_size)
-    puts "Selected dress size is: #{@dress_size}"
-    page.open_skirt_length
-    @dress_length = MainBasePage::LENGTH[rand(MainBasePage::LENGTH.length)]
-    page.select_skirt_length(@dress_length)
-    puts "Selected dress length is: #{@dress_length}"
+
+    page.open_size_profile
+    page.change_metric('cm')
+    random_growth = page.get_random_growth.to_i
+    puts "Random growth is: #{random_growth}cm"
+    page.specify_your_growth(random_growth)
+
+    random_size = page.get_random_dress_size('USA')
+    puts "Random size is: #{random_size}"
+    page.specify_random_size(random_size)
+
+    page.save_pdp_size_profile
+
     @dress_color = page.div_element(xpath: "//div[text()='Color']/..//div[contains(@class,'content__right')]").text
     puts "Selected dress color is: #{@dress_color}"
     @product_price = page.divProductPrice_element.text.gsub(/[^\d\.]/, '').to_f
     puts "Product price is: #{@product_price}"
     page.add_to_bag
+
+
+
   end
   on(CheckOutPage) do |page|
     first_name = Faker::Name.first_name
@@ -85,6 +93,9 @@ end
 And(/^all data of selected dress are correct\.$/) do
   on(ReturnExchangePage) do |page|
     dress_size = "Size: #{@dress_size.gsub(/\s+/, "")}"
+
+    # sample_customization = page.divs_for(css: '.CAD--addon-list-item .name').map(&:text).sample
+
     return_order_dress_size = page.div_element(xpath: "//div[@class='size']").text
     dress_height = @dress_length.capitalize
     return_order_dress_height = page.div_element(xpath: "//div[@class='size']").text

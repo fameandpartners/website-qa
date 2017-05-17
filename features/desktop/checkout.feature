@@ -5,7 +5,8 @@ Feature: Checkout process.
   @smoke
   Scenario Outline: As an anonymous user I can buy a dress.
     When I go to "<Country>" site version.
-    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
+    Then specify random dress size and growth for the dress.
+#    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     Then I fill in form fields with:
       | Email                   | anonymous_user@fameandpartners.com  |
@@ -40,7 +41,8 @@ Feature: Checkout process.
   Scenario Outline: As a registered user I can buy a dress.
     When I go to "<Country>" site version.
     And I login as user.
-    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
+    Then specify random dress size and growth for the dress.
+#    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     Then I fill in form fields with:
       | Email                   | auto.user.fm@gmail.com    |
@@ -75,7 +77,8 @@ Feature: Checkout process.
   @smoke
   Scenario Outline: As an anonymous user I can buy a dress with an extra $30 fee charge shipping.
     When I go to "<Country>" site version.
-    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
+    Then specify random dress size and growth for the dress.
+#    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     And I fill in form fields with:
       | Email                   | anonymous_user@fameandpartners.com    |
@@ -111,7 +114,8 @@ Feature: Checkout process.
   Scenario Outline: As a registered user I can buy a dress with an extra $30 fee charge shipping.
     When I go to "<Country>" site version.
     And I login as user.
-    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
+    Then specify random dress size and growth for the dress.
+#    Then specify "<Dress Size>" dress Size and "<Height & Hemline>" skirt length of the dress.
     And add the dress to cart.
     And I fill in form fields with:
       | Email                   | auto.user.fm@gmail.com    |

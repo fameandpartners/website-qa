@@ -110,21 +110,27 @@ And(/^confirm password reset\.$/) do
       page.specify_gmail(CONFIG['chrome_user'])
       page.go_next
       page.specify_gpwd(CONFIG['chrome_user_pwd'])
+      page.go_next
+      # page.specify_gmail(CONFIG['chrome_user'])
+      # page.go_next
     elsif browser_name == 'firefox'
       page.specify_gmail(CONFIG['firefox_user'])
       page.go_next
       page.specify_gpwd(CONFIG['firefox_user_pwd'])
+      page.go_next
     elsif browser_name == 'internet explorer'
       page.specify_gmail(CONFIG['ie_user'])
       page.go_next
       page.specify_gpwd(CONFIG['ie_user_pwd'])
+      page.go_next
     elsif browser_name == 'safari'
       page.specify_gmail(CONFIG['safari_user'])
       page.go_next
       page.specify_gpwd(CONFIG['safari_user_pwd'])
+      page.go_next
     end
-    page.sign_in_gmail
-    page.goto_inbox
+    # page.sign_in_gmail
+    # page.goto_inbox
     page.open_res_email
     page.click_reset_link
   end
