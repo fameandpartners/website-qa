@@ -15,5 +15,4 @@ Feature: Set preconditions.
 
   Scenario: Disable sales.
     When I go to Sales tab.
-    Then I check for active Sale.
-    And deactivate it if it is.
+    Then deactivate active Sale(s).

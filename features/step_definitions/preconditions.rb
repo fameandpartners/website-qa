@@ -7,12 +7,8 @@ When(/^I go to Sales tab\.$/) do
   on(SalesPage).visit_site_version(country: 'USA', url: '/admin/sales')
 end
 
-Then(/^I check for active Sale\.$/) do
+Then(/^deactivate active Sale\(s\)\.$/) do
   on(SalesPage) do |page|
     page
   end
-end
-
-And(/^deactivate it if it is\.$/) do
-  pending
 end

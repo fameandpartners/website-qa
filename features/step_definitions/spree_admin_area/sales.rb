@@ -20,12 +20,12 @@ Then(/^make it ([^"]*) discount type, active and sitewide\.$/) do |discount_type
         @percent = Random.new.rand(10..35)
         puts "Specified percent sale is: #{@percent}%"
       when 'Fixed'
-        @percent = Random.new.rand(11.2...76.9).round(2)
+        @percent = Random.new.rand(11...99)
         puts "Specified fixed sale is: #{@percent}%"
     end
     page.specify_discount_size(@percent)
 
-    page.select_discount_type(dicount_type)
+    page.select_discount_type(discount_type)
     page.select_currency('ALL')
     page.click_create_sale
     page.visit_site_version(country: 'USA', url: '/logout')
@@ -38,7 +38,7 @@ And(/^verify that percentage sale price is applied to products for (.*) website\
     page.visit_site_version(country: country, url: '/dresses', basic_auth: true)
     old_price = page.span_element(xpath: "(//span[@class='price-original'])[1]").text.gsub(/[^\d\.]/, '').to_f
     sale_price = page.span_element(xpath: "(//span[@class='price-sale'])[1]").text.gsub(/[^\d\.]/, '').to_f
-    discount = old_price * (1 - @percent.to_f/100).round(2)
+    discount = (old_price * (1 - @percent.to_f/100)).round(2)
     puts <<-EOS
   Sale is: #{@percent}%
   Old price is: #{old_price}$
@@ -70,14 +70,15 @@ end
 Then(/^add products into your cart and go to Checkout\.$/) do
   on(ProductsPage).link_element(xpath: "(//a[contains(@class,'product-name')])[1]").when_present(30).click
   on(ProductPage) do |page|
-    page.open_dress_size
-    dress_size = page.get_random_dress_size(@country)
-    puts "Selected dress size is: #{dress_size}"
-    page.select_dress_size(dress_size)
-    page.open_skirt_length
-    skirt_length = page.get_random_skirt_length
-    puts "Selected skirt length is: #{skirt_length.capitalize}"
-    page.select_skirt_length(skirt_length)
+    page.open_size_profile
+    page.change_metric('cm')
+    random_growth = page.get_random_growth.to_i
+    page.specify_your_growth(random_growth)
+    puts "Specified random growth is: #{random_growth}cm"
+    random_size = page.get_random_dress_size(@country)
+    puts "Random size is: #{random_size}"
+    page.specify_random_size(random_size)
+    page.save_pdp_size_profile
     page.add_to_bag
   end
 end

@@ -126,7 +126,17 @@ module Product
 
 
   def change_metric(metric_type)
-    self.chkMetric_element.when_present(30).click
+    case metric_type
+      when 'cm'
+        if self.chkMetric_element.attribute("class") == 'RadioToggle left'
+          self.chkMetric_element.when_present(30).click
+        end
+      when 'inch'
+        if self.chkMetric_element.attribute("class") == 'RadioToggle right'
+          self.chkMetric_element.when_present(30).click
+        end
+    end
+
   end
 
 
