@@ -2,10 +2,15 @@ Given(/^I create a new guest user order\.$/) do |table|
   on(ProductPage) do |page|
     page.visit_site_version(country: 'USA', url: '', basic_auth: true)
     page.visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
-    page.open_dress_size
-    page.select_dress_size('US 10')
-    page.open_skirt_length
-    page.select_skirt_length('PETITE'.downcase)
+    page.open_size_profile
+    page.change_metric('cm')
+    random_growth = page.get_random_growth.to_i
+    page.specify_your_growth(random_growth)
+    puts "Specified random growth is: #{random_growth}cm"
+    random_size = page.get_random_dress_size('USA')
+    puts "Random size is: #{random_size}"
+    page.specify_random_size(random_size)
+    page.save_pdp_size_profile
     page.add_to_bag
   end
   on(CheckOutPage) do |page|
