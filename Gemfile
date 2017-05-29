@@ -1,12 +1,12 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
-
-gem 'cucumber'
+gem 'cucumber', '2.4.0'
 gem 'rspec'
 gem 'rake'
-gem 'page-object'
-gem 'watir'
-gem 'watir-scroll'
+gem 'page-object', '2.0.0'
+gem 'watir', '6.1.0'
+gem 'watir-scroll', '0.3.0'
 gem 'faker'
+gem 'selenium-webdriver', '3.0.5'
 # gem 'pry'
 # gem 'pry-remote'
