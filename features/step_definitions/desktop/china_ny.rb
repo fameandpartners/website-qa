@@ -22,7 +22,7 @@ end
 Then(/^check CNY delivery time on checkout\.$/) do |msg|
   on(CheckOutPage) do |page|
     page.divAddressForm_element.when_present
-    estim_delivery = @browser.dd(xpath:"//div[contains(@class,'product-form')]//dd[text()='Estimated delivery: 2 weeks']").text
+    estim_delivery = @browser.dd(xpath:"//div[contains(@class,'product-form')]//dd[text()='Estimated delivery, 22 - 25 business days']").text
     expect(estim_delivery).to eql('Estimated Delivery: 2 Weeks')
 
     chk_msg_delivery = page.paragraph_element(xpath:"//div[contains(@class,'product-form')]//p[contains(text(),'delivery timeline')]").text

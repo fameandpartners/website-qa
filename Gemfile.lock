@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     builder (3.2.3)
     childprocess (0.6.1)
@@ -66,13 +66,14 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  cucumber
+  cucumber (= 2.4.0)
   faker
-  page-object
+  page-object (= 2.0.0)
   rake
   rspec
-  watir
-  watir-scroll
+  selenium-webdriver (= 3.0.5)
+  watir (= 6.1.0)
+  watir-scroll (= 0.3.0)
 
 BUNDLED WITH
    1.12.5

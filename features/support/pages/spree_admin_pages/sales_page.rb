@@ -86,6 +86,13 @@ class SalesPage < MainBasePage
     end
   end
 
+  def delete_all_sales
+    while self.link_element(xpath:"//td[text()='Active']/..//a[contains(@class,'delete-resource')]").visible?
+      self.link_element(xpath: "//td[text()='Active']/..//a[contains(@class,'delete-resource')]").when_present(30).click
+      @browser.alert.ok
+    end
+  end
+
   def edit_sale(sale_name)
     self
   end

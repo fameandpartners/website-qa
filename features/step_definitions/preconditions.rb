@@ -9,6 +9,6 @@ end
 
 Then(/^deactivate active Sale\(s\)\.$/) do
   on(SalesPage) do |page|
-    page
+    page.delete_all_sales
   end
 end
