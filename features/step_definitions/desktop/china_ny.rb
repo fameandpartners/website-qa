@@ -19,15 +19,15 @@ end
 And(/^add a dress to cart\.$/) do
   on(ProductPage).add_to_bag
 end
-Then(/^check CNY delivery time on checkout\.$/) do |msg|
+Then(/^check CNY delivery time period on checkout\.$/) do #|msg|
   on(CheckOutPage) do |page|
     page.divAddressForm_element.when_present
-    estim_delivery = @browser.dd(xpath:"//div[contains(@class,'product-form')]//dd[text()='Estimated delivery, 22 - 25 business days']").text
+    estim_delivery = @browser.dd(xpath:"//div[contains(@class,'product-form')]//dd[text()='22 - 25 business days']").text
     expect(estim_delivery).to eql('Estimated Delivery: 2 Weeks')
 
-    chk_msg_delivery = page.paragraph_element(xpath:"//div[contains(@class,'product-form')]//p[contains(text(),'delivery timeline')]").text
-    puts chk_msg_delivery
-    expect(chk_msg_delivery).to eql(msg)
+    # chk_msg_delivery = page.paragraph_element(xpath:"//div[contains(@class,'product-form')]//p[contains(text(),'delivery timeline')]").text
+    # puts chk_msg_delivery
+    # expect(chk_msg_delivery).to eql(msg)
   end
 end
 
@@ -59,26 +59,47 @@ But(/^complete order\.$/) do |table|
   end
 end
 
-And(/^check estimated delivery on order confirm page\.$/) do
+And(/^order confirm page contains (\d+) delivery days\.$/) do |dlv_days|
+  sleep 5
+  @browser.refresh
   on(OrderPage) do |page|
-    exp_deliver_date = (Date.today + 14).strftime('%d of %b, %Y')
+    exp_deliver_date_column = (Date.today + dlv_days.to_i).strftime('%d of %b, %Y')
+    exp_dlv_dt_ord_dtls = (Date.today + dlv_days.to_i).strftime('%a, %d %b %Y')
+    puts "Calculated expected standard order on: #{exp_deliver_date_column}"
+    puts "Calculated expected delivery date is: #{exp_dlv_dt_ord_dtls}"
     page.h1_element(xpath: "//h1[text()='Thanks for your order!']").when_present(30)
     @browser.scroll.to :center
-    expect(page.h4_element(xpath: "//h4[text()='Expect Standard delivery: #{exp_deliver_date}']").visible?).to be_truthy
-    order_deliver_date = page.h4_element(xpath: "//h4[text()='Expect Standard delivery: #{exp_deliver_date}']").text
-    puts order_deliver_date
+    expect(page.h4_element(xpath: "//h4[text()='EXPECT YOUR STANDARD ORDER ON #{exp_deliver_date_column}.']").visible?).to be_truthy
+    full_order_delivery_date = page.div_element(xpath: "//div[@class='delivery-date']").text
+    puts <<-EOS
+      Order's delivery date info is:
+
+      #{full_order_delivery_date}
+    EOS
+
+    expect(page.h4_element(xpath: "//div[@class='delivery-date']/h4[text()='Expected delivery date']").visible?).to be_truthy
+    expect(page.span_element(xpath: "//div[@class='delivery-date']/span[text()='#{exp_dlv_dt_ord_dtls}']").visible?).to be_truthy
+    order_deliver_date = page.h4_element(xpath: "//h4[text()='EXPECT YOUR STANDARD ORDER ON #{exp_deliver_date_column}.']").text
+    puts "EXPECT YOUR STANDARD ORDER ON #{order_deliver_date}"
   end
 end
 
-Then(/^check Expected delivery date in profile\.$/) do
+
+
+Then(/^expected delivery date in profile increased on (\d+) days\.$/) do |days|
   on(MyProfilePage) do |page|
     page.visit_site_version(country: 'USA', url: '/user_orders')
     page.tblOrdersTable_element.when_present
-    d = (Date.today + 14).strftime('%m/%d/%y')
+    d = (Date.today + days.to_i).strftime('%m/%d/%y')
     prof_exp_delivery_date = page.cell_element(xpath:"//a[text()='#{@order_number}']/../..//td[text()='#{d}']").text
-    puts prof_exp_delivery_date
+    puts "Order delivery date in profile is: #{prof_exp_delivery_date}"
   end
 end
+
+
+
+
+
 
 And(/^check Expected delivery date in email\.$/) do
   on(CustomerIO) do |page|
@@ -96,3 +117,5 @@ And(/^check Expected delivery date in email\.$/) do
     expect(order_volume).to eql("We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment.\nWe'll be back to our normal timeline of 7-10 days soon.")
   end
 end
+
+
