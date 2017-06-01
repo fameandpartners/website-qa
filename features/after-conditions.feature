@@ -12,6 +12,3 @@ Feature: Set preconditions.
       | Fast Making    | express_making      |
     Then expire cache.
 
-  Scenario: Disable sales.
-    When I go to Sales tab.
-    Then deactivate active Sale(s).

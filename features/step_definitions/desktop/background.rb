@@ -55,7 +55,7 @@ Given(/^as a customer I create a new order\.$/) do |table|
       Order Total: #{order_total}
     EOS
     @prices = {
-        sub_total:  sub_total,
+        sub_total: sub_total,
         shipping: shipping,
         order_total: order_total
     }
@@ -79,7 +79,7 @@ end
 Given(/^open admin users page\.$/) do
   on(LoginPage) do |page|
     page.visit_site_version(country: 'USA', url: '/login', basic_auth: true)
-    page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
+    page.specify_credentials(CONFIG['spree_admin'], CONFIG['admin_pwd'])
     page.submit_login
     page.visit_site_version(country: 'USA', url: '/admin/users')
   end
@@ -88,7 +88,7 @@ end
 Given(/^I login to admin area\.$/) do
   on(LoginPage) do |page|
     page.visit_site_version(country: 'USA', url: '/login', basic_auth: true)
-    page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
+    page.specify_credentials(CONFIG['spree_admin'], CONFIG['admin_pwd'])
     page.submit_login
   end
 end
@@ -102,7 +102,7 @@ Given(/^enable China New Year flag\.$/) do
     # page.visit_site_version(country: 'USA', url: '/login')
   end
   on(LoginPage) do |page|
-    page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
+    page.specify_credentials(CONFIG['spree_admin'], CONFIG['admin_pwd'])
     page.submit_login
     page.visit_site_version(country: 'USA', url: '/fame_admin/backend/features')
   end
@@ -113,6 +113,7 @@ Given(/^enable China New Year flag\.$/) do
   end
 end
 
+
 Given(/^I login as "([^"]*)"\.$/) do |user_role|
   on(LoginPage) do |page|
     session_data[browser_name][:is_authorized] = true
@@ -120,7 +121,7 @@ Given(/^I login as "([^"]*)"\.$/) do |user_role|
     page.visit_site_version(country: 'USA', url: '/login')
     case user_role
       when 'admin'
-        page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
+        page.specify_credentials(CONFIG['spree_admin'], CONFIG['admin_pwd'])
       when 'user'
         page.specify_registered_user(browser_name)
     end
@@ -134,7 +135,7 @@ Given(/^as admin I disable China New Year feature flag\.$/) do
     page.visit_site_version(country: 'USA', url: '/login')
   end
   on(LoginPage) do |page|
-    page.specify_credentials(CONFIG['spree_admin'],CONFIG['admin_pwd'])
+    page.specify_credentials(CONFIG['spree_admin'], CONFIG['admin_pwd'])
     page.submit_login
     page.visit_site_version(country: 'USA', url: '/fame_admin/backend/features')
   end
@@ -151,3 +152,27 @@ Given(/^I am on Wedding Atelier page\.$/) do
     page.visit_site_version(country: 'Australia', url: '', basic_auth: true)
   end
 end
+
+
+Given(/^I disable CNY flag\.$/) do
+  on(HomePage) do |page|
+    page.visit_site_version(country: 'USA', url: '/logout', basic_auth: true)
+    page.visit_site_version(country: 'USA', url: '/login')
+    # page.visit_site_version(country: 'USA', url: '', basic_auth: true)
+    # page.click_my_account
+  end
+  on(LoginPage) do |page|
+    page.specify_credentials(CONFIG['spree_admin'], CONFIG['admin_pwd'])
+    page.submit_login
+    page.visit_site_version(country: 'USA', url: '/fame_admin/backend/features')
+  end
+  on(FameAdminPage) do |page|
+    page.cny_flag('disable')
+    page.expire_cache
+    page.visit_site_version(country: 'USA', url: '/logout')
+  end
+end
+
+
+
+

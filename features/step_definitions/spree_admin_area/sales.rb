@@ -1,3 +1,7 @@
+When(/^I go to Sales tab\.$/) do
+  on(SalesPage).visit_site_version(country: 'USA', url: '/admin/sales')
+end
+
 When(/^I create a new Sale\.$/) do
   on(SalesPage) do |page|
     page.visit_site_version(country: 'USA', url: '/admin/sales')
@@ -180,4 +184,10 @@ end
 
 And(/^Sale price is displayed on order confirmation email\.$/) do
   pending
+end
+
+Then(/^deactivate active Sale\(s\)\.$/) do
+  on(SalesPage) do |page|
+    page.delete_all_sales
+  end
 end

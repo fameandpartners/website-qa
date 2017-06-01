@@ -3,12 +3,4 @@ When(/^I am on Fame admin feature flags\.$/) do
 end
 
 
-When(/^I go to Sales tab\.$/) do
-  on(SalesPage).visit_site_version(country: 'USA', url: '/admin/sales')
-end
 
-Then(/^deactivate active Sale\(s\)\.$/) do
-  on(SalesPage) do |page|
-    page.delete_all_sales
-  end
-end
