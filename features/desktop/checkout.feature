@@ -178,7 +178,6 @@ Feature: Checkout process.
     Then "Thanks for your order!" page with order number displayed.
     And it appears in "USA" orders admin area.
 
-    #new size profile done
   Scenario: As a user I can delete a dress from checkout.
     When I go to "USA" site version.
     Then specify random dress size and growth for the dress.
