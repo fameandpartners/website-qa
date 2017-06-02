@@ -94,8 +94,6 @@ And(/^all data of selected dress are correct\.$/) do
   on(ReturnExchangePage) do |page|
     dress_size = "Size: #{@dress_size.gsub(/\s+/, "")}"
 
-    # sample_customization = page.divs_for(css: '.CAD--addon-list-item .name').map(&:text).sample
-
     return_order_dress_size = page.div_element(xpath: "//div[@class='size']").text
     dress_height = @dress_length.capitalize
     return_order_dress_height = page.div_element(xpath: "//div[@class='size']").text

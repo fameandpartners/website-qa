@@ -72,7 +72,8 @@ end
 
 When(/^I am on product page\.$/) do
   on(ProductPage).visit_site_version(country: 'USA', url: '', basic_auth: true)
-  on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
+  # on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
+  on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-the-demas-dress-1511?color=navy')
 end
 
 

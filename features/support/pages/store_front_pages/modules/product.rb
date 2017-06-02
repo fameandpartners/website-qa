@@ -25,6 +25,8 @@ module Product
   link(:lnkCloseCustomize, xpath: "//*[text()='Select your customization']/..//a[@class='btn-close med']")
 
   link(:lnkSizeProfile, text: 'Size Profile')
+  link(:lnkCustomizeIt, text: 'Customize It')
+  button(:btnApplyCustomizations, text:'Apply Customizations')
   button(:chkMetric, id: 'metric')
   div(:divSizeFitTab, id: 'tab-size-fit')
   text_field(:txtHeightCm, id: 'height-option-cm')
@@ -139,11 +141,21 @@ module Product
 
   end
 
+  def open_customize_it
+    self.lnkCustomizeIt_element.when_present(30).click
+    sleep 1
+  end
 
-  # def close_dress_size
-  #   self.lnkCloseDressSize_element.when_present.click
-  #   self.divSizeFitTab_element.when_present
-  # end
+  def select_random_customization
+    sample_customizations = @browser.spans(css: '.CAD--addon-list-item .name').map(&:text).sample
+    self.span_element(text: sample_customizations).when_present(20).click
+    puts "Selected customization is: #{sample_customizations}"
+    sleep 3
+  end
+
+  def apply_customizations
+    self.btnApplyCustomizations_element.when_present(30).click
+  end
 
   def specify_your_size(dress_size:)
     self.link_element(xpath: "//a[contains(text(),'#{dress_size}')]").when_present(30).click
@@ -216,7 +228,6 @@ module Product
   def click_amber_image
     self.imgAmber_element.when_present(30).click
   end
-
 
   def get_random_dress_size(country)
     case country

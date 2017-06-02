@@ -23,6 +23,7 @@ Feature: Product page.
   @smoke
   Scenario: As a user I can customize a dress and add it to bag.
     When I select random "Dress Size" and "Growth".
+    Then select random customization.
     Then I can add a dress to bag.
     And I go to checkout process.
 

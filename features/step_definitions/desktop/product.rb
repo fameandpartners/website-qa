@@ -104,6 +104,16 @@ When(/^I select random "Dress Size" and "Growth"\.$/) do
   end
 end
 
+Then(/^select random customization\.$/) do
+  on(ProductPage) do |page|
+    page.open_customize_it
+    page.select_random_customization
+    page.apply_customizations
+    # page.puts_existing_customizations
+  end
+end
+
+
 Then(/^I can add a dress to bag\.$/) do
   on(ProductPage) do |page|
     page.add_to_bag
@@ -165,3 +175,4 @@ Then(/^I can open Free Styling Session via "Amber Bond" image link\.$/) do
     page.click_amber_image
   end
 end
+
