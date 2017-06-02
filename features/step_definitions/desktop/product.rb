@@ -24,7 +24,7 @@ Then(/^specify random dress size and growth for the dress\.$/) do
     puts "Random growth is: #{random_growth}cm"
     page.specify_your_growth(random_growth)
 
-    random_size = page.get_random_dress_size('USA')
+    random_size = page.get_random_dress_size(@country_version)
     puts "Random size is: #{random_size}"
     page.specify_random_size(random_size)
 

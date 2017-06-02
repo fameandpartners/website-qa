@@ -33,9 +33,9 @@ Feature: Checkout process.
     And it appears in "<Country>" orders admin area.
 
     Examples:
-      | Country   | Ship Country  | State           | City    | Dress Size | Height & Hemline |
-      | USA       | United States | Washington      | Seattle | US 10      | PETITE           |
-      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD         |
+      | Country   | Ship Country  | State           | City    |
+      | USA       | United States | Washington      | Seattle |
+      | Australia | Australia     | New South Wales | Sydney  |
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress.
@@ -70,9 +70,9 @@ Feature: Checkout process.
     And it appears in "<Country>" orders admin area.
 
     Examples:
-      | Country   | Ship Country  | State           | City    | Dress Size | Height & Hemline |
-      | USA       | United States | Washington      | Seattle | US 10      | PETITE           |
-      | Australia | Australia     | New South Wales | Sydney  | AU 6       | STANDARD         |
+      | Country   | Ship Country  | State           | City    |
+      | USA       | United States | Washington      | Seattle |
+      | Australia | Australia     | New South Wales | Sydney  |
 
   @smoke
   Scenario Outline: As an anonymous user I can buy a dress with an extra $30 fee charge shipping.
@@ -106,9 +106,9 @@ Feature: Checkout process.
     And it appears in "<Country>" orders admin area.
 
     Examples:
-      | Country   | Ship Country  | State   | City      | Dress Size | Height & Hemline |
-      | USA       | Austria       | Wien    | Ayia Napa | US 10      | PETITE           |
-      | Australia | China         | Shanxi  | Taiyuan   | AU 6       | STANDARD         |
+      | Country   | Ship Country  | State   | City      |
+      | USA       | Austria       | Wien    | Ayia Napa |
+      | Australia | China         | Shanxi  | Taiyuan   |
 
   @smoke
   Scenario Outline: As a registered user I can buy a dress with an extra $30 fee charge shipping.
@@ -144,9 +144,9 @@ Feature: Checkout process.
     And it appears in "<Country>" orders admin area.
 
     Examples:
-      | Country   | Ship Country  | State   | City      | Dress Size | Height & Hemline |
-      | USA       | Austria       | Wien    | Ayia Napa | US 10      | PETITE           |
-      | Australia | China         | Shanxi  | Taiyuan   | AU 6       | STANDARD         |
+      | Country   | Ship Country  | State   | City      |
+      | USA       | Austria       | Wien    | Ayia Napa |
+      | Australia | China         | Shanxi  | Taiyuan   |
 
   @smoke #new size profile done
   Scenario: As a user I can buy a dress with a discount coupon.
