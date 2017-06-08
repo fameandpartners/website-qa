@@ -4,7 +4,6 @@ Given(/^as a customer I buy a dress\.$/) do |table|
     page.visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
   end
   on(ProductPage) do |page|
-
     page.open_size_profile
     page.change_metric('cm')
     random_growth = page.get_random_growth.to_i
@@ -22,9 +21,6 @@ Given(/^as a customer I buy a dress\.$/) do |table|
     @product_price = page.divProductPrice_element.text.gsub(/[^\d\.]/, '').to_f
     puts "Product price is: #{@product_price}"
     page.add_to_bag
-
-
-
   end
   on(CheckOutPage) do |page|
     first_name = Faker::Name.first_name

@@ -13,7 +13,7 @@ Feature: Sales.
     Then get out of Checkout and continue shopping
     And go to any of the category pages.
     And user won't get 500th error.
-    But delete created sale.
+#    But delete created sale.
 
     Examples:
       | country   |
@@ -29,7 +29,7 @@ Feature: Sales.
     Then get out of Checkout and continue shopping
     And go to any of the category pages.
     And user won't get 500th error.
-    But delete created sale.
+#    But delete created sale.
 
     Examples:
       | country   |
