@@ -4,7 +4,7 @@ Feature: China New Year.
     Given enable China New Year flag.
     Then I login as "user".
     When I am on product page.
-    Then check CNY delivery time is "Estimated delivery, 2 weeks".
+    Then check CNY delivery time is "Estimated delivery, 22 - 25 days".
     And open cart.
     And cart contains "CNY delay delivery" message.
       """

@@ -14,9 +14,9 @@ Feature: Product page.
 
   Scenario: Product page contains right customization bar.
     When right bar contains customization elements:
-      | Color        |
-      | Customize    |
-      | Size Profile |
+      | Color selection | Color        |
+      | Customization   | Customize It |
+      | Size selection  | Size Profile |
     Then they can be opened and closed.
     But "Add to bag" button redirects to Checkout when "Size Profile" is selected.
 

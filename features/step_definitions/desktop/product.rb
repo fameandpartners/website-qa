@@ -81,9 +81,10 @@ end
 
 And(/^right bar contains customization elements\:$/) do |table|
   data = table.raw
+  # self.txtNameOnCard_element.value = data['Name on card']
   on(ProductPage) do |page|
-    expect(page.div_element(text: 'Color').present?).to be_truthy
-    expect(page.div_element(text: 'Customize').present?).to be_truthy
+    expect(page.div_element(text: data['Color selection']).present?).to be_truthy
+    expect(page.link_element(text: 'Customize It').present?).to be_truthy
     expect(page.link_element(text: 'Size Profile').present?).to be_truthy
   end
 end
