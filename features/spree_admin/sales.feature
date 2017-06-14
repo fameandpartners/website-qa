@@ -53,7 +53,6 @@ Feature: Sales.
 #      | USA       | USD      | Percentage    |
 #      | Australia | AUD      | Percentage    |
 
-
   Scenario: Delete all active Sale(s).
     When I go to Sales tab.
     Then deactivate active Sale(s).

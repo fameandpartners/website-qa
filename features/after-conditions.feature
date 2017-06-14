@@ -1,5 +1,5 @@
 @preconditions
-Feature: Set preconditions.
+Feature: Set after conditions.
 
   Background: Login as admin.
     Given I login as "admin".
@@ -12,3 +12,6 @@ Feature: Set preconditions.
       | Fast Making    | express_making      |
     Then expire cache.
 
+  Scenario: Delete all active Sale(s).
+    When I go to Sales tab.
+    Then deactivate active Sale(s).

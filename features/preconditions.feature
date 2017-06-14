@@ -15,3 +15,5 @@ Feature: Set preconditions.
   Scenario: Disable sales.
     When I go to Sales tab.
     Then deactivate active Sale(s).
+
+  Scenario: Recycle cart for registered user.
