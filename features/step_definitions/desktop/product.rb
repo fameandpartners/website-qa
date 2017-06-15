@@ -6,6 +6,11 @@ When(/^I select "([^"]*)" site version\.$/) do |country|
   end
 end
 
+When(/^I am on "([^"]*)" product page\.$/) do |country|
+  on(ProductPage).visit_site_version(country: country, url: '', basic_auth: true)
+  on(ProductPage).visit_site_version(country: country, url: '/dresses/dress-the-demas-dress-1511?color=navy')
+  @country_version=country
+end
 
 When(/^I go to "([^"]*)" site version\.$/) do |country|
   session_data[browser_name][:is_authorized] = false
@@ -16,6 +21,7 @@ end
 
 Then(/^specify random dress size and growth for the dress\.$/) do
   on(ProductPage) do |page|
+
     page.visit_site_version(country: @country_version, url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
 
     page.open_size_profile
@@ -23,7 +29,6 @@ Then(/^specify random dress size and growth for the dress\.$/) do
     random_growth = page.get_random_growth.to_i
     puts "Random growth is: #{random_growth}cm"
     page.specify_your_growth(random_growth)
-
     random_size = page.get_random_dress_size(@country_version)
     puts "Random size is: #{random_size}"
     page.specify_random_size(random_size)

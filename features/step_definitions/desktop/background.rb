@@ -70,12 +70,6 @@ Given(/^open "([^"]*)" home page\.$/) do |site_ver|
   on(HomePage).visit_site_version(country: site_ver, url: '', basic_auth: true)
 end
 
-When(/^I am on product page\.$/) do
-  on(ProductPage).visit_site_version(country: 'USA', url: '', basic_auth: true)
-  # on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
-  on(ProductPage).visit_site_version(country: 'USA', url: '/dresses/dress-the-demas-dress-1511?color=navy')
-end
-
 
 Given(/^open admin users page\.$/) do
   on(LoginPage) do |page|
@@ -173,7 +167,4 @@ Given(/^I disable CNY flag\.$/) do
     page.visit_site_version(country: 'USA', url: '/logout')
   end
 end
-
-
-
 

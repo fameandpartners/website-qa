@@ -3,7 +3,7 @@ Feature: China New Year.
   Scenario: As a customer during the CNY dates, I want to know about delivery delays.
     Given enable China New Year flag.
     Then I login as "user".
-    When I am on product page.
+    When I am on "USA" product page.
     Then check CNY delivery time is "Estimated delivery, 17 - 20 business days".
     And open cart.
     And cart contains "CNY delay delivery" message.
@@ -22,8 +22,8 @@ Feature: China New Year.
       | Expiration Month | 10                |
       | Expiration Year  | 2020              |
       | CVC              | 123               |
-    And order confirm page contains 14 delivery days.
-    Then expected delivery date in profile increased on 14 days.
+    And order confirm page contains "17 - 20" delivery days.
+    Then expected delivery date in profile increased on 20 days.
 #    And check Expected delivery date in email.
 
   Scenario: Disable CNY.
