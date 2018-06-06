@@ -1,5 +1,5 @@
 Then(/^I go to "Forgot Password" form\.$/) do
-  on(HomePage).click_my_account
+  on(HomePage).click_log_in_sign_up
   on(LoginPage).open_forgot_pwd
 end
 #~~~ Reset a password. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

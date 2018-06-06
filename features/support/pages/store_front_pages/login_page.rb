@@ -88,7 +88,7 @@ class LoginPage < MainBasePage
     end
   end
 
-  def create_account
+  def click_create_account
     self.lnkCreateAcc_element.when_present.click
   end
 

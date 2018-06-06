@@ -127,7 +127,7 @@ end
 
 Then(/^apply a coupon for 25% discount\.$/) do
   on(CheckOutPage) do |page|
-    page.specify_coupon(CONFIG['coupon'])
+    page.specify_coupon(CONFIG['coupon_25_percent'])
     page.apply_coupon
   end
 end

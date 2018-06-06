@@ -8,8 +8,8 @@ module HooksHelper
     ENV.fetch('BROWSER_NAME', 'chrome')
   end
 
-  def url
-    ENV.fetch('URL', 'localhost:4444')
+  def grid_url
+    ENV.fetch('GRID_URL', 'localhost:4444')
   end
 
   def environment

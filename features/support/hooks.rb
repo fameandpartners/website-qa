@@ -4,25 +4,25 @@ require_relative('../../features/support/hooks_helper')
 include HooksHelper
 
 Before do |scenario|
-  def assert_it message, &block
-    begin
-      if (block.call)
-        puts "Assertion PASSED for #{message}"
-      else
-        puts "Assertion FAILED for #{message}"
-        fail('Test Failure on assertion')
-      end
-    rescue => e
-      puts "Assertion FAILED for #{message} with exception '#{e}'"
-      fail('Test Failure on assertion')
-    end
-  end
+  # def assert_it message, &block
+  #   begin
+  #     if (block.call)
+  #       puts "Assertion PASSED for #{message}"
+  #     else
+  #       puts "Assertion FAILED for #{message}"
+  #       fail('Test Failure on assertion')
+  #     end
+  #   rescue => e
+  #     puts "Assertion FAILED for #{message} with exception '#{e}'"
+  #     fail('Test Failure on assertion')
+  #   end
+  # end
 
   if browser_path != nil
     Selenium::WebDriver::Firefox.path= "#{browser_path}"
   end
   if environment == :grid
-    @browser = Watir::Browser.new(:remote, :url => "http://#{url}/wd/hub", :desired_capabilities => {browserName: browser_name, version: browser_version})
+    @browser = Watir::Browser.new(:remote, :url => "http://#{grid_url}/wd/hub", :desired_capabilities => {browserName: browser_name, version: browser_version})
     @browser.window.maximize
   else
     @browser = Watir::Browser.new browser_name
@@ -48,7 +48,8 @@ After do |scenario|
     FileUtils.mkdir_p(datetime_folder)
     screenshot_file = File.join(datetime_folder, file_name)
     @browser.driver.save_screenshot(screenshot_file)
-    embed screenshot_file, 'image/png'
+    attach_file(file_name, screenshot_file)
+    # embed screenshot_file, 'image/png'
   end
   @browser.close
 end

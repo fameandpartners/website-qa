@@ -89,7 +89,7 @@ end
 
 But(/^apply an additional discount using a code\.$/) do
   on(CheckOutPage) do |page|
-    page.specify_coupon(CONFIG['coupon'])
+    page.specify_coupon(CONFIG['coupon_25_percent'])
     page.apply_coupon
   end
 end

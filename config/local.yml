@@ -1,6 +1,9 @@
 base_url: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com'
 base_url_au: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com.au'
 
+spree_admin: automation.admin@fameandpartners.com
+admin_pwd: 1qaz2wsx
+
 twit_usr_name: twit_usr_fandp
 twit_email: auto.user.fm@gmail.com
 twit_pwd: 1qazxcv
@@ -27,10 +30,7 @@ ie_user: ie_user@fameandpartners.com
 fb_ie_user: ie_lnwrkpc_user@tfbnw.net
 ie_user_pwd: 1qazqwerty
 
-coupon: SALE25 #coupon for 25% discount
-
-spree_admin: andreyp@fameandpartners.com
-admin_pwd: 1qazqwerty
+coupon_25_percent: SALE25 #coupon for 25% discount
 
 # Credit card:
 card_number: 5520000000000000

@@ -1,13 +1,14 @@
 #~~~ Open Sign Up form. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-When(/^I open "Sign Up" form\.$/) do
-  on(HomePage).click_my_account
-  on(LoginPage).create_account
+When(/^I open "Sign Up" form$/) do
+  on(HomePage).click_log_in_sign_up
+  on(LoginPage).click_create_account
 end
+
+#~~~ Check all Sign Up form elements. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 And(/^there are all required Sign Up controls\.$/) do
   on(SignUpPage) do |page|
     login_ctrls=%w(txtFirstName txtLastName txtEmail txtPwd txtPwdConfirm chkNewsletter btnCreateAccount lnkSignIn)
     expect(login_ctrls.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
-
   end
 end
 
@@ -15,6 +16,7 @@ end
 Then(/^I want to create a new random account\.$/) do
   on(SignUpPage) do |page|
     first_name = Faker::Name.first_name
+    @first_name = first_name
     last_name = Faker::Name.last_name
     page.specify_first_name(first_name)
     page.specify_last_name(last_name)
@@ -34,9 +36,12 @@ User has been generated with next data:
     EOS
   end
 end
-And(/^be sure a new account was created\.$/) do
+And(/^be sure a new account was created$/) do
   on(HomePage) do |page|
-    page.click_my_account
+    expect(page.spnMyAccount_element.text).to eql("Hello, #{@first_name}")
+    # TODO: Verify menu title "Hello, <name>"
+    page.hover_my_account
+    page.open_account_submenu('account')
     expect(page.current_url).to include('/profile')
   end
   on(LogoutPage).visit_site_version(country: 'USA', url: '/logout')
@@ -49,7 +54,7 @@ And(/^be sure a new account was created\.$/) do
     page.visit_site_version(country: 'USA', url: '/admin/users')
     page.specify_srch_user(@new_user_email)
     page.click_search
-    sleep 2
+    # sleep 2
     expect(page.link_element(xpath: "//a[text()='#{@new_user_email}']").visible?).to be_truthy
   end
 
@@ -61,7 +66,7 @@ Then(/^I want to go to "Sign Up" form from it\.$/) do
 end
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#~~~ Check all Sign Up form elements. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 

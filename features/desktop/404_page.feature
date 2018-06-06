@@ -1,3 +1,4 @@
+@regression
 Feature: 404 page.
 
   Background: Open Home page.

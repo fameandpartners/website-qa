@@ -19,8 +19,9 @@ class MainBasePage
   CREDENTIALS = 'fandpstaging:auth4fandpstaging'.freeze
   USA_SIZES = ["US 0","US 2","US 4","US 6","US 8","US 10","US 12","US 14","US 16","US 18","US 20","US 22"].freeze
   AUS_SIZES = ["AU 4","AU 6","AU 8","AU 10","AU 12","AU 14","AU 16","AU 18","AU 20","AU 22","AU 24","AU 26"].freeze
-  HEIGHT = ["147cm","150cm","152cm","155cm","157cm","160cm","163cm","165cm","167cm","170cm","173cm","175cm","178cm","180cm","183cm","185cm","188cm","190cm","193cm"].freeze
-  LENGTH = ["petite","standard","tall"].freeze
+  HEIGHT = %w["147cm", "150cm", "152cm", "155cm", "157cm", "160cm", "163cm", "165cm", "167cm", "170cm", "173cm", "175cm",
+            "178cm", "180cm", "183cm", "185cm", "188cm", "190cm", "193cm"].freeze
+  LENGTH = %w["petite", "standard", "tall"].freeze
 
   URLS = {
       home_us: "#{test_server}.fameandpartners.com",
