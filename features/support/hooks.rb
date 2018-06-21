@@ -48,8 +48,8 @@ After do |scenario|
     FileUtils.mkdir_p(datetime_folder)
     screenshot_file = File.join(datetime_folder, file_name)
     @browser.driver.save_screenshot(screenshot_file)
-    attach_file(file_name, screenshot_file)
-    # embed screenshot_file, 'image/png'
+    # attach_file(file_name, screenshot_file)
+    embed screenshot_file, 'image/png'
   end
   @browser.close
 end

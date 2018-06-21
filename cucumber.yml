@@ -1,3 +1,6 @@
-default: --format AllureCucumber::Formatter --out gen/allure-report
+#default: --format AllureCucumber::Formatter --out gen/allure-report
+default: --format html --out results.html
+#default: --format documentation --format html --out smoke_results.html --tags @regression
 
-#default: --format documentation --format html --out smoke_results.html --tags @smoke
+
+#set PATH=C:/Ruby23/bin;%PATH% && bundle exec cucumber --tags ~@preconditions -r features features/ --format json --out qa1_regression_chrome.json BROWSER_NAME="chrome" URL="172.31.22.128:4444" SRV="qa1"

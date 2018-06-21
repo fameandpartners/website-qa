@@ -1,10 +1,7 @@
 .idea/workspace.xml
 .idea/
-cucumber.json
-results.html
-cucumber_chrome.json
 screenshots/
-cucumber_smoke_chrome.json
-cucumber_checkout.json
+*.json
 features/test.rb
 features/file.csv
+*.html
