@@ -168,3 +168,7 @@ Given(/^I disable CNY flag\.$/) do
   end
 end
 
+
+Given(/^I am on product page\.$/) do
+  on(LoginPage).visit_site_version(country: 'USA', url: CONFIG['base_dress'], basic_auth: true)
+end

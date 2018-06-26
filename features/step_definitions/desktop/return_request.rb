@@ -1,8 +1,5 @@
 Given(/^as a customer I buy a dress\.$/) do |table|
-  on(LoginPage) do |page|
-    page.visit_site_version(country: 'USA', url: '', basic_auth: true)
-    page.visit_site_version(country: 'USA', url: '/dresses/dress-eclectic-love-dress-1114?color=rosewater-floral')
-  end
+  on(LoginPage).visit_site_version(country: 'USA', url: CONFIG['base_dress'], basic_auth: true)
   on(ProductPage) do |page|
     page.open_size_profile
     page.change_metric('cm')

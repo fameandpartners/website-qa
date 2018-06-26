@@ -39,7 +39,6 @@ end
 And(/^be sure a new account was created$/) do
   on(HomePage) do |page|
     expect(page.spnMyAccount_element.text).to eql("Hello, #{@first_name}")
-    # TODO: Verify menu title "Hello, <name>"
     page.hover_my_account
     page.open_account_submenu('account')
     expect(page.current_url).to include('/profile')

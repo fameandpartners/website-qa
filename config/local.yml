@@ -1,6 +1,8 @@
 base_url: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com'
 base_url_au: 'https://fandpstaging:auth4fandpstaging@staging.fameandpartners.com.au'
 
+base_dress: '/dresses/dress-the-tillie-dress-1693?clr=red-light-georgette'
+
 spree_admin: automation.admin@fameandpartners.com
 admin_pwd: 1qaz2wsx
 
@@ -18,10 +20,14 @@ fb_safari_user: safari_lxutxom_user@tfbnw.net
 safari_user_pwd: 1qazqwerty
 
 firefox_user: firefox_user@fameandpartners.com
+chrome_first_name: Mozilla
+chrome_last_name: Firefox
 fb_firefox_user: firefox_skrccip_user@tfbnw.net
 firefox_user_pwd: 1qazqwerty
 
 chrome_user: chrome_user@fameandpartners.com
+chrome_first_name: Google
+chrome_last_name: Chrome
 fb_chrome_user: chrome_hgjvwns_user@tfbnw.net
 chrome_user_pwd: 1qazqwerty
 chrome_afterpay_pwd: fameandpartners2016
@@ -33,11 +39,11 @@ ie_user_pwd: 1qazqwerty
 coupon_25_percent: SALE25 #coupon for 25% discount
 
 # Credit card:
-card_number: 5520000000000000
-card_name: Zaphod Beeblebrox
+card_number: 5555555555554444
 exp_month: 12
-exp_year: 2020
+exp_year: 21
 cd_cvc: 123
+zip_code: 61000
 
 # Customer IO
 customer_io_url: https://fly.customer.io

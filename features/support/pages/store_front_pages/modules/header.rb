@@ -5,11 +5,13 @@ module Header
   link(:lnkAUS, href: 'https://www.fameandpartners.com.au')
   link(:lnkUSA, href: 'https://www.fameandpartners.com')
 
-  span(:spnLog_In_Sign_up, xpath: '//span[text()="Log In / Sign Up"]')
+  link(:spnLog_In_Sign_up, text: 'Log In / Sign Up')
   span(:spnMyAccount, xpath: '//span[contains(text(),"Hello, ")]')
-  link(:lnkMyOrders, href: '/user_orders')
+  link(:lnkAccount, xpath:'//ul[@class="jsx-103694540 header-action-buttons"]//a[text()="Account"]')
+  link(:lnkOrders, xpath:'//ul[@class="jsx-103694540 header-action-buttons"]//a[text()="Orders"]')
+  link(:lnkLogout, xpath:'//ul[@class="jsx-103694540 header-action-buttons"]//a[text()="Logout"]')
   # link(:lnkMyMoodboards, href: '/wishlist')
-  link(:lnkMyAccount, xpath:'//div[@class="Header__action-account-revealer grid-middle"]//a[@href="/profile"]')
+
   link(:lnkLogout, href: '/logout')
 
   # div(:divHomeMenu, id: 'home-menu')

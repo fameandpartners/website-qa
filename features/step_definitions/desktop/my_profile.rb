@@ -1,7 +1,6 @@
 Given(/^I register a new user\.$/) do
   on(HomePage) do |page|
-    page.visit_site_version(country: 'USA', url: '', basic_auth: true)
-    page.visit_site_version(country: 'USA', url: '/signup')
+    page.visit_site_version(country: 'USA', url: '/signup', basic_auth: true)
   end
   on(SignUpPage) do |page|
     first_name = Faker::Name.first_name
@@ -36,9 +35,7 @@ end
 
 
 When(/^I open "My Details" page\.$/) do
-  on(MyProfilePage) do |page|
-    page.visit_site_version(country: 'USA', url: '/profile')
-  end
+  on(HomePage).visit_site_version(country: 'USA', url: '/profile')
 end
 
 Then(/^I can modify profile data with random data\.$/) do
@@ -47,22 +44,32 @@ Then(/^I can modify profile data with random data\.$/) do
     @last_name = Faker::Name.last_name
     page.specify_first_name_profile(@first_name)
     page.specify_last_name_profile(@last_name)
-
     @new_user_email = Faker::Internet.safe_email(@first_name+'_'+@last_name)
     page.change_user_email(@new_user_email)
     @pwd = Faker::Internet.password(10, 20, true)
     page.my_account_pwd(@pwd)
     page.my_account_confirm_pwd(@pwd)
     page.save_profile_changes
+    puts <<-EOS
+User has been updated with next data:
+  First name: #{@first_name}
+   Last name: #{@last_name}
+       Email: #{@new_user_email}
+    Password: #{@pwd}
+    EOS
+  end
+end
+
+
+But(/^I am logged out after profile data update$/) do
+  on(LoginPage) do |page|
+    login_ctrls=%w(txtEmail txtPwd btnLogin)
+    expect(login_ctrls.inject([]){|arr, n| arr << page.send("#{n}_element") }).to all(be_visible)
   end
 end
 
 
 And(/^can login with new updated email and password\.$/) do
-  on(MyProfilePage) do |page|
-    page.visit_site_version(country: 'USA', url: '/logout')
-    page.visit_site_version(country: 'USA', url: '/login')
-  end
   on(LoginPage) do |page|
     page.specify_email(@new_user_email)
     page.specify_pwd(@pwd)
@@ -73,6 +80,7 @@ end
 
 And(/^check updated profile data\.$/) do
   on(MyProfilePage) do |page|
+    expect(page.spnMyAccount_element.text).to eql("Hello, #{@first_name}")
     page.visit_site_version(country: 'USA', url: '/profile')
     new_first_name = page.txtFirstName_element.value
     new_last_name = page.txtLastName_element.value
@@ -85,8 +93,7 @@ end
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When(/^I am on "My Details" page\.$/) do
-  on(HomePage).visit_site_version(country: 'USA', url: '', basic_auth: true)
-  on(HomePage).click_my_account
+  on(HomePage).visit_site_version(country: 'USA', url: '/login', basic_auth: true)
   on(LoginPage) do |page|
     page.specify_registered_user(browser_name)
     page.submit_login
@@ -111,7 +118,8 @@ But(/^"([^"]*)" appears for:$/) do |msg, table|
     data = table.raw
     data.each do |rowdata|
       rowdata.each do |field_label|
-        expect(page.span_element(xpath: "//label[text()='#{field_label}']/../..//span[contains(text(),\"#{msg}\")]").visible?).to be_truthy
+        expect(page.span_element(
+            xpath: "//label[text()='#{field_label}']/../..//span[contains(text(),\"#{msg}\")]").visible?).to be_truthy
       end
     end
   end
