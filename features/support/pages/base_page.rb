@@ -42,12 +42,12 @@ class MainBasePage
     site_url = "https://#{credentials}#{URLS[base_name]}#{url}"
 
     @browser.goto(site_url)
-    if response_code
-      page_status_code(site_url)
-    end
     if basic_auth
       close_promo_offer_popup
       close_first_shopper_popup
+    end
+    if response_code
+      page_status_code(site_url)
     end
   end
 

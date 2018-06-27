@@ -4,6 +4,7 @@ Feature: 404 page.
   Background: Open Home page.
     Given I am on Home page.
 
+    @debug
   Scenario Outline: Verify 404 page displays for user with invalid url parameters.
     When I specify non existing <country> URL.
     Then 404 page displays to user.
