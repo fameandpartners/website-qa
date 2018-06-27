@@ -45,6 +45,10 @@ class MainBasePage
     if response_code
       page_status_code(site_url)
     end
+    if basic_auth
+      close_promo_offer_popup
+      close_first_shopper_popup
+    end
   end
 
 
@@ -63,5 +67,19 @@ class MainBasePage
     response.code
   end
 
+  def close_promo_offer_popup
+    begin
+      self.div_element(xpath: '//a[@data-click="nothing"]//div[contains(text(),"just browsing")]').when_present.click
+    rescue Watir::Wait::TimeoutError
+      false
+    end
+  end
 
+  def close_first_shopper_popup
+    begin
+      self.link_element(css: '#bx-close-inside-636586').when_present.click
+    rescue Watir::Wait::TimeoutError
+      false
+    end
+  end
 end

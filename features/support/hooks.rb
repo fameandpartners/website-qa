@@ -4,20 +4,6 @@ require_relative('../../features/support/hooks_helper')
 include HooksHelper
 
 Before do |scenario|
-  # def assert_it message, &block
-  #   begin
-  #     if (block.call)
-  #       puts "Assertion PASSED for #{message}"
-  #     else
-  #       puts "Assertion FAILED for #{message}"
-  #       fail('Test Failure on assertion')
-  #     end
-  #   rescue => e
-  #     puts "Assertion FAILED for #{message} with exception '#{e}'"
-  #     fail('Test Failure on assertion')
-  #   end
-  # end
-
   if browser_path != nil
     Selenium::WebDriver::Firefox.path= "#{browser_path}"
   end
