@@ -10,11 +10,9 @@ module Header
   link(:lnkAccount, xpath:'//ul[@class="jsx-103694540 header-action-buttons"]//a[text()="Account"]')
   link(:lnkOrders, xpath:'//ul[@class="jsx-103694540 header-action-buttons"]//a[text()="Orders"]')
   link(:lnkLogout, xpath:'//ul[@class="jsx-103694540 header-action-buttons"]//a[text()="Logout"]')
-  # link(:lnkMyMoodboards, href: '/wishlist')
 
   link(:lnkLogout, href: '/logout')
 
-  # div(:divHomeMenu, id: 'home-menu')
   image(:imgLogo, src: 'https://d3uvjcfk5ey2fu.cloudfront.net/assets/logo/new-logo-ad36b2761e48c30c432a93f99e7df38a.svg')
   div(:divNavMainMenu, xpath: "//div[contains(@class,'nav-main-menu')]")
   div(:divNewThisWeek, id: 'rect-new-this-week')
@@ -43,10 +41,6 @@ module Header
     # self.spnMyAccount_element.when_present(30).click
   end
 
-  # def click_my_account
-  #   self.spnMyAccount_element.when_present(30).click
-  # end
-
   def hover_my_account
     self.spnMyAccount_element.when_present.hover
   end
@@ -71,10 +65,9 @@ module Header
   def open_account_submenu(submenu)
     case submenu
     when 'account'
-        # self.link_element(xpath: "//div[@class='Header__action-account-revealer grid-middle']//a[@href='/profile']").when_present.click
-        self.lnkMyAccount_element.when_present.click
+        self.lnkAccount_element.when_present.click
       when 'orders'
-        self.lnkMyOrders_element.when_present.click
+        self.lnkOrders_element.when_present.click
       when 'logout'
         self.lnkLogout_element.when_present.click
       end

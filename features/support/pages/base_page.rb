@@ -70,6 +70,7 @@ class MainBasePage
   def close_promo_offer_popup
     begin
       self.div_element(xpath: '//a[@data-click="nothing"]//div[contains(text(),"just browsing")]').when_present.click
+      self.div_element(xpath: '//a[@data-click="nothing"]//div[contains(text(),"just browsing")]').wait_while_present
     rescue Watir::Wait::TimeoutError
       false
     end
@@ -78,6 +79,7 @@ class MainBasePage
   def close_first_shopper_popup
     begin
       self.link_element(css: '#bx-close-inside-636586').when_present.click
+      self.link_element(css: '#bx-close-inside-636586').wait_while_present
     rescue Watir::Wait::TimeoutError
       false
     end
